@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "YuISEMTS85EAKYCaUV2DTRfH2bFjtKx/2zjC+/o6NPHo1Z2M7L0jX6zN1/JaB8lfkGnCKjRgUiJNDXr8uZ0H1g==",
+  "success": true,
+  "projectFilePath": "C:\\Projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hvelev\\.nuget\\packages\\microsoft.aspnetcore.authentication.negotiate\\6.0.10\\microsoft.aspnetcore.authentication.negotiate.6.0.10.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\6.0.10\\microsoft.aspnetcore.connections.abstractions.6.0.10.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\microsoft.extensions.features\\6.0.10\\microsoft.extensions.features.6.0.10.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\system.directoryservices.protocols\\6.0.1\\system.directoryservices.protocols.6.0.1.nupkg.sha512",
+    "C:\\Users\\hvelev\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
