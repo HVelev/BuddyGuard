@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YuISEMTS85EAKYCaUV2DTRfH2bFjtKx/2zjC+/o6NPHo1Z2M7L0jX6zN1/JaB8lfkGnCKjRgUiJNDXr8uZ0H1g==",
+  "dgSpecHash": "L8i/DxBPfdYGGABYlXlSlnRlREukf59uURp0Q8StD3YbzTtgUk0FQVoDLnKBsU2+OCWSs1bEEtNvftekDIWZeg==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.csproj",
+  "projectFilePath": "C:\\Personal projects\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hvelev\\.nuget\\packages\\microsoft.aspnetcore.authentication.negotiate\\6.0.10\\microsoft.aspnetcore.authentication.negotiate.6.0.10.nupkg.sha512",
     "C:\\Users\\hvelev\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\6.0.10\\microsoft.aspnetcore.connections.abstractions.6.0.10.nupkg.sha512",

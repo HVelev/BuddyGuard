@@ -442,11 +442,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.csproj",
+      "projectUniqueName": "C:\\Personal projects\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.csproj",
       "projectName": "BuddyGuard",
-      "projectPath": "C:\\Projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.csproj",
+      "projectPath": "C:\\Personal projects\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.csproj",
       "packagesPath": "C:\\Users\\hvelev\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\BuddyGuard\\BuddyGuard\\obj\\",
+      "outputPath": "C:\\Personal projects\\Personal projects\\BuddyGuard\\BuddyGuard\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hvelev\\AppData\\Roaming\\NuGet\\NuGet.Config",
