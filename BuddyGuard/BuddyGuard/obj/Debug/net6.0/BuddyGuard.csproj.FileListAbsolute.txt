@@ -40,3 +40,45 @@ C:\Personal projects\Personal projects\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Sy
 C:\Personal projects\Personal projects\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Personal projects\Personal projects\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Personal projects\Personal projects\BuddyGuard\BuddyGuard\bin\Debug\net6.0\web.config
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\appsettings.json
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\web.config
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\BuddyGuard.exe
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\BuddyGuard.deps.json
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\BuddyGuard.runtimeconfig.json
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\BuddyGuard.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\BuddyGuard.pdb
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\System.Web.Cors.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\System.Web.Http.Cors.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Negotiate.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.csproj.AssemblyReference.cache
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.AssemblyInfoInputs.cache
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.AssemblyInfo.cs
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.csproj.CoreCompileInputs.cache
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\scopedcss\bundle\BuddyGuard.styles.css
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.csproj.CopyComplete
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\refint\BuddyGuard.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.pdb
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.genruntimeconfig.cache
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\ref\BuddyGuard.dll
