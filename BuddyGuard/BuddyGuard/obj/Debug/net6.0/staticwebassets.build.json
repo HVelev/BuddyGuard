@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "tb4fLbCaxdF+p4NkdfnkFyKhDzQfPbp713NCncFPs/0=",
-  "Source": "BuddyGuard",
-  "BasePath": "_content/BuddyGuard",
+  "Hash": "SWBE34dFTn9+V+NtuJPnmFiq0WOxtgqmEnKVyUxOJ78=",
+  "Source": "BuddyGuard.API",
+  "BasePath": "_content/BuddyGuard.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

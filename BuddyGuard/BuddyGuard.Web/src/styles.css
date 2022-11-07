@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Comic Sans MS, Comic Sans, cursive
+}
+.mat-sidenav-container {
+  height: 100% !important;
+}
+
+.container {
+    margin-top: 30px !important;
+}
+.mat-drawer-backdrop.mat-drawer-shown {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.brown {
+  color: #683C39;
+}
+/*mat-sidenav-content {
+  animation: fadeOutAnimation ease 1s;
+}
+@keyframes fadeOutAnimation {
+  
+
+  100% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 1;
+  }
+}*/

@@ -1,0 +1,64 @@
+
+mat-toolbar, mat-sidenav-container {
+    background-color: white;
+    height: 100%;
+    margin-top: -5px;
+}
+
+mat-sidenav-content {
+    margin-top: 90px;
+}
+
+.transform {
+  display: flex;
+  font-size: 115px;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  width: 117px;
+  height: 114px;
+  border: solid;
+  border-radius: 50%;
+  cursor: pointer;
+  border-color: orange;
+}
+
+img {
+    width: 80%;
+    cursor: pointer;
+}
+.fixed {
+    position: fixed;
+    z-index: 100;
+}
+
+.btn {
+  color: white;
+  font-size: 20px;
+  display: flex;
+  padding: 15px 40px;
+  margin-top: 10px;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 35px;
+}
+
+button {
+  background-color: transparent;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  font-size: 30px;
+  margin: 10px;
+  border: hidden;
+  cursor: pointer;
+}
+
+.brown {
+  color: #683C39;
+}
+
+.mt {
+  margin-top: 250px;
+  margin-left: 10px;
+}
+

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
-
+using Microsoft.Extensions.Options;
+string CorsAllowSpecificOrigins = "_corsAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,32 +9,38 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-   .AddNegotiate();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+builder.Services.AddCors(service =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    service.AddPolicy(CorsAllowSpecificOrigins,
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+    });
 
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:4200");
-    await next();
-});
+    builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+       .AddNegotiate();
 
-app.UseHttpsRedirection();
+    var app = builder.Build();
 
-app.UseAuthentication();
-app.UseAuthorization();
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action}/{id?}");
+    app.UseCors(CorsAllowSpecificOrigins);
 
-app.Run();
+    app.UseHttpsRedirection();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.Run();

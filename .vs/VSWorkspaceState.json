@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BuddyGuard",
+    "\\BuddyGuard\\BuddyGuard",
+    "\\BuddyGuard\\BuddyGuard.Web"
   ],
-  "SelectedNode": "\\C:\\Users\\ic0o\\Documents\\BuddyGuard",
+  "SelectedNode": "\\BuddyGuard\\BuddyGuard.sln",
   "PreviewInSolutionExplorer": false
 }

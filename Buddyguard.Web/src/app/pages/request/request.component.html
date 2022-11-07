@@ -1,0 +1,116 @@
+<div fxLayoutAlign="center center">
+  <form [formGroup]="form"
+        class="example-form"
+        fxLayout="column"
+        fxLayoutGap="1em">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Имейл адрес</mat-label>
+      <input matInput placeholder="Вашият имейл адрес"
+             formControlName="emailControl">
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Телефон</mat-label>
+      <input formControlName="phoneControl" matInput placeholder="Вашият телефон">
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Три Имена</mat-label>
+      <input formControlName="nameControl" matInput placeholder="Вашите три имена">
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>В кой квартал/район живее домашният любимец</mat-label>
+      <input formControlName="locationControl" matInput placeholder="Квартал/район">
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Име и вид/порода на домашния любимец</mat-label>
+      <input formControlName="speciesControl" matInput placeholder="Име и вид/порода">
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <div fxLayout="column"
+         fxLayoutGap="1em">
+      <mat-label>*Ако желаеш да поемем грижи за повече от един домашен любимец, пример: 2 котки и 1 куче, молим да посочиш долу в свободен текст   </mat-label>
+      <div fxLayout="row"
+           fxLayoutGap="2em">
+        <div fxLayout="column"
+             fxLayoutGap="1em">
+          <div class="example-ripple-container mat-elevation-z4"
+               matRipple>
+            <img src="https://lh5.googleusercontent.com/kxVbh5VFgGAFoyx-q9r7HyL81KwygJllEsCkF3ZuKO1LGmS32g-nkKK3WdSCm9SIykhpRAk0DHMvXxBkXuIJqM2vMrDVEoTAU2Ow02AtEjGp6TircwzDA6YCuWtFKWuuhQ" alt="Alternate Text" />
+          </div>
+          <mat-checkbox class="example-margin">Куче до 10кг</mat-checkbox>
+        </div>
+        <div fxLayout="column"
+             fxLayoutGap="1em">
+          <div class="example-ripple-container mat-elevation-z4"
+               matRipple>
+            <img src="https://lh5.googleusercontent.com/kG18zKgoUkMLB0IFPwqz31vp2tQnvH5bqcyU69QxGGYheaTGFzQkDOD2i7lGEZDrvksiw4h6wHgt3t12hCeGZXWvG2G-BVWoqg5TQbqLx62FN0-kennqmvG1o758FHmHSw" alt="Alternate Text" />
+          </div>
+          <mat-checkbox class="example-margin">Куче над 10кг</mat-checkbox>
+        </div>
+      </div>
+      <div fxLayout="row"
+           fxLayoutGap="2em">
+        <div fxLayout="column"
+             fxLayoutGap="1em">
+          <div class="example-ripple-container mat-elevation-z4"
+               matRipple>
+            <img src="https://lh6.googleusercontent.com/CnS_gORLosOwMLMBeOFKYCDNUlpt4CQ_kFpaSjBhg7wk9yIrprcC7YhXp6_BF9iBnhbo8OL5fUueMV8jsSLOBqgjbHYUUckStFKm7OqU4SXODJJmvkXwIlwjMNmDvS6OeA" alt="Alternate Text" />
+          </div>
+          <mat-checkbox class="example-margin">Котка</mat-checkbox>
+        </div>
+        <div fxLayout="column"
+             fxLayoutGap="1em">
+          <div class="example-ripple-container mat-elevation-z4"
+               matRipple>
+            <img src="https://lh6.googleusercontent.com/k4eA8IAn2nvjX8LXIsUCNyGkeT60dzTP9yjmZPtA6iW6Yye_xoQDoEbK3H7vVFywUWppjaxda255rFcRQPcOrYMs_XQ71D5rlz8JHVUxOQ1t5bwCL1qTXq-iUwL3Ca28UQ" alt="Alternate Text" />
+          </div>
+          <mat-checkbox class="example-margin">Друго</mat-checkbox>
+        </div>
+      </div>
+    </div>
+    <mat-hint>* Само за кучета</mat-hint>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Времетраене на разходките</mat-label>
+      <input formControlName="dogWalkControl" matInput placeholder="Времетраене">
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <mat-label>Начало на грижите</mat-label>
+    <mat-form-field class="example-full-width" appearance="fill" (click)="picker.open()">
+      <mat-label>Изберете дата</mat-label>
+      <input formControlName="startControl" readonly matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <mat-label>Край на грижите</mat-label>
+    <mat-form-field class="example-full-width" appearance="fill" (click)="pick.open()">
+      <mat-label>Изберете дата</mat-label>
+      <input formControlName="endControl" matInput readonly [matDatepicker]="pick">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
+      <mat-datepicker #pick></mat-datepicker>
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Имейл адресът е <strong>задължителен</strong>
+    </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="submitForm()">Изпращане</button>
+  </form>
+</div>

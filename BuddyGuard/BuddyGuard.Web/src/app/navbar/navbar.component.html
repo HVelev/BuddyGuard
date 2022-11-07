@@ -1,0 +1,35 @@
+
+<div>
+  <div class="fixed">
+    <mat-toolbar>
+      <div style="display: flex; margin-top: 10px; align-items: center">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <div>
+          <img routerLink="/" src="https://static.wixstatic.com/media/3df67c_cb863e11b4b84f02be5becddd8bbf49d~mv2.png/v1/fill/w_475,h_90,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Buddy%20Guard%20-%20Horizontal.png" />
+        </div>
+        <div style="margin-left: 400px;">
+          <button class="brown"><span>Разбери повече</span></button>
+          <button class="brown">Buddies</button>
+        </div>
+      </div>
+    </mat-toolbar>
+    
+  </div>
+  <mat-sidenav style="background-color: transparent; border: hidden;" #snav
+                 mode="side">
+    <div class="mt">
+        <mat-chip selected mat-list-item class="btn" routerLink="request">Заявка</mat-chip>
+        <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
+        <mat-chip selected mat-list-item class="btn">Въпроси</mat-chip>
+        <mat-chip selected mat-list-item class="btn" routerLink="/about">Контакти</mat-chip>
+    </div>
+    </mat-sidenav>
+  <mat-sidenav-container style="left: -7px;">
+
+    <mat-sidenav-content @flyInOut>
+      <router-outlet></router-outlet>
+<mat-icon (click)="scrollUp()" class="transform" color="accent">keyboard_arrow_up</mat-icon>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
