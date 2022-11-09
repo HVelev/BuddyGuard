@@ -1,11 +1,13 @@
+using BuddyGuard.Core.Data;
 using Microsoft.AspNetCore.Authentication.Negotiate;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 string CorsAllowSpecificOrigins = "_corsAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<BuddyguardDbContext>(options =>
+    options.UseSqlServer(connectionString));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
