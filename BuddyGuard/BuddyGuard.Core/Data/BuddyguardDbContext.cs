@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VaporStore.Data;
 
 namespace BuddyGuard.Core.Data
 {
@@ -18,9 +19,16 @@ namespace BuddyGuard.Core.Data
 
         public DbSet<Request> Requests { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
+
+
+        public DbSet<Post> Posts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             base.OnModelCreating(builder);
         }
+
     }
 }

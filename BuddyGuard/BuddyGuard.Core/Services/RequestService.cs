@@ -1,4 +1,6 @@
 ﻿using BuddyGuard.Core.Contracts;
+using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,9 +13,30 @@ namespace BuddyGuard.Core.Services
 {
     public class RequestService : IRequestService
     {
-        public IActionResult SubmitForm(FormDTO form)
+        private readonly BuddyguardDbContext dbContext;
+
+        public RequestService(BuddyguardDbContext db)
         {
-            return null;
+            dbContext = db;
+        }
+
+        public void SubmitForm(FormDTO form)
+        {
+            var request = new Request
+            {
+                Name = form.Name,
+                AnimalInfo = form.Species,
+                Phone = form.Phone,
+                Email = form.Email,
+                Location = form.Location,
+                DogWalkLength = form.DogWalk,
+                StartDate = form.StartDate,
+                EndDate = form.EndDate
+            };
+
+            dbContext.Requests.Add(request);
+
+            dbContext.SaveChanges();
         }
     }
 }

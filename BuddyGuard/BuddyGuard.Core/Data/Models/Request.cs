@@ -12,30 +12,32 @@ namespace BuddyGuard.Core.Data.Models
         [Key]
         public int Id { get; set; }
 
+
         [Required]
         [StringLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Required]
         [StringLength(50)]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         [StringLength(20)]
-        public string Phone { get; set; }
+        public string Phone { get; set; } = string.Empty;
 
         [Required]
         [StringLength(30)]
-        public string Location { get; set; }
+        public string Location { get; set; } = string.Empty;
 
-        public string AnimalInfo { get; set; }
+        public string AnimalInfo { get; set; } = string.Empty;
 
-        public string DogWalkLength { get; set; }
+        public string DogWalkLength { get; set; } = string.Empty;
 
         [Required]
         public DateTime StartDate { get; set; }
 
         [Required]
         public DateTime EndDate { get; set; }
+
     }
 }
