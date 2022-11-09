@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj": {}
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj": {}
   },
   "projects": {
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
+        "projectUniqueName": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
         "projectName": "BuddyGuard.Core",
-        "projectPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
-        "packagesPath": "C:\\Users\\hvelev\\.nuget\\packages\\",
-        "outputPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\obj\\",
+        "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
+        "packagesPath": "C:\\Users\\ic0o\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hvelev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ic0o\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,19 +41,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[6.0.11, )"
-            },
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -78,21 +68,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj": {
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj",
+        "projectUniqueName": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj",
         "projectName": "BuddyGuard.API",
-        "projectPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj",
-        "packagesPath": "C:\\Users\\hvelev\\.nuget\\packages\\",
-        "outputPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard\\obj\\",
+        "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj",
+        "packagesPath": "C:\\Users\\ic0o\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hvelev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ic0o\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -107,8 +97,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
-                "projectPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj"
+              "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
+                "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj"
               }
             }
           }
@@ -165,7 +155,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
