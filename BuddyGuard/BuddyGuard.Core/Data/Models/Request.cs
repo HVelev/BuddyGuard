@@ -15,23 +15,23 @@ namespace BuddyGuard.Core.Data.Models
 
         [Required]
         [StringLength(100)]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Email { get; set; } = string.Empty;
+        public string Email { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string Phone { get; set; } = string.Empty;
+        public string Phone { get; set; }
 
         [Required]
         [StringLength(30)]
-        public string Location { get; set; } = string.Empty;
+        public string Location { get; set; }
 
-        public string AnimalInfo { get; set; } = string.Empty;
+        public string? AnimalInfo { get; set; }
 
-        public string DogWalkLength { get; set; } = string.Empty;
+        public string? DogWalkLength { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

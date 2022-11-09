@@ -13,6 +13,12 @@ namespace BuddyGuard.Core.Data.Models
         public int Id { get; set; }
 
         [Required]
+        public string Username { get; set; }
+
+        [Required]
+        public int Stars { get; set; }
+
+        [Required]
         public DateTime PublishedOn { get; set; }
 
         [Required]

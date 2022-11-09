@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuddyGuard.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace BuddyGuard.Core.Data.Models
 {
     public class Notification
     {
+        public Notification()
+        {
+            Requests = new List<Request>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -16,5 +22,6 @@ namespace BuddyGuard.Core.Data.Models
 
         public bool IsRead { get; set; }
 
+        public ICollection<Request> Requests { get; set; }
     }
 }
