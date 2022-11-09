@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\BuddyGuard",
-    "\\BuddyGuard\\BuddyGuard",
-    "\\BuddyGuard\\BuddyGuard.Web"
+    "\\BuddyGuard\\BuddyGuard"
   ],
-  "SelectedNode": "\\BuddyGuard\\BuddyGuard.sln",
+  "SelectedNode": "\\BuddyGuard\\BuddyGuard\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,2 +1,4 @@
 C:\Personal projects\Personal projects\BuddyGuard\BuddyGuard.Web\obj\Debug\BuddyGuard.Web.esproj.SuggestedBindingRedirects.cache
 C:\Personal projects\Personal projects\BuddyGuard\BuddyGuard.Web\obj\Debug\BuddyGuard.Web.esproj.CoreCompileInputs.cache
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard.Web\obj\Debug\BuddyGuard.Web.esproj.SuggestedBindingRedirects.cache
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard.Web\obj\Debug\BuddyGuard.Web.esproj.CoreCompileInputs.cache
