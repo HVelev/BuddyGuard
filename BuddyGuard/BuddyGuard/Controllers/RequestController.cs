@@ -1,12 +1,13 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Web.Http.Filters;
 
 namespace BuddyGuard.Controllers
 {
-    public class RequestController : ControllerBase
+    public class RequestController : Controller
     {
         private readonly IRequestService requestService;
 
@@ -15,6 +16,7 @@ namespace BuddyGuard.Controllers
             this.requestService = requestService;
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult SubmitForm([FromBody] FormDTO form)
         {

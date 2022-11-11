@@ -63,6 +63,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconModule } from '@visurel/iconify-angular';
 import { RequestComponent } from './pages/request/request.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { RequestComponent } from './pages/request/request.component';
     AboutComponent,
     TranslatePipe,
     FooterComponent,
-    RequestComponent
+    RequestComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

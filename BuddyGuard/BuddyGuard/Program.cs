@@ -1,8 +1,17 @@
 using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+
+using System.Text;
+
 string CorsAllowSpecificOrigins = "_corsAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +23,21 @@ builder.Services.AddTransient<IRequestService, RequestService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
+IdentityBuilder identityBuilder = builder.Services.AddIdentityCore<User>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.SignIn.RequireConfirmedEmail = false;
+});
+
+identityBuilder = new IdentityBuilder(identityBuilder.UserType, identityBuilder.Services);
+
+identityBuilder.AddEntityFrameworkStores<BuddyguardDbContext>();
+
+identityBuilder.AddSignInManager<SignInManager<User>>();
+
+identityBuilder.AddUserManager<UserManager<User>>();
+
 builder.Services.AddMvc();
 builder.Services.AddCors(service =>
 {
@@ -24,29 +48,52 @@ builder.Services.AddCors(service =>
             .AllowAnyHeader()
             .AllowAnyMethod();
         });
-    });
+});
 
-    builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-       .AddNegotiate();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie();
 
-    var app = builder.Build();
-
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true
+    };
+});
 
-    app.UseCors(CorsAllowSpecificOrigins);
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+   .AddNegotiate();
 
-    app.UseHttpsRedirection();
+var app = builder.Build();
 
-    app.UseAuthentication();
-    app.UseAuthorization();
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-    app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseCors(CorsAllowSpecificOrigins);
 
-    app.Run();
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();

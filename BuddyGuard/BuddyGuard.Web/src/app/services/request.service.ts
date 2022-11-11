@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FormDTO } from "../models/form.models";
+import { FormDTO } from "../models/form.model";
 
 @Injectable({
   providedIn: 'root'
