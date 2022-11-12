@@ -2,6 +2,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { FormDTO } from '../models/form.model';
+import { RequestService } from '../services/request.service';
+
 
 const enterTransition = transition('openClose', [
   style({
@@ -46,10 +49,13 @@ const fadeOut = trigger('fadeOut', [
     ])
   ]
 })
-export class NavbarComponent implements AfterViewInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
   @ViewChild('snav') navElement!: MatSidenav;
 
+  private requestService: RequestService;
+
   public isToggled = true;
+  public notifications: FormDTO[] = [];
 
   mobileQuery: MediaQueryList;
 
@@ -67,11 +73,21 @@ export class NavbarComponent implements AfterViewInit {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, requestService: RequestService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.requestService = requestService;
   }
+
+  public ngOnInit(): void {
+    this.requestService.getAllUnreadRequests().subscribe({
+      next: (value: FormDTO[]) => {
+        this.notifications = value;
+      }
+    });
+  }
+
   public ngAfterViewInit(): void {
     this.navElement._animationStarted.subscribe({
       next: () => {

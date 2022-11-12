@@ -38,5 +38,20 @@ namespace BuddyGuard.Core.Services
 
             dbContext.SaveChanges();
         }
+
+        public List<FormDTO> GetAllUnreadRequests()
+        {
+            return dbContext.Requests.Select(x => new FormDTO
+            {
+                Name = x.Name,
+                DogWalk = x.DogWalkLength,
+                Email = x.Email,
+                EndDate = x.EndDate,
+                StartDate = x.StartDate,
+                Location = x.Location,
+                Phone = x.Phone,
+                Species = x.AnimalInfo
+            }).ToList();
+        }
     }
 }

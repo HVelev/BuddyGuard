@@ -16,15 +16,11 @@ export class LoginService {
     this.http = http;
   }
 
-  public login(): Observable<string> {
+  public login(user: LoginDTO): Observable<Object> {
     const url = this.buildUrl() + '/Login';
-    const login = new LoginDTO({
-      username: 'ichko55',
-      password: '21Hihi!'
-    });
 
-    return this.http.post(url, login, {
-      responseType: 'text', headers: new HttpHeaders({
+    return this.http.post(url, user, {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     });

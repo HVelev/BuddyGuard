@@ -35,7 +35,7 @@ namespace BuddyGuard.API.Controllers
 
             var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
 
-            if (true)
+            if (result.Succeeded)
             {
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -47,7 +47,7 @@ namespace BuddyGuard.API.Controllers
                   signingCredentials: credentials);
 
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-                response = Ok(new { token = tokenString });
+                response = Ok(new { token = tokenString, user = user });
             }
 
             return response;

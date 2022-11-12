@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HammerModule } from '@angular/platform-browser';
 import { IgxDatePickerModule } from 'igniteui-angular';
@@ -65,6 +65,8 @@ import { IconModule } from '@visurel/iconify-angular';
 import { RequestComponent } from './pages/request/request.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { HttpInterceptorService } from './interceptors/http-interceptor.interceptor';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -73,10 +75,11 @@ import { RegisterComponent } from './pages/register/register.component';
     NavbarComponent,
     AboutComponent,
     TranslatePipe,
+    TimeAgoPipe,
     FooterComponent,
     RequestComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,6 +141,7 @@ import { RegisterComponent } from './pages/register/register.component';
     DialogModule,
     FlexLayoutModule
   ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [
     AppComponent
   ]

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
+import { createPopper } from '@popperjs/core';
 
 @Component({
   selector: 'app-register',

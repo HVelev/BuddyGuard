@@ -26,6 +26,12 @@ export class RequestService {
     });
   }
 
+  public getAllUnreadRequests(): Observable<FormDTO[]> {
+    const url = this.buildUrl() + '/GetAllUnreadRequests';
+
+    return this.http.get<FormDTO[]>(url, {});
+  }
+
   private buildUrl(): string {
     return this.domain + this.controller;
   }

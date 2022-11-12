@@ -1,5 +1,6 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,15 @@ namespace BuddyGuard.Controllers
             requestService.SubmitForm(form);
 
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAllUnreadRequests()
+        {
+            var requests = requestService.GetAllUnreadRequests();
+
+            return Ok(requests);
         }
     }
 }
