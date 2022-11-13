@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { LoginDTO } from '../../models/login.model';
 import { LoginService } from '../../services/login.service';
 
@@ -10,16 +12,20 @@ import { LoginService } from '../../services/login.service';
 })
 export class LoginComponent implements OnInit {
   private service: LoginService;
+  private router: Router;
+  private snackbar: MatSnackBar;
 
   public form: FormGroup;
 
-  constructor(service: LoginService)
+  constructor(service: LoginService, router: Router, snackbar: MatSnackBar)
   {
     this.service = service;
     this.form = new FormGroup({
       usernameControl: new FormControl(undefined, Validators.required),
       passwordControl: new FormControl(undefined, Validators.required)
     });
+    this.router = router;
+    this.snackbar = snackbar;
   }
 
   ngOnInit(): void {
@@ -34,6 +40,15 @@ export class LoginComponent implements OnInit {
     this.service.login(user).subscribe({
       next: (value: any) => {
         sessionStorage.setItem('token', value.token);
+        this.router.navigate(['/']);
+      },
+      error: (error: any) => {
+        if (error.status > 399 && error.status < 500) {
+          this.snackbar.open("Грешно потребителско име или парола", "Close", {
+            duration: 2000,
+            panelClass: 'red-snackbar'
+          });
+        }
       }
     });
   }

@@ -20,8 +20,9 @@ export class RegisterService {
   public register(): Observable<string> {
     const url = this.buildUrl() + '/Register';
     const register = new RegisterDTO({
-      username: 'ichko55',
-      password: '21Hihi!'
+      username: 'ichko56',
+      password: '21Hihi!',
+      role: 'User'
     });
 
     return this.http.post(url, register, {

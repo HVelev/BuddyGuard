@@ -1,3 +1,7 @@
 mat-form-field {
     width: 30%;
 }
+
+.red-snackbar {
+    background: red !important;
+}

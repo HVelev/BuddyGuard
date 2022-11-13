@@ -182,3 +182,15 @@ C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\refint\Bu
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.pdb
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.genruntimeconfig.cache
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\ref\BuddyGuard.API.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNetCore.NodeServices.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNetCore.SpaServices.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNetCore.SpaServices.Extensions.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.Owin.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.Owin.Security.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.Owin.Security.Cookies.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.Owin.Security.OAuth.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Owin.dll

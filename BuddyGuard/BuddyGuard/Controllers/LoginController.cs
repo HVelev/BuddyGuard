@@ -29,28 +29,38 @@ namespace BuddyGuard.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            IActionResult response = Unauthorized();
-
-            var user = await userManager.FindByNameAsync(login.Username);
-
-            var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
-
-            if (result.Succeeded)
+            try
             {
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+                IActionResult response = Unauthorized();
 
-                var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                  _config["Jwt:Issuer"],
-                  null,
-                  expires: DateTime.Now.AddMinutes(120),
-                  signingCredentials: credentials);
+                var user = await userManager.FindByNameAsync(login.Username);
 
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-                response = Ok(new { token = tokenString, user = user });
+                var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
+
+                if (result.Succeeded)
+                {
+                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
+                    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+                    var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+                      _config["Jwt:Issuer"],
+                      null,
+                      expires: DateTime.Now.AddMinutes(120),
+                      signingCredentials: credentials);
+
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+                    response = Ok(new { token = tokenString, user = user });
+                    return response;
+                }
+
+                return response;
             }
+            catch (Exception)
+            {
 
-            return response;
+                return Unauthorized();
+            }
         }
 
         public static string GetMD5(string str)

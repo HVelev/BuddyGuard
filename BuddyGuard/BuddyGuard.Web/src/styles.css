@@ -26,6 +26,34 @@ html {
 .brown {
   color: #683C39;
 }
+
+.red-snackbar {
+  background: #750000 !important;
+}
+
+html, body  {
+  margin: 0;
+  height: 100%;
+}
+
+app-root {
+  margin: 0;
+  height: 100% !important;
+  width: 100% !important;
+  position: absolute;
+}
+
+app-login {
+  margin: 0;
+  height: 90% !important;
+  width: 100% !important;
+  position: absolute;
+}
+
+app-footer {
+  position: sticky !important;
+  top: 100% !important;
+}
 /*mat-sidenav-content {
   animation: fadeOutAnimation ease 1s;
 }
