@@ -24,7 +24,7 @@ mat-sidenav-content {
 }
 
 img {
-    width: 80%;
+    width: 200%;
     cursor: pointer;
 }
 .fixed {
@@ -44,7 +44,12 @@ img {
   border-radius: 35px;
 }
 
-button {
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.navbtn {
   background-color: transparent;
   font-family: Comic Sans MS, Comic Sans, cursive;
   font-size: 30px;

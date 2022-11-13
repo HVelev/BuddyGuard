@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2em" [formGroup]="form">
+  <img src="https://lh6.googleusercontent.com/Jw4dgmLjdR40kLusQBNBaDUNF4ZU_g8DA51bStbmnJmYyb9LQB8KMpz01SK-ypEsrxHXStj8gCqQRHCYJAB6wIB84g6q-3JhXfCEAGmK1RE4wLLZQ8RAcBE1RFX_HpAPuQ=w500" alt="Alternate Text" />
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="usernameControl" placeholder="Потребителско име">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="passwordControl" type="password" placeholder="Парола">
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="login()">login</button>
+</div>

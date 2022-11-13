@@ -6,5 +6,7 @@ namespace BuddyGuard.Core.Contracts
     public interface IRequestService
     {
         void SubmitForm(FormDTO form);
+
+        List<FormDTO> GetAllUnreadRequests();
     }
 }

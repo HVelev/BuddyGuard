@@ -8,8 +8,26 @@
           <img routerLink="/" src="https://static.wixstatic.com/media/3df67c_cb863e11b4b84f02be5becddd8bbf49d~mv2.png/v1/fill/w_475,h_90,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Buddy%20Guard%20-%20Horizontal.png" />
         </div>
         <div style="margin-left: 400px;">
-          <button class="brown"><span>Разбери повече</span></button>
-          <button class="brown">Buddies</button>
+          <button class="brown navbtn" routerLink="login"><span>Влез</span></button>
+          <button class="brown navbtn" routerLink="register"><span>Регистрирай се</span></button>
+          <button class="brown navbtn"><span>Разбери повече</span></button>
+          <button class="brown navbtn">Buddies</button>
+          <button class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
+          <mat-menu #menu="matMenu">
+            <div *ngFor="let notification of notifications">
+              <div mat-menu-item>
+                <mat-card fxFlex="column" fxLayoutGap="2em">
+                  <mat-card-title-group>
+                    <mat-card-title>Имате нова заявка от {{ notification.name }}</mat-card-title>
+                    <mat-card-subtitle>{{ notification.species }}</mat-card-subtitle>
+                  </mat-card-title-group>
+                  <mat-card-content>
+                    Район: {{notification.location}}
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+          </mat-menu>
         </div>
       </div>
     </mat-toolbar>
@@ -28,8 +46,8 @@
 
     <mat-sidenav-content @flyInOut>
       <router-outlet></router-outlet>
+
 <mat-icon (click)="scrollUp()" class="transform" color="accent">keyboard_arrow_up</mat-icon>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-

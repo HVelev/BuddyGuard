@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FormDTO } from "../models/form.models";
+import { FormDTO } from "../models/form.model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,12 @@ export class RequestService {
         'Content-Type': 'application/json'
       })
     });
+  }
+
+  public getAllUnreadRequests(): Observable<FormDTO[]> {
+    const url = this.buildUrl() + '/GetAllUnreadRequests';
+
+    return this.http.get<FormDTO[]>(url, {});
   }
 
   private buildUrl(): string {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormDTO } from '../../models/form.models';
+import { FormDTO } from '../../models/form.model';
 import { RequestService } from '../../services/request.service';
 
 @Component({
