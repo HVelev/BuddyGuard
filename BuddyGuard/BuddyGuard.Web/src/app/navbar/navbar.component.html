@@ -15,15 +15,10 @@
           <button class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
           <mat-menu #menu="matMenu">
             <div *ngFor="let notification of notifications">
-              <div mat-menu-item>
-                <mat-card fxFlex="column" fxLayoutGap="2em">
-                  <mat-card-title-group>
-                    <mat-card-title>Имате нова заявка от {{ notification.name }}</mat-card-title>
-                    <mat-card-subtitle>{{ notification.species }}</mat-card-subtitle>
-                  </mat-card-title-group>
-                  <mat-card-content>
-                    Район: {{notification.location}}
-                  </mat-card-content>
+              <div>
+                <mat-card>
+                  <mat-card-subtitle></mat-card-subtitle>
+                    Имате нова заявка от {{ notification.name }} в район {{ notification.location }}
                 </mat-card>
               </div>
             </div>
@@ -31,23 +26,23 @@
         </div>
       </div>
     </mat-toolbar>
-    
+
   </div>
   <mat-sidenav style="background-color: transparent; border: hidden;" #snav
-                 mode="side">
+               mode="side">
     <div class="mt">
-        <mat-chip selected mat-list-item class="btn" routerLink="request">Заявка</mat-chip>
-        <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
-        <mat-chip selected mat-list-item class="btn">Въпроси</mat-chip>
-        <mat-chip selected mat-list-item class="btn" routerLink="/about">Контакти</mat-chip>
+      <mat-chip selected mat-list-item class="btn" routerLink="request">Заявка</mat-chip>
+      <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
+      <mat-chip selected mat-list-item class="btn">Въпроси</mat-chip>
+      <mat-chip selected mat-list-item class="btn" routerLink="/about">Контакти</mat-chip>
     </div>
-    </mat-sidenav>
+  </mat-sidenav>
   <mat-sidenav-container style="left: -7px;">
 
     <mat-sidenav-content @flyInOut fxFlexLayout="center end">
-      
 
-<mat-icon (click)="scrollUp()" class="transform" color="accent">keyboard_arrow_up</mat-icon>
+
+      <mat-icon (click)="scrollUp()" class="transform" color="accent">keyboard_arrow_up</mat-icon>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

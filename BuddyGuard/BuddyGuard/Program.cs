@@ -15,8 +15,15 @@ using System.Text;
 string CorsAllowSpecificOrigins = "_corsAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var username = System.Environment.UserName;
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (username == "HVelev")
+{
+    connectionString = builder.Configuration.GetConnectionString("LaptopConnection");
+}
+
 builder.Services.AddDbContext<BuddyguardDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddTransient<IRequestService, RequestService>();
