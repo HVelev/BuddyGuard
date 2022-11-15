@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { FormDTO } from '../models/form.model';
+import { ProcessRequestService } from '../services/process-request.service';
 import { RequestService } from '../services/request.service';
 
 
@@ -52,7 +53,7 @@ const fadeOut = trigger('fadeOut', [
 export class NavbarComponent implements OnInit, AfterViewInit {
   @ViewChild('snav') navElement!: MatSidenav;
 
-  private requestService: RequestService;
+  private processRequestService: ProcessRequestService;
 
   public isToggled = true;
   public notifications: FormDTO[] = [];
@@ -73,15 +74,15 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, requestService: RequestService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, processRequestService: ProcessRequestService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    this.requestService = requestService;
+    this.processRequestService = processRequestService;
   }
 
   public ngOnInit(): void {
-    this.requestService.getAllUnreadRequests().subscribe({
+    this.processRequestService.getAllUnreadRequests().subscribe({
       next: (value: FormDTO[]) => {
         this.notifications = value;
       }

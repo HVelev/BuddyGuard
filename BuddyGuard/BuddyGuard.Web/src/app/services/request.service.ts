@@ -8,7 +8,6 @@ import { FormDTO } from "../models/form.model";
 })
 export class RequestService {
   private http: HttpClient;
-  private area = 'Request';
   private controller = 'Request';
   private domain = 'https://localhost:7285/';
 
@@ -24,12 +23,6 @@ export class RequestService {
         'Content-Type': 'application/json'
       })
     });
-  }
-
-  public getAllUnreadRequests(): Observable<FormDTO[]> {
-    const url = this.buildUrl() + '/GetAllUnreadRequests';
-
-    return this.http.get<FormDTO[]>(url, {});
   }
 
   private buildUrl(): string {

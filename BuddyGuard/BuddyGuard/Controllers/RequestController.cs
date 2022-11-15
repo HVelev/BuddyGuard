@@ -25,14 +25,5 @@ namespace BuddyGuard.Controllers
 
             return Ok();
         }
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult GetAllUnreadRequests()
-        {
-            var requests = requestService.GetAllUnreadRequests();
-
-            return Ok(requests);
-        }
     }
 }

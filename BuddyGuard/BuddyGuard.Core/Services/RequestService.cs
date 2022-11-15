@@ -31,27 +31,14 @@ namespace BuddyGuard.Core.Services
                 Location = form.Location,
                 DogWalkLength = form.DogWalk,
                 StartDate = form.StartDate,
-                EndDate = form.EndDate
+                EndDate = form.EndDate,
+                IsRead = form.IsRead,
+                RequestSentDate = DateTime.Now
             };
 
             dbContext.Requests.Add(request);
 
             dbContext.SaveChanges();
-        }
-
-        public List<FormDTO> GetAllUnreadRequests()
-        {
-            return dbContext.Requests.Select(x => new FormDTO
-            {
-                Name = x.Name,
-                DogWalk = x.DogWalkLength,
-                Email = x.Email,
-                EndDate = x.EndDate,
-                StartDate = x.StartDate,
-                Location = x.Location,
-                Phone = x.Phone,
-                Species = x.AnimalInfo
-            }).ToList();
         }
     }
 }

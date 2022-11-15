@@ -27,6 +27,7 @@ if (username == "HVelev")
 builder.Services.AddDbContext<BuddyguardDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddTransient<IRequestService, RequestService>();
+builder.Services.AddTransient<IProcessRequestService, ProcessRequestService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();

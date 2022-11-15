@@ -18,4 +18,8 @@ export class FormDTO {
   public startDate!: Date;
 
   public endDate!: Date;
+
+  public isRead!: boolean;
+
+  public requestSentDate!: Date;
 }
