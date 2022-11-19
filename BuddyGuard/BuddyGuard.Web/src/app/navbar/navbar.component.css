@@ -45,10 +45,7 @@ img {
 .btn {
   color: white;
   font-size: 20px;
-  display: flex;
-  padding: 15px 40px;
-  margin-top: 10px;
-  justify-content: center;
+  display: absolute;
   border: none;
   cursor: pointer;
   border-radius: 35px;
@@ -75,5 +72,11 @@ img {
 .mt {
   margin-top: 250px;
   margin-left: 10px;
+}
+
+.mtxs {
+  margin-top: 250px;
+  margin-left: 10px;
+  width: 100px;
 }
 

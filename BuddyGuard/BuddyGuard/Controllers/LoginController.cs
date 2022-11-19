@@ -1,4 +1,5 @@
 ﻿using BuddyGuard.Core.Contracts;
+using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using BuddyGuard.Core.Services;
@@ -17,12 +18,14 @@ namespace BuddyGuard.API.Controllers
         private IConfiguration _config;
         private SignInManager<User> signInManager;
         private UserManager<User> userManager;
+        private BuddyguardDbContext dbContext;
 
-        public LoginController(IConfiguration config, SignInManager<User> signInManager, UserManager<User> userManager)
+        public LoginController(IConfiguration config, SignInManager<User> signInManager, UserManager<User> userManager, BuddyguardDbContext dbContext)
         {
             _config = config;
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.dbContext = dbContext;
         }
 
         [AllowAnonymous]
@@ -35,6 +38,12 @@ namespace BuddyGuard.API.Controllers
 
                 var user = await userManager.FindByNameAsync(login.Username);
 
+                var role = (from users in dbContext.Users
+                            where users.Id == user.Id
+                            join usersRoles in dbContext.UserRoles on users.Id equals usersRoles.UserId
+                            join roles in dbContext.Roles on usersRoles.RoleId equals roles.Id
+                            select roles).First();
+
                 var result = await signInManager.CheckPasswordSignInAsync(user, login.Password, false);
 
                 if (result.Succeeded)
@@ -43,14 +52,20 @@ namespace BuddyGuard.API.Controllers
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                     var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                      _config["Jwt:Audience"],
+                      _config["Jwt:Issuer"],
                       null,
                       expires: DateTime.Now.AddMinutes(120),
                       signingCredentials: credentials);
 
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-                    response = Ok(new { token = tokenString, user = user });
+                    response = Ok(
+                        new { token = tokenString, 
+                        role = role.Name, 
+                        name = user.FirstName, 
+                        phone = user.PhoneNumber, 
+                        email = user.Email }
+                    );
                     return response;
                 }
 
@@ -60,6 +75,34 @@ namespace BuddyGuard.API.Controllers
             {
 
                 return Unauthorized();
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult IsLoggedIn(string token)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_config["Jwt:SecretKey"]);
+                var securityKey = Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]);
+                var idk = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidAudience = _config["Jwt:Audience"],
+                    ValidIssuer = _config["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(securityKey),
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                return Ok(true);
+            }
+            catch
+            {
+                return Ok(false);
             }
         }
 

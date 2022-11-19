@@ -1,12 +1,117 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.name">
-  </mat-form-field>
+<!--<h1 mat-dialog-title fxLayoutAlign="center">Заявка за обработка</h1>
+<div mat-dialog-content [formGroup]="form">
+  <mat-card class="mat-elevation-z10 outline">
+    <mat-card-title>Информация за собственика</mat-card-title>
+    <div class="padded" fxLayout="column" fxLayoutGap="1em">
+      <div fxLayout="row" fxLayoutGap="1em">
+        <mat-form-field appearance="fill">
+          <mat-label>Име</mat-label>
+          <input matInput formControlName="nameControl" placeholder="Име">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Номер</mat-label>
+          <input matInput formControlName="phoneControl" placeholder="Номер">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="1em">
+        <mat-form-field appearance="fill">
+          <mat-label>Квартал</mat-label>
+          <input matInput formControlName="locationControl" placeholder="Квартал">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Имейл</mat-label>
+          <input matInput formControlName="emailControl" placeholder="Имейл">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="mat-elevation-z10 outline">
+    <mat-card-title>Информация за собственика</mat-card-title>
+    <div class="padded" fxLayout="column" fxLayoutGap="1em">
+      <div fxLayout="row" fxLayoutGap="1em">
+        <mat-form-field appearance="fill">
+          <mat-label>Име</mat-label>
+          <input matInput formControlName="nameControl" placeholder="Име">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Номер</mat-label>
+          <input matInput formControlName="phoneControl" placeholder="Номер">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="1em">
+        <mat-form-field appearance="fill">
+          <mat-label>Квартал</mat-label>
+          <input matInput formControlName="locationControl" placeholder="Квартал">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Имейл</mat-label>
+          <input matInput formControlName="emailControl" placeholder="Имейл">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
-</div>
+</div>-->
+<mat-stepper #stepper>
+  <!-- #docregion editable -->
+  <mat-step [stepControl]="form" [editable]="true">
+    <!-- #enddocregion editable -->
+    <form [formGroup]="form">
+      <!-- #docregion step-label -->
+      <ng-template matStepLabel>Информация за собственик</ng-template>
+      <!-- #enddocregion step-label -->
+      <mat-card class="mat-elevation-z10 outline">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+            <mat-label>Име</mat-label>
+            <input matInput formControlName="nameControl" placeholder="Име">
+          </mat-form-field>
+          <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+            <mat-label>Номер</mat-label>
+            <input matInput formControlName="phoneControl" placeholder="Номер">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+          <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+            <mat-label>Квартал</mat-label>
+            <input matInput formControlName="locationControl" placeholder="Квартал">
+          </mat-form-field>
+          <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+            <mat-label>Имейл</mat-label>
+            <input matInput formControlName="emailControl" placeholder="Имейл">
+          </mat-form-field>
+        </div>
+      </mat-card>
+        <div>
+          <button mat-button matStepperNext>Напред</button>
+        </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="form" [editable]="true">
+    <form [formGroup]="form">
+      <ng-template matStepLabel>Информация за домашния любимец</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Адрес</mat-label>
+        <input matInput
+               formControlName="locationControl"
+               placeholder="Ex. 1 Main St, New York, NY"
+               required />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>

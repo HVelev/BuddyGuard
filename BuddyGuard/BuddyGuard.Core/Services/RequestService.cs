@@ -20,20 +20,15 @@ namespace BuddyGuard.Core.Services
             dbContext = db;
         }
 
-        public void SubmitForm(FormDTO form)
+        public void SubmitForm(RequestDTO form)
         {
             var request = new Request
             {
-                Name = form.Name,
-                AnimalInfo = form.Species,
-                Phone = form.Phone,
-                Email = form.Email,
-                Location = form.Location,
-                DogWalkLength = form.DogWalk,
                 StartDate = form.StartDate,
                 EndDate = form.EndDate,
-                IsRead = form.IsRead,
-                RequestSentDate = DateTime.Now
+                RequestSentDate = DateTime.Now,
+                IsRead = false,
+                IsAccepted = false
             };
 
             dbContext.Requests.Add(request);

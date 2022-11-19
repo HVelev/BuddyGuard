@@ -1,0 +1,12 @@
+.example-input-wrapper {
+  margin-bottom: 16px;
+}
+
+label {
+  margin-right: 4px;
+}
+
+mat-card {
+    margin-top: 20px;
+}
+

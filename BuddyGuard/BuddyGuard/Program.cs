@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 using System.Text;
+using RequestService = BuddyGuard.Core.Services.RequestService;
 
 string CorsAllowSpecificOrigins = "_corsAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,8 @@ builder.Services.AddDbContext<BuddyguardDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddTransient<IRequestService, RequestService>();
 builder.Services.AddTransient<IProcessRequestService, ProcessRequestService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<INomenclatureService, NomenclatureService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();

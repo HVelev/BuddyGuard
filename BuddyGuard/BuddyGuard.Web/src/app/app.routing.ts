@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
+import { AuthGuardGuard } from "./guards/auth-guard.guard";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AboutComponent } from "./pages/about/about.component";
 import { IndexComponent } from "./pages/index/index.component";
@@ -32,7 +33,9 @@ export const appRoutes: Routes = [
   },
   {
     path: 'request',
-    component: RequestComponent
+    component: RequestComponent,
+    canActivate: [AuthGuardGuard],
+    
   },
   {
     path: '',

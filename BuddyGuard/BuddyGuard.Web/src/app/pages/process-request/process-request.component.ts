@@ -48,7 +48,8 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
 
   public openRequest(data: FormDTO) {
     const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
-      width: '250px',
+      width: '700px',
+      height: '500px',
       data: data,
     });
 

@@ -1,4 +1,4 @@
-<div fxLayoutAlign="center center">
+<!--<div fxLayoutAlign="center center">
   <form [formGroup]="form"
         class="example-form"
         fxLayout="column"
@@ -7,37 +7,37 @@
       <mat-label>Имейл адрес</mat-label>
       <input matInput placeholder="Вашият имейл адрес"
              formControlName="emailControl">
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Телефон</mat-label>
       <input formControlName="phoneControl" matInput placeholder="Вашият телефон">
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Три Имена</mat-label>
       <input formControlName="nameControl" matInput placeholder="Вашите три имена">
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>В кой квартал/район живее домашният любимец</mat-label>
       <input formControlName="locationControl" matInput placeholder="Квартал/район">
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Име и вид/порода на домашния любимец</mat-label>
       <input formControlName="speciesControl" matInput placeholder="Име и вид/порода">
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <div fxLayout="column"
          fxLayoutGap="1em">
@@ -85,9 +85,9 @@
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Времетраене на разходките</mat-label>
       <input formControlName="dogWalkControl" matInput placeholder="Времетраене">
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <mat-label>Начало на грижите</mat-label>
     <mat-form-field class="example-full-width" appearance="fill" (click)="picker.open()">
@@ -96,9 +96,9 @@
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <mat-label>Край на грижите</mat-label>
     <mat-form-field class="example-full-width" appearance="fill" (click)="pick.open()">
@@ -107,10 +107,132 @@
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
       <mat-datepicker #pick></mat-datepicker>
-    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
-      Имейл адресът е <strong>задължителен</strong>
-    </mat-error>
+      <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+        Имейл адресът е <strong>задължителен</strong>
+      </mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" (click)="submitForm()">Изпращане</button>
   </form>
+</div>-->
+
+<div fxLayoutAlign="center center">
+  <mat-stepper #stepper>
+    <!-- #docregion editable -->
+    <mat-step [stepControl]="form" [editable]="true">
+      <!-- #enddocregion editable -->
+      <form [formGroup]="form">
+        <!-- #docregion step-label -->
+        <ng-template matStepLabel>Информация за домашните любимци</ng-template>
+        <!-- #enddocregion step-label -->
+        <div *ngFor="let animal of FormArrayControls.controls; let i = index" fxLayoutAlign="center" fxLayoutGap="2em">
+          <mat-card class="mat-elevation-z10 outline">
+            <div formArrayName="animalArrayControl">
+              <mat-card-title>Основна информация</mat-card-title>
+              <div [formGroupName]="i">
+                <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                  <mat-form-field appearance="fill" fxFlex="100">
+                    <mat-label>Име</mat-label>
+                    <input matInput formControlName="nameControl" placeholder="Име">
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" fxFlex="100">
+                    <mat-label>Порода</mat-label>
+                    <input matInput formControlName="speciesControl" placeholder="Номер">
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" fxFlex="100">
+                    <mat-label>Какъв вид е вашето животно?</mat-label>
+                    <input matInput formControlName="animalTypeControl" placeholder="Квартал">
+                    <mat-error *ngIf="FormArrayControls.controls[i].get('animalTypeControl')!.hasError('required')">
+                      Имейл адресът е <strong>задължителен</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <mat-divider></mat-divider>
+                <div fxLayout="column">
+                  <mat-card-title>Услуги</mat-card-title>
+                  <mat-form-field appearance="fill" fxFlex="50">
+                    <mat-label>Порода</mat-label>
+                    <input matInput formControlName="speciesControl" placeholder="Номер">
+                  </mat-form-field>
+                  <h4>Изберете си услуги (незадължително):</h4>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Услуги</mat-label>
+                    <mat-select>
+                      <mat-option>-- None --</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+        <div dir="rtl">
+          <button mat-raised-button color="accent" matStepperNext>Напред</button>
+        </div>
+        <div dir="ltr">
+          <button mat-raised-button color="accent" (click)="addAnimal()">Добавяне на животно</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="form" [editable]="true">
+      <div>
+        <form [formGroup]="dateLocationGroup">
+          <mat-card class="mat-elevation-z10 outline">
+            <ng-template matStepLabel>Информация за периода на услугите и мястото</ng-template>
+            <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+              <mat-label>Начало на грижите</mat-label>
+              <mat-form-field appearance="fill" (click)="picker.open()">
+                <mat-label>Изберете дата</mat-label>
+                <input formControlName="startDateControl" readonly matInput [matDatepicker]="picker" (click)="click()">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-label>Край на грижите</mat-label>
+              <mat-form-field appearance="fill" (click)="pick.open()">
+                <mat-label>Изберете дата</mat-label>
+                <input formControlName="endDateControl" readonly matInput [matDatepicker]="pick" (click)="click()">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
+                <mat-datepicker #pick></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Квартал/Район</mat-label>
+                <input type="text" matInput formControlName="locationControl" [matAutocomplete]="auto">
+                <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let location of locations" [value]="location">
+                    {{ location.displayName }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+          </mat-card>
+        </form>
+      </div>
+    </mat-step>
+    <!--<mat-step [stepControl]="form" [editable]="true">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Информация за домашния любимец</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Адрес</mat-label>
+          <input matInput
+                 formControlName="locationControl"
+                 placeholder="Ex. 1 Main St, New York, NY"
+                 required />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>-->
+  </mat-stepper>
+
 </div>

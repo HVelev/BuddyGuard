@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { FormDTO } from "../models/form.model";
 import { LoginDTO } from "../models/login.model";
 import { RegisterDTO } from "../models/register.model";
@@ -17,15 +17,10 @@ export class RegisterService {
     this.http = http;
   }
 
-  public register(): Observable<string> {
+  public register(formDTO: RegisterDTO): Observable<string> {
     const url = this.buildUrl() + '/Register';
-    const register = new RegisterDTO({
-      username: 'ichko56',
-      password: '21Hihi!',
-      role: 'User'
-    });
 
-    return this.http.post(url, register, {
+    return this.http.post(url, formDTO, {
       responseType: 'text', headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

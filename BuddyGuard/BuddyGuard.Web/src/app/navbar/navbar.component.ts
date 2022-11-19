@@ -3,7 +3,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { FormDTO } from '../models/form.model';
+import { LoginService } from '../services/login.service';
 import { ProcessRequestService } from '../services/process-request.service';
+import { RegisterService } from '../services/register.service';
 import { RequestService } from '../services/request.service';
 
 
@@ -54,9 +56,12 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   @ViewChild('snav') navElement!: MatSidenav;
 
   private processRequestService: ProcessRequestService;
+  private loginService: LoginService;
+  private registerService: RegisterService;
 
   public isToggled = true;
   public notifications: FormDTO[] = [];
+  public role: string | undefined | null;
 
   mobileQuery: MediaQueryList;
 
@@ -74,19 +79,34 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, processRequestService: ProcessRequestService) {
+  constructor(changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    processRequestService: ProcessRequestService,
+    loginService: LoginService,
+    registerService: RegisterService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.processRequestService = processRequestService;
+    this.loginService = loginService;
+    this.role = sessionStorage.getItem('role');
+    this.registerService = registerService;
   }
 
   public ngOnInit(): void {
-    this.processRequestService.getAllUnreadRequests().subscribe({
-      next: (value: FormDTO[]) => {
-        this.notifications = value;
+    this.loginService.onUserLogin.subscribe({
+      next: (value: string) => {
+        this.role = value;
       }
     });
+
+    if (this.role) {
+      this.processRequestService.getAllUnreadRequests().subscribe({
+        next: (value: FormDTO[]) => {
+          this.notifications = value;
+        }
+      });
+    }
   }
 
   public ngAfterViewInit(): void {
@@ -98,6 +118,11 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
     this.navElement.fixedInViewport = true;
     this.navElement.open();
+  }
+
+  public logout() {
+    this.loginService.logout();
+    this.role = undefined;
   }
 
   public scrollUp() {

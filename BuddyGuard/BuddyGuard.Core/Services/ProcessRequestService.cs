@@ -19,18 +19,12 @@ namespace BuddyGuard.Core.Services
             this.dbContext = dbContext;
         }
 
-        public List<FormDTO> GetAllUnreadRequests()
+        public List<RequestDTO> GetAllUnreadRequests()
         {
-            return dbContext.Requests.OrderByDescending(x => x.RequestSentDate).Select(x => new FormDTO
+            return dbContext.Requests.OrderByDescending(x => x.RequestSentDate).Select(x => new RequestDTO
             {
-                Name = x.Name,
-                DogWalk = x.DogWalkLength,
-                Email = x.Email,
                 EndDate = x.EndDate,
                 StartDate = x.StartDate,
-                Location = x.Location,
-                Phone = x.Phone,
-                Species = x.AnimalInfo,
                 IsRead = x.IsRead,
                 RequestSentDate = x.RequestSentDate
             }).ToList();
