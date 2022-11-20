@@ -4,6 +4,7 @@ using BuddyGuard.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuddyGuard.Core.Migrations
 {
     [DbContext(typeof(BuddyguardDbContext))]
-    partial class BuddyguardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120164609_ChangedNonNullableColumn")]
+    partial class ChangedNonNullableColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -941,6 +943,9 @@ namespace BuddyGuard.Core.Migrations
                     b.Property<int?>("AnimalRequestId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("ServiceId", "RequestId");
 
                     b.HasIndex("AnimalRequestId");
@@ -1321,14 +1326,14 @@ namespace BuddyGuard.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4fc8d776-7254-411c-af9b-989713f3f5ae",
-                            ConcurrencyStamp = "707c6614-f6de-44a6-b5d5-9b592ec93ebd",
+                            Id = "3f107bb9-9810-4024-b4e3-182d696421ab",
+                            ConcurrencyStamp = "422a1415-0af2-41f0-aab4-5c1aaeb40118",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "16e31bce-49a3-454c-b1ca-5b3bfe914641",
-                            ConcurrencyStamp = "222a3b0f-8a4a-4896-b3a0-83c5bd376313",
+                            Id = "9e0143a5-0c68-4c92-92d5-34965e2ca95d",
+                            ConcurrencyStamp = "ff94c203-7b07-4d71-931e-4b43d76964ef",
                             Name = "User"
                         });
                 });

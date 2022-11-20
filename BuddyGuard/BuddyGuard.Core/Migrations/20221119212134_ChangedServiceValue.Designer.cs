@@ -4,6 +4,7 @@ using BuddyGuard.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuddyGuard.Core.Migrations
 {
     [DbContext(typeof(BuddyguardDbContext))]
-    partial class BuddyguardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221119212134_ChangedServiceValue")]
+    partial class ChangedServiceValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,6 +37,7 @@ namespace BuddyGuard.Core.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AnimalSpecies")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("AnimalTypeId")
@@ -941,6 +944,9 @@ namespace BuddyGuard.Core.Migrations
                     b.Property<int?>("AnimalRequestId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("ServiceId", "RequestId");
 
                     b.HasIndex("AnimalRequestId");
@@ -1321,14 +1327,14 @@ namespace BuddyGuard.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4fc8d776-7254-411c-af9b-989713f3f5ae",
-                            ConcurrencyStamp = "707c6614-f6de-44a6-b5d5-9b592ec93ebd",
+                            Id = "fc206617-15a3-45d7-88dd-b17f1c977a07",
+                            ConcurrencyStamp = "91242cee-ea5e-4934-a786-1ae62d539853",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "16e31bce-49a3-454c-b1ca-5b3bfe914641",
-                            ConcurrencyStamp = "222a3b0f-8a4a-4896-b3a0-83c5bd376313",
+                            Id = "72941a72-f1cd-4441-bec0-5a3b3d699010",
+                            ConcurrencyStamp = "4a71412e-425c-4d48-bc12-a55e2e0226d7",
                             Name = "User"
                         });
                 });

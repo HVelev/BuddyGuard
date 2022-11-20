@@ -219,7 +219,7 @@ namespace BuddyGuard.Core.Data.Configuration
             {
                 Id = 24,
                 Name = "Ветеринарен преглед",
-                IsForCustomer = true,
+                IsForCustomer = false,
                 PriceId = 15
             },
             new Service()

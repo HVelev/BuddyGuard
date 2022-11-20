@@ -28,8 +28,8 @@
                    class="notification-margin">
                 <mat-icon class="smallIcon" fxFlex="5">mail</mat-icon>
                 <div fxFlex="80" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10">
-                  <p>Имате нова заявка от {{ notification.name }}</p>
-                  <mat-card-subtitle>{{ notification.requestSentDate.toLocaleString() | timeAgo }}</mat-card-subtitle>
+                  <p>Имате нова заявка за {{ notification.startDate }}</p>
+                  <mat-card-subtitle>{{ notification.requestSentDate!.toLocaleString() | timeAgo }}</mat-card-subtitle>
                 </div>
                 <div fxFlex="10" fxLayoutAlign="start end">
                   <button mat-mini-fab color="primary" class="read-btn">

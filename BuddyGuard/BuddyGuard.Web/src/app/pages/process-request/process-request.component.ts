@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormDTO } from '../../models/form.model';
+import { RequestDTO } from '../../models/request.model';
 import { ProcessRequestService } from '../../services/process-request.service';
 import { ProcessRequestDialogComponent } from './models/process-request-dialog/process-request-dialog.component';
 
@@ -18,10 +18,10 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public requests: FormDTO[] = [];
+  public requests: RequestDTO[] = [];
   public displayedColumns: string[] = ['name', 'location', 'startDate', 'endDate', 'actions'];
   public datePipe: DatePipe;
-  public dataSource: MatTableDataSource<FormDTO>;
+  public dataSource: MatTableDataSource<RequestDTO>;
   public dialog: MatDialog;
 
   constructor(service: ProcessRequestService,
@@ -29,13 +29,13 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
     dialog: MatDialog) {
     this.service = service;
     this.datePipe = datePipe;
-    this.dataSource = new MatTableDataSource<FormDTO>();
+    this.dataSource = new MatTableDataSource<RequestDTO>();
     this.dialog = dialog;
   }
 
   ngOnInit(): void {
     this.service.getAllUnreadRequests().subscribe({
-      next: (value: FormDTO[]) => {
+      next: (value: RequestDTO[]) => {
         
         this.dataSource.data = value;
       }
@@ -46,7 +46,7 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  public openRequest(data: FormDTO) {
+  public openRequest(data: RequestDTO) {
     const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
       width: '700px',
       height: '500px',

@@ -7,7 +7,6 @@
             Services = new List<int>();
         }
 
-        public List<int> Services { get; set; }
 
         public decimal TotalAmount { get; set; }
 
@@ -15,13 +14,17 @@
 
         public int LocationId { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public string EndDate { get; set; }
 
         public DateTime RequestSentDate { get; set; }
 
         public bool IsRead { get; set; }
+
+        public PetDTO[] Pets { get; set; }
+
+        public List<int> Services { get; set; }
 
         public bool IsAccepted { get; set; }
     }

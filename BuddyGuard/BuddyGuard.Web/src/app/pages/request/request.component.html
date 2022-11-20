@@ -135,31 +135,36 @@
                     <input matInput formControlName="nameControl" placeholder="Име">
                   </mat-form-field>
                   <mat-form-field appearance="fill" fxFlex="100">
-                    <mat-label>Порода</mat-label>
-                    <input matInput formControlName="speciesControl" placeholder="Номер">
-                  </mat-form-field>
-                  <mat-form-field appearance="fill" fxFlex="100">
                     <mat-label>Какъв вид е вашето животно?</mat-label>
-                    <input matInput formControlName="animalTypeControl" placeholder="Квартал">
-                    <mat-error *ngIf="FormArrayControls.controls[i].get('animalTypeControl')!.hasError('required')">
-                      Имейл адресът е <strong>задължителен</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <mat-divider></mat-divider>
-                <div fxLayout="column">
-                  <mat-card-title>Услуги</mat-card-title>
-                  <mat-form-field appearance="fill" fxFlex="50">
-                    <mat-label>Порода</mat-label>
-                    <input matInput formControlName="speciesControl" placeholder="Номер">
-                  </mat-form-field>
-                  <h4>Изберете си услуги (незадължително):</h4>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Услуги</mat-label>
-                    <mat-select>
-                      <mat-option>-- None --</mat-option>
+                    <mat-select (selectionChange)="onAnimalTypeSelectionChange($event, i)" formControlName="animalTypeControl" #animalType>
+                      <mat-option *ngFor="let animalType of animalTypes" [value]="animalType">
+                        {{ animalType.displayName }}
+                      </mat-option>
                     </mat-select>
                   </mat-form-field>
+                </div>
+                <div *ngIf="isVisible[i]">
+                  <mat-divider></mat-divider>
+                  <div fxLayout="column">
+                    <mat-card-title>Услуги</mat-card-title>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Услуги</mat-label>
+                      <mat-select multiple formControlName="animalServiceControl">
+                        <mat-option *ngFor="let service of animalServices[i]" [value]="service">
+                          {{ service.displayName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <h4>Изберете си услуги (незадължително):</h4>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Брой разходки</mat-label>
+                      <mat-select formControlName="dogWalkLengthControl">
+                        <mat-option *ngFor="let service of animalServices[i]" [value]="service">
+                          {{ service.displayName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
                 </div>
               </div>
             </div>
@@ -198,41 +203,77 @@
               <mat-form-field>
                 <mat-label>Квартал/Район</mat-label>
                 <input type="text" matInput formControlName="locationControl" [matAutocomplete]="auto">
-                <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let location of locations" [value]="location">
                     {{ location.displayName }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
+              <mat-form-field appearance="fill" (click)="meeting.open()">
+                <mat-hint>* Ако не изберете ден и час, ще се свържем с Вас най-късно 24 часа преди определената начална дата на грижите за уговаряне на среща</mat-hint>
+                <mat-label>Предпочитана дата за първоначална среща</mat-label>
+                <input formControlName="meetingDateControl" readonly matInput [matDatepicker]="meeting" (click)="click()">
+                <mat-datepicker-toggle matSuffix [for]="meeting"></mat-datepicker-toggle>
+                <mat-datepicker #meeting></mat-datepicker>
+              </mat-form-field>
             </div>
           </mat-card>
         </form>
       </div>
+      <div dir="rtl">
+        <button mat-raised-button color="accent" matStepperNext>Напред</button>
+      </div>
+      <div dir="ltr">
+        <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="form" [editable]="true">
+      <div>
+        <form [formGroup]="form">
+          <mat-card class="mat-elevation-z10 outline">
+            <ng-template matStepLabel>Допълнителни услуги</ng-template>
+            <mat-label>Ако желаете допълнителни услуги, моля изберете:</mat-label>
+            <mat-form-field appearance="fill">
+              <mat-select multiple formControlName="customerServiceControl">
+                <mat-option *ngFor="let service of clientServices" [value]="service">
+                  {{ service.displayName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card>
+        </form>
+      </div>
+      <div dir="ltr">
+        <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
+      </div>
+      <div dir="rtl">
+        <button mat-raised-button color="primary" (click)="submitForm()">Изпращане на заявка</button>
+      </div>
     </mat-step>
     <!--<mat-step [stepControl]="form" [editable]="true">
-      <form [formGroup]="form">
-        <ng-template matStepLabel>Информация за домашния любимец</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Адрес</mat-label>
-          <input matInput
-                 formControlName="locationControl"
-                 placeholder="Ex. 1 Main St, New York, NY"
-                 required />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
+    <form [formGroup]="form">
+      <ng-template matStepLabel>Информация за домашния любимец</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Адрес</mat-label>
+        <input matInput
+               formControlName="locationControl"
+               placeholder="Ex. 1 Main St, New York, NY"
+               required />
+      </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button matStepperNext>Next</button>
       </div>
-    </mat-step>-->
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>-->
   </mat-stepper>
 
 </div>

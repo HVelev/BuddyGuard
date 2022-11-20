@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { FormDTO } from '../models/form.model';
+import { RequestDTO } from '../models/request.model';
 import { LoginService } from '../services/login.service';
 import { ProcessRequestService } from '../services/process-request.service';
 import { RegisterService } from '../services/register.service';
@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   private registerService: RegisterService;
 
   public isToggled = true;
-  public notifications: FormDTO[] = [];
+  public notifications: RequestDTO[] = [];
   public role: string | undefined | null;
 
   mobileQuery: MediaQueryList;
@@ -102,7 +102,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
     if (this.role) {
       this.processRequestService.getAllUnreadRequests().subscribe({
-        next: (value: FormDTO[]) => {
+        next: (value: RequestDTO[]) => {
           this.notifications = value;
         }
       });

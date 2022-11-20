@@ -69,6 +69,7 @@ import { HttpInterceptorService } from './interceptors/http-interceptor.intercep
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { ProcessRequestComponent } from './pages/process-request/process-request.component';
 import { ProcessRequestDialogComponent } from './pages/process-request/models/process-request-dialog/process-request-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -145,7 +146,7 @@ import { ProcessRequestDialogComponent } from './pages/process-request/models/pr
     DialogModule,
     FlexLayoutModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }, DatePipe],
   bootstrap: [
     AppComponent
   ]

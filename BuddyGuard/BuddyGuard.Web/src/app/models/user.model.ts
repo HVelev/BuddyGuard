@@ -2,6 +2,7 @@ export class UserDTO {
   public constructor(obj?: Partial<UserDTO>) {
     Object.assign(this, obj);
   }
+  public id!: string;
 
   public firstName!: string;
 

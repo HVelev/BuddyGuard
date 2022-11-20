@@ -1,3 +1,4 @@
+using BuddyGuard.API.Models;
 using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Models;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 using System.Text;
-using RequestService = BuddyGuard.Core.Services.RequestService;
+using RequestsService = BuddyGuard.Core.Services.RequestsService;
 
 string CorsAllowSpecificOrigins = "_corsAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +28,7 @@ if (username == "HVelev")
 
 builder.Services.AddDbContext<BuddyguardDbContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddTransient<IRequestService, RequestService>();
+builder.Services.AddTransient<IRequestService, RequestsService>();
 builder.Services.AddTransient<IProcessRequestService, ProcessRequestService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<INomenclatureService, NomenclatureService>();
@@ -48,6 +49,11 @@ identityBuilder.AddEntityFrameworkStores<BuddyguardDbContext>();
 identityBuilder.AddSignInManager<SignInManager<User>>();
 
 identityBuilder.AddUserManager<UserManager<User>>();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new DateConverter());
+});
 
 builder.Services.AddMvc();
 builder.Services.AddCors(service =>

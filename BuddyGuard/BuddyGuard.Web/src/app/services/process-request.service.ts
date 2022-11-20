@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormDTO } from '../models/form.model';
+import { RequestDTO } from '../models/request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,10 @@ export class ProcessRequestService {
     this.http = http;
   }
 
-  public getAllUnreadRequests(): Observable<FormDTO[]> {
+  public getAllUnreadRequests(): Observable<RequestDTO[]> {
     const url = this.buildUrl() + '/GetAllUnreadRequests';
 
-    return this.http.get<FormDTO[]>(url, {});
+    return this.http.get<RequestDTO[]>(url, {});
   }
 
   private buildUrl(): string {

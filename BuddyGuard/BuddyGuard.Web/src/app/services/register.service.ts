@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { FormDTO } from "../models/form.model";
 import { LoginDTO } from "../models/login.model";
 import { RegisterDTO } from "../models/register.model";
 

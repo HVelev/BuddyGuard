@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
 import { createPopper } from '@popperjs/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { FormDTO } from '../../models/form.model';
 import { RegisterDTO } from '../../models/register.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';

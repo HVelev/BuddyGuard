@@ -1,7 +1,9 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { DatePipe } from "@angular/common";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FormDTO } from "../models/form.model";
+import { PetDTO } from "../models/pet.model";
+import { RequestDTO } from "../models/request.model";
 import { UserDTO } from "../models/user.model";
 import { NomenclatureDTO } from "../shared/models/nomenclature-dto";
 
@@ -12,9 +14,13 @@ export class RequestService {
   private http: HttpClient;
   private controller = 'Request';
   private domain = 'https://localhost:7285/';
+  private datePipe: DatePipe;
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient,
+    datePipe: DatePipe
+  ) {
     this.http = http;
+    this.datePipe = datePipe;
   }
 
   public getAnimalTypes(): Observable<NomenclatureDTO<number>[]> {
@@ -53,14 +59,11 @@ export class RequestService {
     return this.http.get<NomenclatureDTO<number>[]>(url, {});
   }
 
-  public submitForm(data: FormDTO): Observable<string> {
+  public submitForm(data: RequestDTO): Observable<void> {
     const url = this.buildUrl() + '/SubmitForm';
-
-    return this.http.post(url, data, {
-      responseType: 'text', headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+    
+   
+    return this.http.post<void>(url, data);
   }
 
   private buildUrl(): string {

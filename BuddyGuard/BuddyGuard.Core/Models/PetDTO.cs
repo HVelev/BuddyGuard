@@ -7,21 +7,17 @@ using System.Threading.Tasks;
 
 namespace BuddyGuard.Core.Models
 {
-    public class AnimalDTO
+    public class PetDTO
     {
-        public AnimalDTO()
-        {
-            AnimalServices = new List<int>();
-        }
 
         [Required]
         public string Name { get; set; }
 
-        public string Species { get; set; }
+        public string? Species { get; set; }
 
         [Required]
-        public int AnimalType { get; set; }
+        public int AnimalTypeId { get; set; }
 
-        public List<int> AnimalServices { get; set; }
+        public int[] Services { get; set; }
     }
 }

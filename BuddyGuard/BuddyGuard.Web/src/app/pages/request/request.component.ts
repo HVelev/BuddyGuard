@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormDTO } from '../../models/form.model';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { PetDTO } from '../../models/pet.model';
+import { RequestDTO } from '../../models/request.model';
 import { RequestService } from '../../services/request.service';
 import { NomenclatureDTO } from '../../shared/models/nomenclature-dto';
 
@@ -12,6 +14,9 @@ import { NomenclatureDTO } from '../../shared/models/nomenclature-dto';
 export class RequestComponent implements OnInit {
   private service: RequestService;
 
+  @ViewChild('animalType')
+  public animalTypeMatSelect!: MatSelect;
+
   public form: FormGroup;
   public animalTypes: NomenclatureDTO<number>[] = [];
   public locations: NomenclatureDTO<number>[] = [];
@@ -19,16 +24,16 @@ export class RequestComponent implements OnInit {
   public smallDogServices: NomenclatureDTO<number>[] = [];
   public bigDogServices: NomenclatureDTO<number>[] = [];
   public catServices: NomenclatureDTO<number>[] = [];
+  public animalServices: NomenclatureDTO<number>[][] = [];
   public animals: FormArray = new FormArray([new FormGroup({
-    nameControl: new FormControl(1, Validators.required),
-    animalTypeControl: new FormControl(undefined, Validators.required),
+    nameControl: new FormControl('asd', Validators.required),
+    animalTypeControl: new FormControl(3, Validators.required),
     speciesControl: new FormControl(),
-    animalServiceGroupControl: new FormGroup({
-      combControl: new FormControl(),
-      walkControl: new FormControl(),
-      bathControl: new FormControl()
-    })
+    animalServiceControl: new FormControl(),
+    dogWalkLengthControl: new FormControl()
   })]);
+  public isVisible: boolean[] = [false];
+  public totalPrice: number = 0;
 
   public get FormArrayControls(): FormArray {
     return this.form.get('animalArrayControl') as FormArray;
@@ -38,7 +43,8 @@ export class RequestComponent implements OnInit {
     return this.form.get('dateLocationGroupControl') as FormGroup;
   }
 
-  constructor(service: RequestService) {
+  constructor(service: RequestService
+  ) {
     this.service = service;
 
     this.service.getAnimalTypes().subscribe({
@@ -50,7 +56,6 @@ export class RequestComponent implements OnInit {
     this.service.getLocations().subscribe({
       next: (value: NomenclatureDTO<number>[]) => {
         this.locations = value;
-        debugger;
       }
     });
 
@@ -72,7 +77,7 @@ export class RequestComponent implements OnInit {
       }
     });
 
-    this.service.getClientServices().subscribe({
+    this.service.getCatServices().subscribe({
       next: (value: NomenclatureDTO<number>[]) => {
         this.catServices = value;
       }
@@ -81,10 +86,10 @@ export class RequestComponent implements OnInit {
     this.form = new FormGroup({
       animalArrayControl: this.animals,
       dateLocationGroupControl: new FormGroup({
-        startDateControl: new FormControl(undefined, Validators.required),
-        endDateControl: new FormControl(undefined, Validators.required),
+        startDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
+        endDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
         meetingDateControl: new FormControl(),
-        locationControl: new FormControl(undefined, Validators.required)
+        locationControl: new FormControl(3, Validators.required)
       }),
       customerServiceControl: new FormControl()
     });
@@ -92,7 +97,10 @@ export class RequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.form;
-    debugger;
+    ((this.form.controls['animalArrayControl'] as FormArray).at(0) as FormGroup).controls['animalTypeControl'].valueChanges.subscribe({
+      next: (value: any) => {
+      }
+    });
   }
 
   public date = new Date();
@@ -102,16 +110,15 @@ export class RequestComponent implements OnInit {
       nameControl: new FormControl(undefined, Validators.required),
       animalTypeControl: new FormControl(undefined, Validators.required),
       speciesControl: new FormControl(),
-      animalServiceGroup: new FormGroup({
-        combControl: new FormControl(),
-        walkControl: new FormControl(),
-        bathControl: new FormControl()
-      })
+      animalServiceControl: new FormControl(),
+      dogWalkLengthControl: new FormControl()
     });
 
+    this.isVisible.push(false);
+
+    this.animalServices.push([]);
 
     this.animals.push(group, { emitEvent: false });
-    debugger;
 
     (this.form.get('animalArrayControl')! as FormArray).at(0).get('animalTypeControl')!.markAsUntouched();
     (this.form.get('animalArrayControl')! as FormArray).at(0).get('animalTypeControl')!.markAsPristine();
@@ -121,6 +128,22 @@ export class RequestComponent implements OnInit {
     debugger;
   }
 
+  public onAnimalTypeSelectionChange(event: MatSelectChange, index: number) {
+    if (event.value.displayName === 'Друго') {
+      this.isVisible[index] = false;
+      this.animalServices[index] = [];
+    } else if (event.value.displayName === 'Котка') {
+      this.animalServices[index] = this.catServices;
+      this.isVisible[index] = true;
+    } else if (event.value.displayName === 'Малко куче') {
+      this.animalServices[index] = this.smallDogServices;
+      this.isVisible[index] = true;
+    } else if (event.value.displayName === 'Голямо куче') {
+      this.animalServices[index] = this.bigDogServices;
+      this.isVisible[index] = true;
+    }
+  }
+
   public displayFn(data: NomenclatureDTO<number>): string {
     return data && data.displayName ? data.displayName : '';
   }
@@ -128,22 +151,55 @@ export class RequestComponent implements OnInit {
 
   public submitForm() {
     if (this.form.valid) {
-      const form = new FormDTO({
-        name: this.form.get('nameControl')!.value,
-        email: this.form.get('emailControl')!.value,
-        phone: this.form.get('phoneControl')!.value,
-        location: this.form.get('locationControl')?.value,
-        startDate: this.form.get('startControl')!.value,
-        endDate: this.form.get('endControl')!.value,
-        dogWalk: this.form.get('dogWalkControl')!.value,
-        species: this.form.get('speciesControl')!.value
+      const dateLocationGroup = this.form.controls['dateLocationGroupControl'];
+
+      const customerServicesControl = this.form.controls['customerServiceControl'];
+
+      const pets: PetDTO[] = [];
+
+      const customerServices: number[] = [];
+
+      for (let service of customerServicesControl.value) {
+        customerServices.push(service.value);
+      }
+
+      for (let group of this.animals.controls) {
+        const pet: PetDTO = new PetDTO();
+
+        pet.name = group.get('nameControl')!.value;
+        pet.species = group.get('speciesControl')!.value;
+        pet.animalTypeId = group.get('animalTypeControl')!.value?.value ?? group.get('animalTypeControl')!.value;
+        pet.services = [];
+
+        if (group.get('animalServiceControl')!.value && Array.isArray(group.get('animalServiceControl')!.value)) {
+
+          for (let service of group.get('animalServiceControl')!.value) {
+            pet.services.push(service.value);
+          }
+        }
+
+        if (group.get('dogWalkLengthControl')!.value) {
+          pet.services.push(group.get('dogWalkLengthControl')!.value.value);
+        }
+
+        pets.push(pet);
+      }
+
+      const startDate: Date = dateLocationGroup.get('startDateControl')!.value;
+
+      const form = new RequestDTO({
+        locationId: dateLocationGroup.get('locationControl')!.value?.value ?? dateLocationGroup.get('locationControl')!.value,
+        startDate: dateLocationGroup.get('startDateControl')!.value,
+        endDate: dateLocationGroup.get('endDateControl')!.value,
+        isAccepted: false,
+        isRead: false,
+        userId: sessionStorage.getItem('id')!,
+        totalAmount: this.totalPrice,
+        services: customerServices,
+        pets: pets
       });
 
-      this.service.submitForm(form).subscribe({
-        next: (value: string) => {
-          debugger;
-        }
-      });
+      this.service.submitForm(form).subscribe();
     }
   }
 }

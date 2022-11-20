@@ -61,9 +61,10 @@ namespace BuddyGuard.API.Controllers
 
                     response = Ok(
                         new { token = tokenString, 
-                        role = role.Name, 
-                        name = user.FirstName, 
-                        phone = user.PhoneNumber, 
+                        role = role.Name,
+                        id = user.Id,
+                        name = user.FirstName,
+                        phone = user.PhoneNumber,
                         email = user.Email }
                     );
                     return response;

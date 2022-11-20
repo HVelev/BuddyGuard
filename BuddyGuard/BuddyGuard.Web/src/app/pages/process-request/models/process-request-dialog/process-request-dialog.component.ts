@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormDTO } from '../../../../models/form.model';
+import { RequestDTO } from '../../../../models/request.model';
 
 @Component({
   selector: 'app-process-request-dialog',
@@ -13,7 +13,7 @@ export class ProcessRequestDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ProcessRequestDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FormDTO,
+    @Inject(MAT_DIALOG_DATA) public data: RequestDTO,
   ) {
     this.form = new FormGroup({
       nameControl: new FormControl(),
@@ -31,10 +31,10 @@ export class ProcessRequestDialogComponent implements OnInit {
   }
 
   private fillForm() {
-    this.form.get('nameControl')?.setValue(this.data.name);
-    this.form.get('phoneControl')?.setValue(this.data.phone);
-    this.form.get('emailControl')?.setValue(this.data.email);
-    this.form.get('locationControl')?.setValue(this.data.location);
+    //this.form.get('nameControl')?.setValue(this.data.name);
+    //this.form.get('phoneControl')?.setValue(this.data.phone);
+    //this.form.get('emailControl')?.setValue(this.data.email);
+    //this.form.get('locationControl')?.setValue(this.data.location);
   }
 
 }

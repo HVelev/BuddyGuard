@@ -35,7 +35,8 @@ namespace BuddyGuard.Core.Services
         {
             List<NomenclatureDTO<int>> catServices = (from service in db.Services
                                                  where service.AnimalTypeId == 3
-                                                 || (!service.IsForCustomer && !service.AnimalTypeId.HasValue)
+                                                 || (!service.IsForCustomer
+                                                    && !service.AnimalTypeId.HasValue)
                                                  join price in db.Prices on service.PriceId equals price.Id
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
