@@ -20,6 +20,8 @@
 
         public DateTime RequestSentDate { get; set; }
 
+        public string? Comment { get; set; }
+
         public bool IsRead { get; set; }
 
         public PetDTO[] Pets { get; set; }

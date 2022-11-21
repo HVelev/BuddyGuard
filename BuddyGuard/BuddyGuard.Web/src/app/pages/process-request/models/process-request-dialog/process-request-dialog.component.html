@@ -85,9 +85,9 @@
           </mat-form-field>
         </div>
       </mat-card>
-        <div>
-          <button mat-button matStepperNext>Напред</button>
-        </div>
+      <div>
+        <button mat-button matStepperNext>Напред</button>
+      </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="form" [editable]="true">
@@ -112,6 +112,167 @@
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="form" [editable]="true">
+    <!-- #enddocregion editable -->
+    <div>
+      <form [formGroup]="form">
+        <mat-card class="mat-elevation-z10 outline">
+          <!-- #docregion step-label -->
+          <ng-template matStepLabel>Информация за домашните любимци</ng-template>
+          <!-- #enddocregion step-label -->
+          <div *ngFor="let animal of FormArrayControls.controls; let i = index">
+            <mat-card class="full-width mt" fxLayoutAlign="center center">
+              <div formArrayName="animalArrayControl" fxLayout="column" fxFlex="70">
+                <mat-card-title fxFlexAlign="center">Основна информация</mat-card-title>
+                <div [formGroupName]="i">
+                  <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Име</mat-label>
+                      <input matInput formControlName="nameControl" placeholder="Име">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" fxFlex="100">
+                      <mat-label>Какъв вид е Вашето животно?</mat-label>
+                      <mat-select formControlName="animalTypeControl" #animalType>
+                        <mat-option>
+                          selected
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <ng-container [ngTemplateOutlet]="isOthersSelected(i) === undefined ? empty : isOthersSelected(i) === true ? description : species">
+                    </ng-container>
+                    <ng-template #empty></ng-template>
+                    <ng-template #description>
+                      <mat-form-field appearance="fill" fxFlex="100">
+                        <mat-label>Моля опишете домашния си любимец</mat-label>
+                        <input matInput formControlName="descriptionControl" placeholder="Име">
+                      </mat-form-field>
+                    </ng-template>
+                    <ng-template #species>
+                      <mat-form-field appearance="fill" fxFlex="100">
+                        <mat-label>Порода</mat-label>
+                        <input matInput formControlName="speciesControl" placeholder="Каква е породата на Вашия домашен любимец?">
+                      </mat-form-field>
+                    </ng-template>
+                  </div>
+                  <div>
+                    <mat-divider></mat-divider>
+                    <div fxLayout="column">
+                      <mat-card-title fxFlexAlign="center">Услуги</mat-card-title>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Брой разходки</mat-label>
+                        <mat-select formControlName="dogWalkLengthControl">
+                          <mat-option>
+                            selected
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Допълнителни услуги</mat-label>
+                        <mat-select multiple formControlName="animalServiceControl">
+                          <mat-option>
+                            selected
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+        </mat-card>
+      </form>
+    </div>
+    <div class="mt" fxLayoutAlign="end">
+      <div dir="rtl">
+        <button mat-raised-button color="accent" matStepperNext>Напред</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="form" [editable]="true">
+    <div [formGroup]="form">
+      <form formGroupName="dateLocationGroupControl">
+        <mat-card class="mat-elevation-z10 outline" fxLayoutAlign="center">
+          <ng-template matStepLabel>Информация за периода на услугите и мястото</ng-template>
+          <div fxLayout="column" fxLayoutGap="1em" fxFlex="70">
+            <mat-label>Начало на грижите</mat-label>
+            <mat-form-field appearance="fill" (click)="picker.open()">
+              <mat-label>Изберете дата</mat-label>
+              <input formControlName="startDateControl" readonly matInput [matDatepicker]="picker">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-label>Край на грижите</mat-label>
+            <mat-form-field appearance="fill" (click)="pick.open()">
+              <mat-label>Изберете дата</mat-label>
+              <input formControlName="endDateControl" readonly matInput [matDatepicker]="pick">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
+              <mat-datepicker #pick></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Квартал/Район</mat-label>
+              <input type="text" matInput formControlName="locationControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option>
+                  selected
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field appearance="fill" (click)="meeting.open()">
+              <mat-hint>* Ако не изберете ден и час, ще се свържем с Вас най-късно 24 часа преди определената начална дата на грижите за уговаряне на среща</mat-hint>
+              <mat-label>Предпочитана дата за първоначална среща</mat-label>
+              <input formControlName="meetingDateControl" readonly matInput [matDatepicker]="meeting">
+              <mat-datepicker-toggle matSuffix [for]="meeting"></mat-datepicker-toggle>
+              <mat-datepicker #meeting></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </form>
+    </div>
+    <div class="mt" fxLayoutAlign="space-between">
+      <div dir="rtl">
+        <button mat-raised-button color="accent" matStepperNext>Напред</button>
+      </div>
+      <div dir="ltr">
+        <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="form" [editable]="true">
+    <div>
+      <form [formGroup]="form">
+        <mat-card class="mat-elevation-z10 outline" fxLayout="column" fxLayoutGap="1em">
+          <ng-template matStepLabel>Допълнителни услуги</ng-template>
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em">
+            <mat-label fxFlex="50">Ако желаете допълнителни услуги, моля изберете от следните опции:</mat-label>
+            <mat-form-field class="mt" appearance="fill" fxFlex="50" style="max-width: 100%">
+              <mat-select multiple formControlName="customerServiceControl">
+                <mat-option>
+                  selected
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-label>Ако не откривате услугата, от която имате нужда, попълнете полето:</mat-label>
+          <mat-form-field appearance="fill" fxFlex="100">
+            <textarea #message maxlength="200" matInput formControlName="commentControl" placeholder="Оставете коментар"></textarea>
+            <mat-hint align="end">{{message.value.length}} / 200</mat-hint>
+          </mat-form-field>
+        </mat-card>
+      </form>
+    </div>
+    <div class="mt" fxLayoutAlign="space-between">
+      <div dir="ltr">
+        <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
+      </div>
+      <div dir="rtl">
+        <button mat-raised-button color="primary">Изпращане на заявка</button>
+      </div>
     </div>
   </mat-step>
 </mat-stepper>

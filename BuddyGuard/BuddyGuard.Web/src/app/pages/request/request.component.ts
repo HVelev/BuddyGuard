@@ -27,13 +27,15 @@ export class RequestComponent implements OnInit {
   public animalServices: NomenclatureDTO<number>[][] = [];
   public animals: FormArray = new FormArray([new FormGroup({
     nameControl: new FormControl('asd', Validators.required),
-    animalTypeControl: new FormControl(3, Validators.required),
+    animalTypeControl: new FormControl(undefined, Validators.required),
     speciesControl: new FormControl(),
     animalServiceControl: new FormControl(),
-    dogWalkLengthControl: new FormControl()
+    dogWalkLengthControl: new FormControl(),
+    descriptionControl: new FormControl()
   })]);
   public isVisible: boolean[] = [false];
   public totalPrice: number = 0;
+  public currentlySelectedPet: string | undefined;
 
   public get FormArrayControls(): FormArray {
     return this.form.get('animalArrayControl') as FormArray;
@@ -89,21 +91,15 @@ export class RequestComponent implements OnInit {
         startDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
         endDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
         meetingDateControl: new FormControl(),
-        locationControl: new FormControl(3, Validators.required)
+        locationControl: new FormControl(undefined, Validators.required)
       }),
-      customerServiceControl: new FormControl()
+      customerServiceControl: new FormControl(),
+      commentControl: new FormControl()
     });
   }
 
   ngOnInit(): void {
-    this.form;
-    ((this.form.controls['animalArrayControl'] as FormArray).at(0) as FormGroup).controls['animalTypeControl'].valueChanges.subscribe({
-      next: (value: any) => {
-      }
-    });
   }
-
-  public date = new Date();
 
   public addAnimal() {
     const group = new FormGroup({
@@ -111,7 +107,8 @@ export class RequestComponent implements OnInit {
       animalTypeControl: new FormControl(undefined, Validators.required),
       speciesControl: new FormControl(),
       animalServiceControl: new FormControl(),
-      dogWalkLengthControl: new FormControl()
+      dogWalkLengthControl: new FormControl(),
+      descriptionControl: new FormControl(undefined, Validators.required)
     });
 
     this.isVisible.push(false);
@@ -125,10 +122,16 @@ export class RequestComponent implements OnInit {
   }
 
   public click() {
-    debugger;
   }
 
   public onAnimalTypeSelectionChange(event: MatSelectChange, index: number) {
+    this.FormArrayControls.at(index).get('speciesControl')!.reset();
+    this.FormArrayControls.at(index).get('animalServiceControl')!.reset();
+    this.FormArrayControls.at(index).get('dogWalkLengthControl')!.reset();
+    this.FormArrayControls.at(index).get('descriptionControl')!.reset();
+
+    this.currentlySelectedPet = event.value.displayName;
+
     if (event.value.displayName === 'Друго') {
       this.isVisible[index] = false;
       this.animalServices[index] = [];
@@ -142,6 +145,14 @@ export class RequestComponent implements OnInit {
       this.animalServices[index] = this.bigDogServices;
       this.isVisible[index] = true;
     }
+  }
+
+  public isOthersSelected(index: number): boolean | undefined {
+    if (!this.FormArrayControls.at(index).get('animalTypeControl')!.value) {
+      return undefined;
+    }
+
+    return this.FormArrayControls.at(index).get('animalTypeControl')!.value.displayName === 'Друго';
   }
 
   public displayFn(data: NomenclatureDTO<number>): string {
@@ -159,8 +170,12 @@ export class RequestComponent implements OnInit {
 
       const customerServices: number[] = [];
 
-      for (let service of customerServicesControl.value) {
-        customerServices.push(service.value);
+      const comment: string | undefined = this.form.controls['commentControl'].value;
+
+      if (customerServicesControl.value && Array.isArray(customerServicesControl.value)) {
+        for (let service of customerServicesControl.value) {
+          customerServices.push(service.value);
+        }
       }
 
       for (let group of this.animals.controls) {
@@ -168,6 +183,7 @@ export class RequestComponent implements OnInit {
 
         pet.name = group.get('nameControl')!.value;
         pet.species = group.get('speciesControl')!.value;
+        pet.petDescription = group.get('descriptionControl')!.value,
         pet.animalTypeId = group.get('animalTypeControl')!.value?.value ?? group.get('animalTypeControl')!.value;
         pet.services = [];
 
@@ -185,14 +201,16 @@ export class RequestComponent implements OnInit {
         pets.push(pet);
       }
 
-      const startDate: Date = dateLocationGroup.get('startDateControl')!.value;
+      const startDate: string = dateLocationGroup.get('startDateControl')!.value;
+      const endDate: string = dateLocationGroup.get('endDateControl')!.value;
 
       const form = new RequestDTO({
         locationId: dateLocationGroup.get('locationControl')!.value?.value ?? dateLocationGroup.get('locationControl')!.value,
-        startDate: dateLocationGroup.get('startDateControl')!.value,
-        endDate: dateLocationGroup.get('endDateControl')!.value,
+        startDate: startDate,
+        endDate: endDate,
         isAccepted: false,
         isRead: false,
+        comment: comment,
         userId: sessionStorage.getItem('id')!,
         totalAmount: this.totalPrice,
         services: customerServices,

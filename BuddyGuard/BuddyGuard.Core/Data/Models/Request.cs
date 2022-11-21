@@ -25,6 +25,8 @@ namespace BuddyGuard.Core.Data.Models
 
         public DateTime RequestSentDate { get; set; }
 
+        public string? Comment { get; set; }
+
         [Required]
         public string UserId { get; set; }
 
@@ -32,7 +34,6 @@ namespace BuddyGuard.Core.Data.Models
 
         [Required]
         public int LocationId { get; set; }
-
         
         public Location Location { get; set; }
     }

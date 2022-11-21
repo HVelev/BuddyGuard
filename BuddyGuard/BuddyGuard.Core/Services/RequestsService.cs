@@ -29,6 +29,7 @@ namespace BuddyGuard.Core.Services
                 StartDate = DateTime.Parse(form.StartDate),
                 EndDate = DateTime.Parse(form.EndDate),
                 RequestSentDate = DateTime.Now,
+                Comment = form.Comment,
                 IsRead = false,
                 IsAccepted = false
             };
@@ -54,6 +55,7 @@ namespace BuddyGuard.Core.Services
                 {
                     AnimalName = pet.Name,
                     AnimalSpecies = pet.Species,
+                    PetDescription = pet.PetDescription,
                     AnimalTypeId = pet.AnimalTypeId,
                     RequestId = entity.Id
                 };

@@ -10,3 +10,14 @@ mat-card {
     margin-top: 20px;
 }
 
+.full-width {
+  width: 100%;
+}
+
+form {
+  margin-top: 20px !important;
+}
+
+.mt {
+  margin-top: 2% !important;
+}

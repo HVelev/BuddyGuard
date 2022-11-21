@@ -120,70 +120,91 @@
     <!-- #docregion editable -->
     <mat-step [stepControl]="form" [editable]="true">
       <!-- #enddocregion editable -->
-      <form [formGroup]="form">
-        <!-- #docregion step-label -->
-        <ng-template matStepLabel>Информация за домашните любимци</ng-template>
-        <!-- #enddocregion step-label -->
-        <div *ngFor="let animal of FormArrayControls.controls; let i = index" fxLayoutAlign="center" fxLayoutGap="2em">
+      <div>
+        <form [formGroup]="form">
           <mat-card class="mat-elevation-z10 outline">
-            <div formArrayName="animalArrayControl">
-              <mat-card-title>Основна информация</mat-card-title>
-              <div [formGroupName]="i">
-                <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
-                  <mat-form-field appearance="fill" fxFlex="100">
-                    <mat-label>Име</mat-label>
-                    <input matInput formControlName="nameControl" placeholder="Име">
-                  </mat-form-field>
-                  <mat-form-field appearance="fill" fxFlex="100">
-                    <mat-label>Какъв вид е вашето животно?</mat-label>
-                    <mat-select (selectionChange)="onAnimalTypeSelectionChange($event, i)" formControlName="animalTypeControl" #animalType>
-                      <mat-option *ngFor="let animalType of animalTypes" [value]="animalType">
-                        {{ animalType.displayName }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div *ngIf="isVisible[i]">
-                  <mat-divider></mat-divider>
-                  <div fxLayout="column">
-                    <mat-card-title>Услуги</mat-card-title>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Услуги</mat-label>
-                      <mat-select multiple formControlName="animalServiceControl">
-                        <mat-option *ngFor="let service of animalServices[i]" [value]="service">
-                          {{ service.displayName }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <h4>Изберете си услуги (незадължително):</h4>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Брой разходки</mat-label>
-                      <mat-select formControlName="dogWalkLengthControl">
-                        <mat-option *ngFor="let service of animalServices[i]" [value]="service">
-                          {{ service.displayName }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
+            <!-- #docregion step-label -->
+            <ng-template matStepLabel>Информация за домашните любимци</ng-template>
+            <!-- #enddocregion step-label -->
+            <div *ngFor="let animal of FormArrayControls.controls; let i = index">
+              <mat-card class="full-width mt" fxLayoutAlign="center center">
+                <div formArrayName="animalArrayControl" fxLayout="column" fxFlex="70">
+                  <mat-card-title fxFlexAlign="center">Основна информация</mat-card-title>
+                  <div [formGroupName]="i">
+                    <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Име</mat-label>
+                        <input matInput formControlName="nameControl" placeholder="Име">
+                      </mat-form-field>
+                      <mat-form-field appearance="fill" fxFlex="100">
+                        <mat-label>Какъв вид е Вашето животно?</mat-label>
+                        <mat-select (selectionChange)="onAnimalTypeSelectionChange($event, i)" formControlName="animalTypeControl" #animalType>
+                          <mat-option *ngFor="let animalType of animalTypes" [value]="animalType">
+                            {{ animalType.displayName }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <ng-container [ngTemplateOutlet]="isOthersSelected(i) === undefined ? empty : isOthersSelected(i) === true ? description : species">
+                      </ng-container>
+                      <ng-template #empty></ng-template>
+                      <ng-template #description>
+                        <mat-form-field appearance="fill" fxFlex="100">
+                          <mat-label>Моля опишете домашния си любимец</mat-label>
+                          <input matInput formControlName="descriptionControl" placeholder="Име">
+                        </mat-form-field>
+                      </ng-template>
+                      <ng-template #species>
+                        <mat-form-field appearance="fill" fxFlex="100">
+                          <mat-label>Порода</mat-label>
+                          <input matInput formControlName="speciesControl" placeholder="Каква е породата на Вашия домашен любимец?">
+                        </mat-form-field>
+                      </ng-template>
+                    </div>
+                    <div *ngIf="isVisible[i]">
+                      <mat-divider></mat-divider>
+                      <div fxLayout="column">
+                        <mat-card-title fxFlexAlign="center">Услуги</mat-card-title>
+                        <mat-form-field appearance="fill" *ngIf="FormArrayControls.at(i).get('animalTypeControl')!.value.displayName !== 'Котка'">
+                          <mat-label>Брой разходки</mat-label>
+                          <mat-select formControlName="dogWalkLengthControl">
+                            <mat-option *ngFor="let service of animalServices[i]" [value]="service">
+                              {{ service.displayName }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Допълнителни услуги</mat-label>
+                          <mat-select multiple formControlName="animalServiceControl">
+                            <mat-option *ngFor="let service of animalServices[i]" [value]="service">
+                              {{ service.displayName }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </mat-card>
             </div>
+
           </mat-card>
+        </form>
+      </div>
+      <div class="mt" fxLayoutAlign="space-between">
+        <div dir="ltr">
+          <button mat-raised-button color="accent" (click)="addAnimal()">Добавяне на животно</button>
         </div>
         <div dir="rtl">
           <button mat-raised-button color="accent" matStepperNext>Напред</button>
         </div>
-        <div dir="ltr">
-          <button mat-raised-button color="accent" (click)="addAnimal()">Добавяне на животно</button>
-        </div>
-      </form>
+      </div>
     </mat-step>
     <mat-step [stepControl]="form" [editable]="true">
       <div>
         <form [formGroup]="dateLocationGroup">
-          <mat-card class="mat-elevation-z10 outline">
+          <mat-card class="mat-elevation-z10 outline" fxLayoutAlign="center">
             <ng-template matStepLabel>Информация за периода на услугите и мястото</ng-template>
-            <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+            <div fxLayout="column" fxLayoutGap="1em" fxFlex="70">
               <mat-label>Начало на грижите</mat-label>
               <mat-form-field appearance="fill" (click)="picker.open()">
                 <mat-label>Изберете дата</mat-label>
@@ -220,60 +241,71 @@
           </mat-card>
         </form>
       </div>
-      <div dir="rtl">
-        <button mat-raised-button color="accent" matStepperNext>Напред</button>
-      </div>
-      <div dir="ltr">
-        <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
+      <div class="mt" fxLayoutAlign="space-between">
+        <div dir="rtl">
+          <button mat-raised-button color="accent" matStepperNext>Напред</button>
+        </div>
+        <div dir="ltr">
+          <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
+        </div>
       </div>
     </mat-step>
     <mat-step [stepControl]="form" [editable]="true">
       <div>
         <form [formGroup]="form">
-          <mat-card class="mat-elevation-z10 outline">
+          <mat-card class="mat-elevation-z10 outline" fxLayout="column" fxLayoutGap="1em">
             <ng-template matStepLabel>Допълнителни услуги</ng-template>
-            <mat-label>Ако желаете допълнителни услуги, моля изберете:</mat-label>
-            <mat-form-field appearance="fill">
-              <mat-select multiple formControlName="customerServiceControl">
-                <mat-option *ngFor="let service of clientServices" [value]="service">
-                  {{ service.displayName }}
-                </mat-option>
-              </mat-select>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5em">
+              <mat-label fxFlex="50">Ако желаете допълнителни услуги, моля изберете от следните опции:</mat-label>
+              <mat-form-field class="mt" appearance="fill" fxFlex="50" style="max-width: 100%">
+                <mat-select multiple formControlName="customerServiceControl">
+                  <mat-option *ngFor="let service of clientServices" [value]="service">
+                    {{ service.displayName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-label>Ако не откривате услугата, от която имате нужда, попълнете полето:</mat-label>
+            <mat-form-field appearance="fill" fxFlex="100">
+              <textarea #message maxlength="200" matInput formControlName="commentControl" placeholder="Оставете коментар"></textarea>
+              <mat-hint align="end">{{message.value.length}} / 200</mat-hint>
             </mat-form-field>
           </mat-card>
         </form>
       </div>
-      <div dir="ltr">
-        <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
-      </div>
-      <div dir="rtl">
-        <button mat-raised-button color="primary" (click)="submitForm()">Изпращане на заявка</button>
+      <div class="mt" fxLayoutAlign="space-between">
+        <div dir="ltr">
+          <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
+        </div>
+        <div dir="rtl">
+          <button mat-raised-button color="primary" (click)="submitForm()">Изпращане на заявка</button>
+        </div>
       </div>
     </mat-step>
     <!--<mat-step [stepControl]="form" [editable]="true">
-    <form [formGroup]="form">
-      <ng-template matStepLabel>Информация за домашния любимец</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Адрес</mat-label>
-        <input matInput
-               formControlName="locationControl"
-               placeholder="Ex. 1 Main St, New York, NY"
-               required />
-      </mat-form-field>
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Информация за домашния любимец</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Адрес</mat-label>
+          <input matInput
+                 formControlName="locationControl"
+                 placeholder="Ex. 1 Main St, New York, NY"
+                 required />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>-->
+    </mat-step>-->
   </mat-stepper>
 
 </div>

@@ -20,6 +20,8 @@ export class RequestDTO {
   public isAccepted!: boolean;
 
   public requestSentDate?: Date;
+
+  public comment?: string;
     
   public pets!: PetDTO[];
 

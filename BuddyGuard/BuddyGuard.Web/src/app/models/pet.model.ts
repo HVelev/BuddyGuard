@@ -7,6 +7,8 @@ export class PetDTO {
 
   public species?: string;
 
+  public petDescription?: string;
+
   public animalTypeId!: number;
 
   public services?: number[];
