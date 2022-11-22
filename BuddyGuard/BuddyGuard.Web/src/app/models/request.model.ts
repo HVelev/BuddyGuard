@@ -2,28 +2,32 @@ import { PetDTO } from "./pet.model";
 
 export class RequestDTO {
   public constructor(obj?: Partial<RequestDTO>) {
-  Object.assign(this, obj);
+    Object.assign(this, obj);
   }
 
-  public userId!: string;
+  public firstName!: string;
 
-  public locationId!: number;
+  public lastName!: string;
 
-  public totalAmount!: number;
+  public email!: string;
 
-  public startDate!: string;
+  public phone!: string;
 
-  public endDate!: string;
+  public startDate!: Date;
 
-  public isRead!: boolean;
+  public endDate!: Date;
 
-  public isAccepted!: boolean;
+  public sentDate!: Date;
 
-  public requestSentDate?: Date;
+  public location!: string;
+
+  public exactLocation!: string;
+
+  public meetingDate?: Date;
+
+  public clientServices?: string[];
 
   public comment?: string;
-    
-  public pets!: PetDTO[];
 
-  public services?: number[];
+  public pets!: PetDTO[];
 }

@@ -1,8 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { RequestDTO } from '../models/request.model';
+import { EditRequestDTO } from '../models/edit-request.model';
 import { LoginService } from '../services/login.service';
 import { ProcessRequestService } from '../services/process-request.service';
 import { RegisterService } from '../services/register.service';
@@ -60,8 +61,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   private registerService: RegisterService;
 
   public isToggled = true;
-  public notifications: RequestDTO[] = [];
+  public notifications: EditRequestDTO[] = [];
   public role: string | undefined | null;
+  public datePipe: DatePipe;
 
   mobileQuery: MediaQueryList;
 
@@ -83,7 +85,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     media: MediaMatcher,
     processRequestService: ProcessRequestService,
     loginService: LoginService,
-    registerService: RegisterService) {
+    registerService: RegisterService,
+    datePipe: DatePipe) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -91,6 +94,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.loginService = loginService;
     this.role = sessionStorage.getItem('role');
     this.registerService = registerService;
+    this.datePipe = datePipe;
   }
 
   public ngOnInit(): void {
@@ -102,7 +106,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
     if (this.role) {
       this.processRequestService.getAllUnreadRequests().subscribe({
-        next: (value: RequestDTO[]) => {
+        next: (value: EditRequestDTO[]) => {
           this.notifications = value;
         }
       });

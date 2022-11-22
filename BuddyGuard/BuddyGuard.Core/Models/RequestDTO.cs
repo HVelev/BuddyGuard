@@ -1,33 +1,32 @@
-﻿namespace BuddyGuard.Core.Models
+﻿
+namespace BuddyGuard.Core.Models
 {
     public class RequestDTO
     {
-        public RequestDTO()
-        {
-            Services = new List<int>();
-        }
+        public string FirstName { get; set; }
 
+        public string LastName { get; set; }
 
-        public decimal TotalAmount { get; set; }
+        public string Email { get; set; }
 
-        public string UserId { get; set; }
+        public string Phone { get; set; }
 
-        public int LocationId { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public string StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
-        public string EndDate { get; set; }
+        public DateTime SentDate { get; set; }
 
-        public DateTime RequestSentDate { get; set; }
+        public string Location { get; set; }
+
+        public string ExactLocation { get; set; }
+
+        public DateTime? MeetingDate { get; set; }
+
+        public string[]? ClientServices { get; set; }
 
         public string? Comment { get; set; }
 
-        public bool IsRead { get; set; }
-
         public PetDTO[] Pets { get; set; }
-
-        public List<int> Services { get; set; }
-
-        public bool IsAccepted { get; set; }
     }
 }

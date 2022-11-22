@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RequestDTO } from '../../../../models/request.model';
-import { NomenclatureDTO } from '../../../../shared/models/nomenclature-dto';
+import { EditRequestDTO } from '../../../../models/edit-request.model';
 
 @Component({
   selector: 'app-process-request-dialog',
@@ -22,7 +21,7 @@ export class ProcessRequestDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ProcessRequestDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: RequestDTO,
+    @Inject(MAT_DIALOG_DATA) public data: EditRequestDTO,
   ) {
     this.form = new FormGroup({
       nameControl: new FormControl(),
@@ -66,6 +65,9 @@ export class ProcessRequestDialogComponent implements OnInit {
     return true;
   }
 
+  public close() {
+    this.dialogRef.close();
+  }
 
   private fillForm() {
     //this.form.get('nameControl')?.setValue(this.data.name);

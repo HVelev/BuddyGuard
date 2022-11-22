@@ -2,7 +2,8 @@ import { DatePipe } from "@angular/common";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { PetDTO } from "../models/pet.model";
+import { EditPetDTO } from "../models/edit-pet.model";
+import { EditRequestDTO } from "../models/edit-request.model";
 import { RequestDTO } from "../models/request.model";
 import { UserDTO } from "../models/user.model";
 import { NomenclatureDTO } from "../shared/models/nomenclature-dto";
@@ -59,11 +60,20 @@ export class RequestService {
     return this.http.get<NomenclatureDTO<number>[]>(url, {});
   }
 
-  public submitForm(data: RequestDTO): Observable<void> {
+  public submitForm(data: EditRequestDTO): Observable<void> {
     const url = this.buildUrl() + '/SubmitForm';
     
    
     return this.http.post<void>(url, data);
+  }
+
+  public getRequest(requestId: number): Observable<RequestDTO> {
+    const url = this.buildUrl() + '/GetRequest';
+    const httpParams = new HttpParams().append('requestId', requestId);
+
+    return this.http.get<RequestDTO>(url, {
+      params: httpParams
+    });
   }
 
   private buildUrl(): string {

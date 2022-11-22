@@ -9,7 +9,7 @@ export class PetDTO {
 
   public petDescription?: string;
 
-  public animalTypeId!: number;
+  public animalType!: string;
 
-  public services?: number[];
+  public services?: string[];
 }

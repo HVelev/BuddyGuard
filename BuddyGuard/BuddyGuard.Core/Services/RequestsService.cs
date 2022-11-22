@@ -20,7 +20,7 @@ namespace BuddyGuard.Core.Services
             dbContext = db;
         }
 
-        public void SubmitForm(RequestDTO form)
+        public void SubmitForm(EditRequestDTO form)
         {
             var request = new Request
             {
@@ -78,6 +78,41 @@ namespace BuddyGuard.Core.Services
             }
 
             dbContext.SaveChanges();
+        }
+
+        public RequestDTO GetRequest(int requestId)
+        {
+            RequestDTO request = (from requestDb in dbContext.Requests
+                                  join user in dbContext.Users on requestDb.UserId equals user.Id
+                                  join location in dbContext.Locations on requestDb.LocationId equals location.Id
+                                  where requestDb.Id == requestId
+                                  select new RequestDTO
+                                  {
+                                      FirstName = user.FirstName,
+                                      LastName = user.LastName,
+                                      Email = user.Email,
+                                      Phone = user.PhoneNumber,
+                                      Location = location.Name,
+                                      StartDate = requestDb.StartDate,
+                                      EndDate = requestDb.EndDate,
+                                      SentDate = requestDb.RequestSentDate,
+                                      Comment = requestDb.Comment
+                                  }).First();
+
+            PetDTO[] pets = (from requestDb in dbContext.Requests
+                             join animalRequest in dbContext.AnimalRequests on requestDb.Id equals animalRequest.RequestId
+                             join animalType in dbContext.AnimalTypes on animalRequest.AnimalTypeId equals animalType.Id
+                             select new PetDTO
+                             {
+                                 Name = animalRequest.AnimalName,
+                                 AnimalType = animalType.Name,
+                                 PetDescription = animalRequest.PetDescription,
+                                 Species = animalRequest.AnimalSpecies
+                             }).ToArray();
+
+            request.Pets = pets;
+
+            return request;
         }
     }
 }

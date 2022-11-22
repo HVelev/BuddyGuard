@@ -27,11 +27,20 @@ namespace BuddyGuard.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult SubmitForm([FromBody] RequestDTO form)
+        public IActionResult SubmitForm([FromBody] EditRequestDTO form)
         {
             requestService.SubmitForm(form);
 
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetRequest([FromQuery] int requestId)
+        {
+            RequestDTO result = requestService.GetRequest(requestId);
+
+            return Ok(result);
         }
 
         [Authorize]

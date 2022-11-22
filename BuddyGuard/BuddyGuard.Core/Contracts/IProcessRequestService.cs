@@ -9,6 +9,6 @@ namespace BuddyGuard.Core.Contracts
 {
     public interface IProcessRequestService
     {
-        List<RequestDTO> GetAllUnreadRequests();
+        List<EditRequestDTO> GetAllUnreadRequests();
     }
 }

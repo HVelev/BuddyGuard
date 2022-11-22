@@ -19,6 +19,8 @@ namespace BuddyGuard.Core.Data.Models
         [Required]
         public DateTime EndDate { get; set; }
 
+        public DateTime? MeetingDate { get; set; }
+
         public bool IsRead { get; set; }
 
         public bool IsAccepted { get; set; }

@@ -19,9 +19,9 @@ namespace BuddyGuard.Core.Services
             this.dbContext = dbContext;
         }
 
-        public List<RequestDTO> GetAllUnreadRequests()
+        public List<EditRequestDTO> GetAllUnreadRequests()
         {
-            return dbContext.Requests.OrderByDescending(x => x.RequestSentDate).Select(x => new RequestDTO
+            return dbContext.Requests.OrderByDescending(x => x.RequestSentDate).Select(x => new EditRequestDTO
             {
                 EndDate = x.EndDate.ToString(),
                 StartDate = x.StartDate.ToString(),

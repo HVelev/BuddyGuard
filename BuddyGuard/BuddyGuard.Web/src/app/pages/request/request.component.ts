@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
-import { PetDTO } from '../../models/pet.model';
-import { RequestDTO } from '../../models/request.model';
+import { EditPetDTO } from '../../models/edit-pet.model';
+import { EditRequestDTO } from '../../models/edit-request.model';
 import { RequestService } from '../../services/request.service';
 import { NomenclatureDTO } from '../../shared/models/nomenclature-dto';
 
@@ -161,12 +161,14 @@ export class RequestComponent implements OnInit {
 
 
   public submitForm() {
+    debugger;
+
     if (this.form.valid) {
       const dateLocationGroup = this.form.controls['dateLocationGroupControl'];
 
       const customerServicesControl = this.form.controls['customerServiceControl'];
 
-      const pets: PetDTO[] = [];
+      const pets: EditPetDTO[] = [];
 
       const customerServices: number[] = [];
 
@@ -179,7 +181,7 @@ export class RequestComponent implements OnInit {
       }
 
       for (let group of this.animals.controls) {
-        const pet: PetDTO = new PetDTO();
+        const pet: EditPetDTO = new EditPetDTO();
 
         pet.name = group.get('nameControl')!.value;
         pet.species = group.get('speciesControl')!.value;
@@ -204,7 +206,7 @@ export class RequestComponent implements OnInit {
       const startDate: string = dateLocationGroup.get('startDateControl')!.value;
       const endDate: string = dateLocationGroup.get('endDateControl')!.value;
 
-      const form = new RequestDTO({
+      const form = new EditRequestDTO({
         locationId: dateLocationGroup.get('locationControl')!.value?.value ?? dateLocationGroup.get('locationControl')!.value,
         startDate: startDate,
         endDate: endDate,
