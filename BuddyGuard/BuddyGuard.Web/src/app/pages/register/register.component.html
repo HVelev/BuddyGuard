@@ -1,15 +1,44 @@
-<div fxLayoutAlign="center center">
-  <img src="https://lh6.googleusercontent.com/Jw4dgmLjdR40kLus…84g6q-3JhXfCEAGmK1RE4wLLZQ8RAcBE1RFX_HpAPuQ" alt="Alternate Text" />
-  <button style="cursor: pointer" (click)="register()">register</button>
-  <div class="btn-group dropend">
-    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropend
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Menu item</a></li>
-      <li><a class="dropdown-item" href="#">Menu item</a></li>
-      <li><a class="dropdown-item" href="#">Menu item</a></li>
-    </ul>
-  </div>
+<div fxLayout="column"
+     fxLayoutAlign="center center"
+     fxLayoutGap="2em"
+     [formGroup]="form">
+  <img src="https://lh6.googleusercontent.com/Jw4dgmLjdR40kLusQBNBaDUNF4ZU_g8DA51bStbmnJmYyb9LQB8KMpz01SK-ypEsrxHXStj8gCqQRHCYJAB6wIB84g6q-3JhXfCEAGmK1RE4wLLZQ8RAcBE1RFX_HpAPuQ=w500" alt="Alternate Text" />
+  <mat-form-field appearance="fill">
+    <mat-label>Име</mat-label>
+    <input matInput formControlName="firstNameControl" placeholder="Име">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Фамилия</mat-label>
+    <input matInput formControlName="lastNameControl" placeholder="Фамилия">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Имейл</mat-label>
+    <input matInput formControlName="emailControl" placeholder="Имейл">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Потребителско име</mat-label>
+    <input matInput formControlName="usernameControl" placeholder="Потребителско име">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Парола</mat-label>
+    <input matInput formControlName="passwordControl" type="password" placeholder="Парола">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Потвърди паролата</mat-label>
+    <input matInput formControlName="confirmPasswordControl" type="password" placeholder="Потвърждение">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Адрес</mat-label>
+    <input matInput formControlName="addressControl" placeholder="Адрес">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Телефон</mat-label>
+    <input matInput formControlName="phoneControl" placeholder="Телефон">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Роля</mat-label>
+    <input matInput formControlName="roleControl" placeholder="Роля">
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="register()">register</button>
 </div>
 

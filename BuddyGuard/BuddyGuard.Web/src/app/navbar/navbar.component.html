@@ -8,11 +8,12 @@
           <img routerLink="/" src="https://static.wixstatic.com/media/3df67c_cb863e11b4b84f02be5becddd8bbf49d~mv2.png/v1/fill/w_475,h_90,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Buddy%20Guard%20-%20Horizontal.png" />
         </div>
         <div style="margin-left: 400px;">
-          <button class="brown navbtn" routerLink="login"><span>Влез</span></button>
-          <button class="brown navbtn" routerLink="register"><span>Регистрирай се</span></button>
           <button class="brown navbtn"><span>Разбери повече</span></button>
           <button class="brown navbtn">Buddies</button>
-          <button class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
+          <button *ngIf="role === 'Admin'" class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
+          <button *ngIf="!role ?? true" class="brown navbtn" routerLink="login"><span>Влез</span></button>
+          <button *ngIf="!role ?? true" class="brown navbtn" routerLink="register"><span>Регистрирай се</span></button>
+          <button *ngIf="role ?? false" class="brown navbtn" routerLink="/" (click)="logout()">Излез</button>
           <mat-menu class="gap oval-border" #menu="matMenu">
             <div>
               <p>
@@ -27,8 +28,8 @@
                    class="notification-margin">
                 <mat-icon class="smallIcon" fxFlex="5">mail</mat-icon>
                 <div fxFlex="80" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10">
-                  <p>Имате нова заявка от {{ notification.name }}</p>
-                  <mat-card-subtitle>{{ notification.requestSentDate.toLocaleString() | timeAgo }}</mat-card-subtitle>
+                  <p>Имате нова заявка за {{ notification.startDate }}</p>
+                  <mat-card-subtitle>{{ notification.requestSentDate!.toString() | timeAgo }}</mat-card-subtitle>
                 </div>
                 <div fxFlex="10" fxLayoutAlign="start end">
                   <button mat-mini-fab color="primary" class="read-btn">
@@ -41,17 +42,19 @@
       </div>
     </mat-toolbar>
 
-  </div>
-  <mat-sidenav style="background-color: transparent; border: hidden;" #snav
-               mode="side">
-    <div class="mt">
-      <mat-chip selected mat-list-item class="btn" routerLink="request">Заявка</mat-chip>
-      <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
-      <mat-chip selected mat-list-item class="btn">Въпроси</mat-chip>
-      <mat-chip selected mat-list-item class="btn" routerLink="/about">Контакти</mat-chip>
-      <mat-chip selected mat-list-item class="btn" routerLink="/process-request">Заявки за обработка</mat-chip>
+    <div fxLayoutAlign="start" style="display: block !important">
+      <mat-sidenav style="background-color: transparent; border: hidden;" #snav
+                   mode="side">
+        <div class="mt" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+          <mat-chip *ngIf="role === 'User'" selected mat-list-item class="btn" routerLink="request">Заявка</mat-chip>
+          <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
+          <mat-chip selected mat-list-item class="btn">Въпроси</mat-chip>
+          <mat-chip selected mat-list-item class="btn" routerLink="/about">Контакти</mat-chip>
+          <mat-chip *ngIf="role === 'Admin'" selected mat-list-item class="btn" routerLink="/process-request">Заявки за обработка</mat-chip>
+        </div>
+      </mat-sidenav>
     </div>
-  </mat-sidenav>
+  </div>
   <mat-sidenav-container style="left: -7px;">
 
     <mat-sidenav-content @flyInOut fxFlexLayout="center end">

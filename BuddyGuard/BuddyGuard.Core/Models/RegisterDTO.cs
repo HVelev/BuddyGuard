@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BuddyGuard.Core.Models
 {
-    public class RegisterDTO
+    public class RegisterDTO : UserDTO
     {
         [Required]
         public string Username { get; set; }

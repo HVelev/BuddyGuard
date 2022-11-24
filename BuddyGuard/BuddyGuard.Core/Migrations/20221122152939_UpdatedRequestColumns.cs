@@ -5,33 +5,33 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BuddyGuard.Core.Migrations
 {
-    public partial class UpdatedRequestTable : Migration
+    public partial class UpdatedRequestColumns : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsRead",
+
+            migrationBuilder.AddColumn<string>(
+                name: "Comment",
                 table: "Requests",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
+                type: "nvarchar(max)",
+                nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "RequestSentDate",
+                name: "MeetingDate",
                 table: "Requests",
                 type: "datetime2",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.DropColumn(
-                name: "IsRead",
+                name: "Comment",
                 table: "Requests");
 
             migrationBuilder.DropColumn(
-                name: "RequestSentDate",
+                name: "MeetingDate",
                 table: "Requests");
         }
     }

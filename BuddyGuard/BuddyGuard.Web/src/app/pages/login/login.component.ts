@@ -39,7 +39,15 @@ export class LoginComponent implements OnInit {
 
     this.service.login(user).subscribe({
       next: (value: any) => {
+        this.service.onUserLogin.next(value.role);
+
         sessionStorage.setItem('token', value.token);
+        sessionStorage.setItem('role', value.role);
+        sessionStorage.setItem('name', value.name);
+        sessionStorage.setItem('email', value.email);
+        sessionStorage.setItem('phone', value.phone);
+        sessionStorage.setItem('id', value.id);
+
         this.router.navigate(['/']);
       },
       error: (error: any) => {

@@ -22,7 +22,7 @@ namespace BuddyGuard.Core.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Notification", b =>
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.AnimalRequest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,15 +30,722 @@ namespace BuddyGuard.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
+                    b.Property<string>("AnimalName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReceivedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("AnimalSpecies")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AnimalTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PetDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notifications");
+                    b.HasIndex("AnimalTypeId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("AnimalRequests");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.AnimalType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AnimalTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Малко куче"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Голямо куче"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Котка"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Друго"
+                        });
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PriceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PriceId");
+
+                    b.ToTable("Locations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Абдовица",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Банишора",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Барите",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Белите брези",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Бенковски",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Бизнес парк София",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Бокар",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Борово",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Ботунец",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Бояна",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Бункера",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Бъкстон",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Витоша",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Владимир Заимов",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Враждебна",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Връбница",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Връбница-1",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Връбница-2",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Гевгелийски квартал",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Гео Милев",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Горна баня",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Горубляне",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Гоце Делчев",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "Дианабад",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Димитър Миленков",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "Драгалевци",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "Драз махала",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = "Дружба",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = "Дървеница",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = "Западен парк",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = "Захарна фабрика",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Name = "Зона Б-18",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Name = "Зона Б-19",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Name = "Зона Б-5-3",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Name = "Иван Вазов",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Name = "Изгрев",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Name = "Изток",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = "Илинден",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = "Илиянци",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = "Киноцентър",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = "Княжево",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = "Красна поляна",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = "Красно село",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = "Кремиковци",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = "Крива река",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Name = "Кръстова вада",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Name = "Кюлуците",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Name = "Лагера",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Name = "Лев Толстой",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Name = "Левски",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Name = "Лозенец",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Name = "Люлин",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Name = "Малашевци",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Name = "Малинова долина",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Name = "Манастирски ливади",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Name = "Младост",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Name = "Младост 1А",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 58,
+                            Name = "Младост 2",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 59,
+                            Name = "Младост 3",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 60,
+                            Name = "Младост 4",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 61,
+                            Name = "Модерно преградие",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 62,
+                            Name = "Момкова махала",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 63,
+                            Name = "Мотописта",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 64,
+                            Name = "Мусагеница",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 65,
+                            Name = "Надежда",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 66,
+                            Name = "Обеля",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 67,
+                            Name = "Оборище",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 68,
+                            Name = "Овча Купел",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 69,
+                            Name = "Овча Купел 1",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 70,
+                            Name = "Овча Купел 2",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 71,
+                            Name = "Орландовци",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 72,
+                            Name = "Павлово",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 73,
+                            Name = "Подуяне",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 74,
+                            Name = "Полигона",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 75,
+                            Name = "Разсадника-Коньовица",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 76,
+                            Name = "Редута",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 77,
+                            Name = "Република",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 78,
+                            Name = "Света Троица",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 79,
+                            Name = "Свобода",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 80,
+                            Name = "Сердика",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 81,
+                            Name = "Сеславци",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 82,
+                            Name = "Симеоново",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 83,
+                            Name = "Славия",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 84,
+                            Name = "Слатина",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 85,
+                            Name = "Стефан Караджа",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 86,
+                            Name = "Стрелбище",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 87,
+                            Name = "Студентски град",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 88,
+                            Name = "Сухата река",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 89,
+                            Name = "Суходол",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 90,
+                            Name = "Требич",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 91,
+                            Name = "Триъгълника",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 92,
+                            Name = "Факултета",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 93,
+                            Name = "Филиповци",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 94,
+                            Name = "Фондови жилища",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 95,
+                            Name = "Хаджи Димитър",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 96,
+                            Name = "Хиподрума",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 97,
+                            Name = "Хладилника",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 98,
+                            Name = "Христо Ботев",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Name = "Цариградски комплекс",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 100,
+                            Name = "Център",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 101,
+                            Name = "Челопечене",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 102,
+                            Name = "Чепинско шосе",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 103,
+                            Name = "Южен парк",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 104,
+                            Name = "Ючбунар",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 105,
+                            Name = "Яворов",
+                            PriceId = 1
+                        });
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Post", b =>
@@ -73,6 +780,119 @@ namespace BuddyGuard.Core.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Price", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prices");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 5m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amount = 8m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amount = 14m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amount = 16m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amount = 21m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Amount = 12m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Amount = 17m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Amount = 19m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Amount = 24m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Amount = 29m
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Amount = 10m
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Amount = 0m
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Amount = 3.50m
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Amount = 2.99m
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Amount = 19.99m
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Amount = 6m
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Amount = 4.99m
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Amount = 14.99m
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Amount = 5.99m
+                        });
+                });
+
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Request", b =>
                 {
                     b.Property<int>("Id")
@@ -81,40 +901,24 @@ namespace BuddyGuard.Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AnimalInfo")
+                    b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DogWalkLength")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int")
+                        .HasColumnName("LocationId");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int?>("NotificationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<DateTime?>("MeetingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("RequestSentDate")
                         .HasColumnType("datetime2");
@@ -122,11 +926,300 @@ namespace BuddyGuard.Core.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("NotificationId");
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.RequestService", b =>
+                {
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AnimalRequestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ServiceId", "RequestId");
+
+                    b.HasIndex("AnimalRequestId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("RequestServices");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AnimalTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsForCustomer")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PriceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WalkLength")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PriceId");
+
+                    b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Две разходки без камера",
+                            PriceId = 2,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Две разходки с камера",
+                            PriceId = 3,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Разходка без камера",
+                            PriceId = 1,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Разходка с камера",
+                            PriceId = 2,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Две разходки без камера",
+                            PriceId = 4,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Две разходки с камера",
+                            PriceId = 9,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Разходка без камера",
+                            PriceId = 11,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Разходка с камера",
+                            PriceId = 3,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Две разходки без камера",
+                            PriceId = 6,
+                            WalkLength = "Комбинирана (30мин + 60мин)"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AnimalTypeId = 1,
+                            IsForCustomer = false,
+                            Name = "Две разходки с камера",
+                            PriceId = 8,
+                            WalkLength = "Комбинирани (30мин + 60мин)"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Две разходки без камера",
+                            PriceId = 6,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Две разходки с камера",
+                            PriceId = 8,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Разходка без камера",
+                            PriceId = 2,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Разходка с камера",
+                            PriceId = 6,
+                            WalkLength = "30 минути"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Две разходки без камера",
+                            PriceId = 5,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Две разходки с камера",
+                            PriceId = 10,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Разходка без камера",
+                            PriceId = 3,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Разходка с камера",
+                            PriceId = 8,
+                            WalkLength = "60 минути"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Две разходки без камера",
+                            PriceId = 7,
+                            WalkLength = "Комбинирани (30мин + 60мин)"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AnimalTypeId = 2,
+                            IsForCustomer = false,
+                            Name = "Две разходки с камера",
+                            PriceId = 9,
+                            WalkLength = "Комбинирани (30мин + 60мин)"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            IsForCustomer = false,
+                            Name = "Еднократно ресане",
+                            PriceId = 17
+                        },
+                        new
+                        {
+                            Id = 22,
+                            IsForCustomer = false,
+                            Name = "Цялостно къпане",
+                            PriceId = 18
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AnimalTypeId = 3,
+                            IsForCustomer = false,
+                            Name = "Разходка навън",
+                            PriceId = 19
+                        },
+                        new
+                        {
+                            Id = 24,
+                            IsForCustomer = false,
+                            Name = "Ветеринарен преглед",
+                            PriceId = 15
+                        },
+                        new
+                        {
+                            Id = 25,
+                            IsForCustomer = true,
+                            Name = "Събиране на поща",
+                            PriceId = 13
+                        },
+                        new
+                        {
+                            Id = 26,
+                            IsForCustomer = true,
+                            Name = "Посрещане/Изпращане на пратка",
+                            PriceId = 13
+                        },
+                        new
+                        {
+                            Id = 27,
+                            IsForCustomer = true,
+                            Name = "Еднократно поливане на цветя",
+                            PriceId = 14
+                        });
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.User", b =>
@@ -141,9 +1234,6 @@ namespace BuddyGuard.Core.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int?>("Age")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -156,17 +1246,12 @@ namespace BuddyGuard.Core.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Job")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -195,10 +1280,6 @@ namespace BuddyGuard.Core.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Town")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -245,6 +1326,20 @@ namespace BuddyGuard.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b21c365d-4205-414e-ab5c-df5f8a1f542c",
+                            ConcurrencyStamp = "da0e3ca2-6e71-4846-94cf-9e96c960ce91",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "1813705b-802e-4648-b386-f035fec67129",
+                            ConcurrencyStamp = "b452dfc0-3068-4a41-af33-58450ae7c6ff",
+                            Name = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -353,6 +1448,36 @@ namespace BuddyGuard.Core.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.AnimalRequest", b =>
+                {
+                    b.HasOne("BuddyGuard.Core.Data.Models.AnimalType", "AnimalType")
+                        .WithMany()
+                        .HasForeignKey("AnimalTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BuddyGuard.Core.Data.Models.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AnimalType");
+
+                    b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Location", b =>
+                {
+                    b.HasOne("BuddyGuard.Core.Data.Models.Price", "Price")
+                        .WithMany()
+                        .HasForeignKey("PriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Price");
+                });
+
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Post", b =>
                 {
                     b.HasOne("BuddyGuard.Core.Data.Models.User", null)
@@ -362,9 +1487,57 @@ namespace BuddyGuard.Core.Migrations
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Request", b =>
                 {
-                    b.HasOne("BuddyGuard.Core.Data.Models.Notification", null)
+                    b.HasOne("BuddyGuard.Core.Data.Models.Location", "Location")
                         .WithMany("Requests")
-                        .HasForeignKey("NotificationId");
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("BuddyGuard.Core.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.RequestService", b =>
+                {
+                    b.HasOne("BuddyGuard.Core.Data.Models.AnimalRequest", "AnimalRequest")
+                        .WithMany()
+                        .HasForeignKey("AnimalRequestId");
+
+                    b.HasOne("BuddyGuard.Core.Data.Models.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BuddyGuard.Core.Data.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AnimalRequest");
+
+                    b.Navigation("Request");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Service", b =>
+                {
+                    b.HasOne("BuddyGuard.Core.Data.Models.Price", "Price")
+                        .WithMany()
+                        .HasForeignKey("PriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Price");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -418,7 +1591,7 @@ namespace BuddyGuard.Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Notification", b =>
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Location", b =>
                 {
                     b.Navigation("Requests");
                 });

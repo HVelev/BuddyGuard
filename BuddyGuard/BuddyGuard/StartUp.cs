@@ -28,7 +28,7 @@ namespace BuddyGuard.API
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<BuddyguardDbContext>(options =>
             //    options.UseSqlServer(connectionString));
-            services.AddTransient<IRequestService, RequestService>());
+            services.AddTransient<IRequestService, RequestsService>());
             services.BuildServiceProvider();
             //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddSwaggerGen();

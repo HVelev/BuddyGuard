@@ -22,24 +22,44 @@ namespace BuddyGuard.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO userModel)
         {
-            User user = new User
+            try
             {
-                UserName = userModel.Username,
-            };
+                var doesUserExist = dbContext.Users.Where(x => x.Email == userModel.Email).Count() > 0;
 
-            var result = await userManager.CreateAsync(user, userModel.Password);
+                if (doesUserExist)
+                {
+                    return UnprocessableEntity();
+                }
 
-            IdentityRole role = dbContext.Roles.Where(x => x.Name == userModel.Role).First();
+                User user = new User
+                {
+                    UserName = userModel.Username,
+                    Email = userModel.Email,
+                    Address = userModel.Address,
+                    FirstName = userModel.FirstName,
+                    LastName = userModel.LastName,
+                    PhoneNumber = userModel.Phone
+                };
 
-            dbContext.UserRoles.Add(new IdentityUserRole<string>
+                var result = await userManager.CreateAsync(user, userModel.Password);
+
+                IdentityRole role = dbContext.Roles.Where(x => x.Name == userModel.Role).First();
+
+                dbContext.UserRoles.Add(new IdentityUserRole<string>
+                {
+                    RoleId = role.Id,
+                    UserId = user.Id
+                });
+
+                dbContext.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception)
             {
-                RoleId = role.Id,
-                UserId = user.Id
-            });
 
-            dbContext.SaveChanges();
-
-            return Ok();
+                throw;
+            }
         }
     }
 }
