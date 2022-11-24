@@ -13,13 +13,27 @@
           <button class="brown navbtn"><span>Разбери повече</span></button>
           <button class="brown navbtn">Buddies</button>
           <button class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
-          <mat-menu #menu="matMenu">
+          <mat-menu class="gap oval-border" #menu="matMenu">
+            <div>
+              <p>
+                <mat-toolbar color="primary" class="notification-title" fxLayoutAlign="start center">
+                  <span>Нотификации</span>
+                </mat-toolbar>
+              </p>
+            </div>
             <div *ngFor="let notification of notifications">
-              <div>
-                <mat-card>
-                  <mat-card-subtitle></mat-card-subtitle>
-                    Имате нова заявка от {{ notification.name }} в район {{ notification.location }}
-                </mat-card>
+              <div fxLayout="row"
+                   fxLayoutAlign="center center"
+                   class="notification-margin">
+                <mat-icon class="smallIcon" fxFlex="5">mail</mat-icon>
+                <div fxFlex="80" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10">
+                  <p>Имате нова заявка от {{ notification.name }}</p>
+                  <mat-card-subtitle>{{ notification.requestSentDate.toLocaleString() | timeAgo }}</mat-card-subtitle>
+                </div>
+                <div fxFlex="10" fxLayoutAlign="start end">
+                  <button mat-mini-fab color="primary" class="read-btn">
+                  </button>
+                </div>
               </div>
             </div>
           </mat-menu>
@@ -35,6 +49,7 @@
       <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
       <mat-chip selected mat-list-item class="btn">Въпроси</mat-chip>
       <mat-chip selected mat-list-item class="btn" routerLink="/about">Контакти</mat-chip>
+      <mat-chip selected mat-list-item class="btn" routerLink="/process-request">Заявки за обработка</mat-chip>
     </div>
   </mat-sidenav>
   <mat-sidenav-container style="left: -7px;">

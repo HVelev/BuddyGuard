@@ -4,6 +4,7 @@ using BuddyGuard.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuddyGuard.Core.Migrations
 {
     [DbContext(typeof(BuddyguardDbContext))]
-    partial class BuddyguardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221115113612_UpdatedRequestTable")]
+    partial class UpdatedRequestTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

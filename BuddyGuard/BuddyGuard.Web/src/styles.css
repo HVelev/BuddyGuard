@@ -2,13 +2,44 @@
 body {
   font-family: Comic Sans MS, Comic Sans, cursive
 }
+
 .mat-sidenav-container {
   height: 100% !important;
 }
 
-.container {
-    margin-top: 30px !important;
+#mat-menu-panel-0 > div {
+  padding-top: 0px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 500px !important;
+  height: 400px !important;
 }
+
+.oval-border {
+  border-radius: 20px !important;
+}
+
+.notification-title {
+  box-shadow: 0 0 0 100vmax #ff5722 !important;
+  clip-path: inset(0 -100vmax);
+  height: 70px !important;
+}
+
+.notification-margin {
+  margin-bottom: 1em
+}
+
+.read-btn {
+  width: 10px !important;
+  max-width: 10px !important;
+  height: 10px !important;
+  max-width: 10px !important;
+}
+
+.container {
+  margin-top: 30px !important;
+}
+
 .mat-drawer-backdrop.mat-drawer-shown {
   position: fixed;
   padding: 0;
@@ -31,7 +62,7 @@ html {
   background: #750000 !important;
 }
 
-html, body  {
+html, body {
   margin: 0;
   height: 100%;
 }

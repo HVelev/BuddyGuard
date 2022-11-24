@@ -12,8 +12,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\interceptors\" />
+    <Folder Include="src\app\pages\process-request\models\" />
     <Folder Include="src\app\shared\" />
-    <Folder Include="src\app\pages\" />
     <Folder Include="src\component\" />
   </ItemGroup>
 </Project>

@@ -67,6 +67,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HttpInterceptorService } from './interceptors/http-interceptor.interceptor';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { ProcessRequestComponent } from './pages/process-request/process-request.component';
+import { ProcessRequestDialogComponent } from './pages/process-request/models/process-request-dialog/process-request-dialog.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +82,8 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     RequestComponent,
     LoginComponent,
     RegisterComponent,
+    ProcessRequestComponent,
+    ProcessRequestDialogComponent,
   ],
   imports: [
     BrowserModule,

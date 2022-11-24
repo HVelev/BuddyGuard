@@ -27,6 +27,16 @@ img {
     width: 100%;
     cursor: pointer;
 }
+
+::deep #mat-menu-panel-0 > div {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.smallIcon {
+    font-size: 12px;
+}
+
 .fixed {
     position: fixed;
     z-index: 100;
