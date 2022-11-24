@@ -41,6 +41,7 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
       next: (value: RequestDTO) => {
         
         this.dataSource.data = [value];
+        debugger;
       }
     });
   }
