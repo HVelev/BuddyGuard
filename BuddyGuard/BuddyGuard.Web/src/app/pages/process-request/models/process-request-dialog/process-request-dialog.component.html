@@ -102,13 +102,13 @@
             <div fxFlex="50" fxLayout="column" fxLayoutGap="0.5em">
               <mat-label>Начало на грижите</mat-label>
               <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
-                <input matInput formControlName="locationControl">
+                <input matInput formControlName="startDateControl">
               </mat-form-field>
             </div>
             <div fxFlex="50" fxLayout="column" fxLayoutGap="0.5em">
               <mat-label>Край на грижите</mat-label>
               <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
-                <input matInput formControlName="emailControl">
+                <input matInput formControlName="endDateControl">
               </mat-form-field>
             </div>
           </div>
@@ -122,14 +122,14 @@
             <div fxFlex="50" fxLayout="column" fxLayoutGap="0.5em">
               <mat-label>Точен адрес</mat-label>
               <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
-                <input matInput formControlName="emailControl">
+                <input matInput formControlName="exactLocationControl">
               </mat-form-field>
             </div>
           </div>
           <div fxFlex="100" fxLayout="column" fxLayoutAlign="center">
             <mat-label>Предпочитана дата за първоначална среща</mat-label>
             <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
-              <input matInput formControlName="emailControl">
+              <input matInput formControlName="meetingDateControl">
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayout="column" fxLayoutAlign="center">
@@ -142,9 +142,7 @@
                   Натиснете, за да видите списъкът от заявени услуги
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p>едно</p>
-              <p>две</p>
-              <p>три</p>
+              <p *ngFor="let service of data.clientServices">{{ service }}</p>
             </mat-expansion-panel>
           </div>
           <div fxFlex="100" fxLayout="column" fxLayoutAlign="center">
@@ -179,21 +177,18 @@
                 <mat-card-title fxFlexAlign="center">Основна информация</mat-card-title>
                 <div [formGroupName]="i">
                   <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Име</mat-label>
-                      <input matInput formControlName="nameControl" placeholder="Име">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" fxFlex="100">
-                      <mat-label>Какъв вид е Вашето животно?</mat-label>
-                      <mat-select formControlName="animalTypeControl" #animalType>
-                        <mat-option>
-                          selected
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <ng-container [ngTemplateOutlet]="isOthersSelected(i) === undefined ? empty : isOthersSelected(i) === true ? description : species">
+                    <div fxLayout="row" fxLayoutGap="1em">
+                      <mat-form-field appearance="fill" fxFlex="50">
+                        <mat-label>Име</mat-label>
+                        <input matInput formControlName="nameControl" placeholder="Име">
+                      </mat-form-field>
+                      <mat-form-field appearance="fill" fxFlex="50">
+                        <mat-label>Какъв вид е Вашето животно?</mat-label>
+                        <input matInput formControlName="animalTypeControl">
+                      </mat-form-field>
+                    </div>
+                    <ng-container [ngTemplateOutlet]="FormArrayControls.controls[i].get('animalTypeControl')!.value === 'Друго' ? description : species">
                     </ng-container>
-                    <ng-template #empty></ng-template>
                     <ng-template #description>
                       <mat-form-field appearance="fill" fxFlex="100">
                         <mat-label>Моля опишете домашния си любимец</mat-label>
@@ -201,7 +196,7 @@
                       </mat-form-field>
                     </ng-template>
                     <ng-template #species>
-                      <mat-form-field appearance="fill" fxFlex="100">
+                      <mat-form-field appearance="fill" class="half-width" fxFlexAlign="center">
                         <mat-label>Порода</mat-label>
                         <input matInput formControlName="speciesControl" placeholder="Каква е породата на Вашия домашен любимец?">
                       </mat-form-field>
@@ -211,13 +206,9 @@
                     <mat-divider></mat-divider>
                     <div fxLayout="column" fxLayoutGap="1em">
                       <mat-card-title fxFlexAlign="center">Услуги</mat-card-title>
-                      <mat-form-field appearance="fill">
+                      <mat-form-field appearance="fill" *ngIf="FormArrayControls.controls[i].get('dogWalkLengthControl')!.value">
                         <mat-label>Брой разходки</mat-label>
-                        <mat-select formControlName="dogWalkLengthControl">
-                          <mat-option>
-                            selected
-                          </mat-option>
-                        </mat-select>
+                        <input matInput formControlName="dogWalkLengthControl">
                       </mat-form-field>
                       <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
@@ -228,9 +219,8 @@
                             Натиснете, за да видите всички услуги, заявени за домашния любимец
                           </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <p>едно</p>
-                        <p>две</p>
-                        <p>три</p>
+                        <p *ngFor="let service of FormArrayControls.controls[i].get('animalServiceControl')!.value">{{ service }}</p>
+                        <mat-hint *ngIf="!FormArrayControls.controls[i].get('animalServiceControl')!.value || FormArrayControls.controls[i].get('animalServiceControl')!.value.length == 0">Няма заявени услуги за този любимец</mat-hint>
                       </mat-expansion-panel>
                     </div>
                   </div>
@@ -258,9 +248,9 @@
       <button mat-raised-button color="primary">Приемане на заявка</button>
     </div>
   </mat-step>
-  <mat-step [stepControl]="form" [editable]="true">
+  <!--<mat-step [stepControl]="form" [editable]="true">
     <div [formGroup]="form">
-      <form formGroupName="dateLocationGroupControl">
+      <form formGroupName="form">
         <mat-card class="mat-elevation-z10 outline" fxLayoutAlign="center">
           <ng-template matStepLabel>Информация за периода на услугите и мястото</ng-template>
           <div fxLayout="column" fxLayoutGap="1em" fxFlex="70">
@@ -340,5 +330,5 @@
         <button mat-raised-button color="primary">Изпращане на заявка</button>
       </div>
     </div>
-  </mat-step>
+  </mat-step>-->
 </mat-stepper>

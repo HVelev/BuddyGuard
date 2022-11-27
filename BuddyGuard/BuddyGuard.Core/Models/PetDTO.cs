@@ -11,6 +11,8 @@ namespace BuddyGuard.Core.Models
 
         public string AnimalType { get; set; }
 
-        public int[]? PetServices { get; set; }
+        public string DogWalkLength { get; set; }
+
+        public string[]? Services { get; set; }
     }
 }

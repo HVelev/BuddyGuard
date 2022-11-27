@@ -52,7 +52,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("RequestId");
 
-                    b.ToTable("AnimalRequests");
+                    b.ToTable("AnimalRequests", (string)null);
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.AnimalType", b =>
@@ -69,7 +69,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AnimalTypes");
+                    b.ToTable("AnimalTypes", (string)null);
 
                     b.HasData(
                         new
@@ -113,7 +113,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("PriceId");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
 
                     b.HasData(
                         new
@@ -777,7 +777,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Price", b =>
@@ -793,7 +793,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prices");
+                    b.ToTable("Prices", (string)null);
 
                     b.HasData(
                         new
@@ -936,7 +936,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Requests");
+                    b.ToTable("Requests", (string)null);
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.RequestService", b =>
@@ -956,7 +956,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("RequestId");
 
-                    b.ToTable("RequestServices");
+                    b.ToTable("RequestServices", (string)null);
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Service", b =>
@@ -987,7 +987,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("PriceId");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
 
                     b.HasData(
                         new

@@ -116,9 +116,9 @@
 </div>-->
 
 <div fxLayoutAlign="center center">
-  <mat-stepper #stepper>
+  <mat-stepper linear #stepper>
     <!-- #docregion editable -->
-    <mat-step [stepControl]="form" [editable]="true">
+    <mat-step [stepControl]="FormArrayControls" [editable]="true">
       <!-- #enddocregion editable -->
       <div>
         <form [formGroup]="form">
@@ -167,7 +167,7 @@
                         <mat-form-field appearance="fill" *ngIf="FormArrayControls.at(i).get('animalTypeControl')!.value.displayName !== 'Котка'">
                           <mat-label>Брой разходки</mat-label>
                           <mat-select formControlName="dogWalkLengthControl">
-                            <mat-option *ngFor="let service of animalServices[i]" [value]="service">
+                            <mat-option *ngFor="let service of petWalkLengths[i]" [value]="service">
                               {{ service.displayName }}
                             </mat-option>
                           </mat-select>
@@ -199,7 +199,7 @@
         </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="form" [editable]="true">
+    <mat-step [stepControl]="dateLocationGroup" [editable]="true">
       <div>
         <form [formGroup]="dateLocationGroup">
           <mat-card class="mat-elevation-z10 outline" fxLayoutAlign="center">
@@ -208,16 +208,17 @@
               <mat-label>Начало на грижите</mat-label>
               <mat-form-field appearance="fill" (click)="picker.open()">
                 <mat-label>Изберете дата</mat-label>
-                <input formControlName="startDateControl" readonly matInput [matDatepicker]="picker" (click)="click()">
-                <mat-hint>MM/DD/YYYY</mat-hint>
+                <input formControlName="startDateControl" readonly matInput [matDatepicker]="picker" [max]="minStartDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-              <mat-label>Край на грижите</mat-label>
+              <div fxLayout="row" fxLayoutGap="0.9em">
+                <mat-label>Край на грижите</mat-label>
+                <mat-hint>* включително</mat-hint>
+              </div>
               <mat-form-field appearance="fill" (click)="pick.open()">
                 <mat-label>Изберете дата</mat-label>
-                <input formControlName="endDateControl" readonly matInput [matDatepicker]="pick" (click)="click()">
-                <mat-hint>MM/DD/YYYY</mat-hint>
+                <input formControlName="endDateControl" readonly matInput [matDatepicker]="pick" [min]="maxEndDate">
                 <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
                 <mat-datepicker #pick></mat-datepicker>
               </mat-form-field>
@@ -233,7 +234,7 @@
               <mat-form-field appearance="fill" (click)="meeting.open()">
                 <mat-hint>* Ако не изберете ден и час, ще се свържем с Вас най-късно 24 часа преди определената начална дата на грижите за уговаряне на среща</mat-hint>
                 <mat-label>Предпочитана дата за първоначална среща</mat-label>
-                <input formControlName="meetingDateControl" readonly matInput [matDatepicker]="meeting" (click)="click()">
+                <input formControlName="meetingDateControl" readonly matInput [matDatepicker]="meeting">
                 <mat-datepicker-toggle matSuffix [for]="meeting"></mat-datepicker-toggle>
                 <mat-datepicker #meeting></mat-datepicker>
               </mat-form-field>
@@ -242,15 +243,15 @@
         </form>
       </div>
       <div class="mt" fxLayoutAlign="space-between">
-        <div dir="rtl">
-          <button mat-raised-button color="accent" matStepperNext>Напред</button>
-        </div>
         <div dir="ltr">
           <button mat-raised-button color="accent" matStepperPrevious>Назад</button>
         </div>
+        <div dir="rtl">
+          <button mat-raised-button color="accent" matStepperNext>Напред</button>
+        </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="form" [editable]="true">
+    <mat-step [stepControl]="form" [editable]="false">
       <div>
         <form [formGroup]="form">
           <mat-card class="mat-elevation-z10 outline" fxLayout="column" fxLayoutGap="1em">
@@ -270,6 +271,7 @@
               <textarea #message maxlength="200" matInput formControlName="commentControl" placeholder="Оставете коментар"></textarea>
               <mat-hint align="end">{{message.value.length}} / 200</mat-hint>
             </mat-form-field>
+            <h3 fxFlexAlign="end">Финална цена: {{ finalPrice.toFixed(2) }}</h3>
           </mat-card>
         </form>
       </div>

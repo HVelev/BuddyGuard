@@ -53,7 +53,7 @@ const fadeOut = trigger('fadeOut', [
     ])
   ]
 })
-export class NavbarComponent implements OnInit, AfterViewInit {
+export class NavbarComponent implements OnInit {
   @ViewChild('snav') navElement!: MatSidenav;
 
   private processRequestService: ProcessRequestService;
@@ -111,17 +111,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         }
       });
     }
-  }
-
-  public ngAfterViewInit(): void {
-    this.navElement._animationStarted.subscribe({
-      next: () => {
-        this.isToggled = this.navElement.opened;
-      }
-    });
-
-    this.navElement.fixedInViewport = true;
-    this.navElement.open();
   }
 
   public logout() {

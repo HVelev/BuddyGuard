@@ -81,9 +81,27 @@ namespace BuddyGuard.Controllers
 
         [Authorize]
         [HttpGet]
+        public IActionResult GetSmallDogWalkLengths()
+        {
+            var result = nomenclatureService.SmallDogWalkLengthNomenclatures();
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult GetBigDogServices()
         {
             var result = nomenclatureService.BigDogServicesNomenclatures();
+
+            return Ok(result);
+        }
+        
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetBigDogWalkLengths()
+        {
+            var result = nomenclatureService.BigDogWalkLengthNomenclatures();
 
             return Ok(result);
         }
@@ -93,6 +111,15 @@ namespace BuddyGuard.Controllers
         public IActionResult GetCatServices()
         {
             var result = nomenclatureService.CatServicesNomenclatures();
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAllUnreadRequests()
+        {
+            var result = requestService.GetAllUnreadRequests();
 
             return Ok(result);
         }

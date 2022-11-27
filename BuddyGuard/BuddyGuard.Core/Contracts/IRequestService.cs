@@ -8,5 +8,7 @@ namespace BuddyGuard.Core.Contracts
         void SubmitForm(EditRequestDTO form);
 
         RequestDTO GetRequest(int requestId);
+
+        List<RequestDTO> GetAllUnreadRequests();
     }
 }

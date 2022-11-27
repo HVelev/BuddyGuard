@@ -15,7 +15,11 @@ namespace BuddyGuard.Core.Contracts
 
         List<NomenclatureDTO<int>> SmallDogServicesNomenclatures();
 
+        List<NomenclatureDTO<int>> SmallDogWalkLengthNomenclatures();
+
         List<NomenclatureDTO<int>> BigDogServicesNomenclatures();
+
+        List<NomenclatureDTO<int>> BigDogWalkLengthNomenclatures();
 
         List<NomenclatureDTO<int>> CatServicesNomenclatures();
 

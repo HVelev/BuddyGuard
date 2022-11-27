@@ -68,7 +68,7 @@ namespace BuddyGuard.Core.Services
         public List<NomenclatureDTO<int>> SmallDogServicesNomenclatures()
         {
             List<NomenclatureDTO<int>> dogServices = (from service in db.Services
-                                                 where service.AnimalTypeId == 1
+                                                 where (service.AnimalTypeId == 1 && service.WalkLength == null)
                                                  || (!service.IsForCustomer && !service.AnimalTypeId.HasValue)
                                                  join price in db.Prices on service.PriceId equals price.Id
                                                  orderby service.Name
@@ -82,10 +82,26 @@ namespace BuddyGuard.Core.Services
             return dogServices;
         }
 
+        public List<NomenclatureDTO<int>> SmallDogWalkLengthNomenclatures()
+        {
+            List<NomenclatureDTO<int>> dogServices = (from service in db.Services
+                                                      where service.AnimalTypeId == 1 && service.WalkLength != null
+                                                      join price in db.Prices on service.PriceId equals price.Id
+                                                      orderby service.Name
+                                                      select new NomenclatureDTO<int>
+                                                      {
+                                                          Value = service.Id,
+                                                          DisplayName = $"{service.Name} - {service.WalkLength}",
+                                                          Price = price.Amount
+                                                      }).ToList();
+
+            return dogServices;
+        }
+
         public List<NomenclatureDTO<int>> BigDogServicesNomenclatures()
         {
             List<NomenclatureDTO<int>> dogServices = (from service in db.Services
-                                                 where service.AnimalTypeId == 2
+                                                 where (service.AnimalTypeId == 2 && service.WalkLength == null)
                                                  || (!service.IsForCustomer && !service.AnimalTypeId.HasValue)
                                                  join price in db.Prices on service.PriceId equals price.Id
                                                  orderby service.Name
@@ -95,6 +111,22 @@ namespace BuddyGuard.Core.Services
                                                      DisplayName = service.Name,
                                                      Price = price.Amount
                                                  }).ToList();
+
+            return dogServices;
+        }
+
+        public List<NomenclatureDTO<int>> BigDogWalkLengthNomenclatures()
+        {
+            List<NomenclatureDTO<int>> dogServices = (from service in db.Services
+                                                      where service.AnimalTypeId == 2 && service.WalkLength != null
+                                                      join price in db.Prices on service.PriceId equals price.Id
+                                                      orderby service.Name
+                                                      select new NomenclatureDTO<int>
+                                                      {
+                                                          Value = service.Id,
+                                                          DisplayName = $"{service.Name} - {service.WalkLength}",
+                                                          Price = price.Amount
+                                                      }).ToList();
 
             return dogServices;
         }

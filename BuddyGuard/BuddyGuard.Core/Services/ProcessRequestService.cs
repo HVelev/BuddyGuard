@@ -23,8 +23,8 @@ namespace BuddyGuard.Core.Services
         {
             return dbContext.Requests.OrderByDescending(x => x.RequestSentDate).Select(x => new EditRequestDTO
             {
-                EndDate = x.EndDate.ToString(),
-                StartDate = x.StartDate.ToString(),
+                EndDate = x.EndDate,
+                StartDate = x.StartDate,
                 IsRead = x.IsRead,
                 RequestSentDate = x.RequestSentDate
             }).ToList();

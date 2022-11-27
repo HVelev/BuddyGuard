@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EditRequestDTO } from '../../../../models/edit-request.model';
+import { RequestDTO } from '../../../../models/request.model';
 
 @Component({
   selector: 'app-process-request-dialog',
@@ -11,8 +12,8 @@ import { EditRequestDTO } from '../../../../models/edit-request.model';
 export class ProcessRequestDialogComponent implements OnInit {
   public form: FormGroup;
   public animals: FormArray = new FormArray([new FormGroup({
-    nameControl: new FormControl(undefined, Validators.required),
-    animalTypeControl: new FormControl(undefined, Validators.required),
+    nameControl: new FormControl(),
+    animalTypeControl: new FormControl(),
     speciesControl: new FormControl(),
     animalServiceControl: new FormControl(),
     dogWalkLengthControl: new FormControl(),
@@ -21,22 +22,20 @@ export class ProcessRequestDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ProcessRequestDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: EditRequestDTO,
+    @Inject(MAT_DIALOG_DATA) public data: RequestDTO,
   ) {
     this.form = new FormGroup({
-      nameControl: new FormControl(),
-      phoneControl: new FormControl(),
-      locationControl: new FormControl(),
-      emailControl: new FormControl(),
+      nameControl: new FormControl(data.firstName),
+      phoneControl: new FormControl(data.phone),
+      locationControl: new FormControl(data.location),
+      exactLocationControl: new FormControl(data.exactLocation),
+      emailControl: new FormControl(data.email),
+      startDateControl: new FormControl(data.startDate),
+      endDateControl: new FormControl(data.endDate),
+      meetingDateControl: new FormControl(data.meetingDate),
+      customerServiceControl: new FormControl(data.clientServices),
+      commentControl: new FormControl(data.comment),
       animalArrayControl: this.animals,
-      dateLocationGroupControl: new FormGroup({
-        startDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
-        endDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
-        meetingDateControl: new FormControl(),
-        locationControl: new FormControl(undefined, Validators.required)
-      }),
-      customerServiceControl: new FormControl(),
-      commentControl: new FormControl()
     });
   }
 
@@ -46,6 +45,19 @@ export class ProcessRequestDialogComponent implements OnInit {
 
     ngOnInit(): void {
       this.fillForm();
+
+      for (let pet of this.data.pets) {
+        console.log(pet.services);
+
+        this.animals.push(new FormGroup({
+          nameControl: new FormControl(pet.name),
+          animalTypeControl: new FormControl(pet.animalType),
+          speciesControl: new FormControl(pet.species),
+          animalServiceControl: new FormControl(pet.services),
+          dogWalkLengthControl: new FormControl(pet.dogWalkLength),
+          descriptionControl: new FormControl(pet.petDescription)
+        }));
+      }
     }
 
   onNoClick(): void {
@@ -53,7 +65,6 @@ export class ProcessRequestDialogComponent implements OnInit {
   }
 
   public isOthersSelected(index: number): boolean | undefined {
-    debugger;
     if (!this.FormArrayControls.at(index).get('animalTypeControl')) {
       return undefined;
     }

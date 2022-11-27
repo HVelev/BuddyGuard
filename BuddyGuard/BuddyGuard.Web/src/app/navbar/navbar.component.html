@@ -1,13 +1,15 @@
 
 <div>
-  <div class="fixed">
+  <div class="fixed max-width">
     <mat-toolbar>
-      <div style="display: flex; margin-top: 10px; align-items: center">
-        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-        <div>
-          <img routerLink="/" src="https://static.wixstatic.com/media/3df67c_cb863e11b4b84f02be5becddd8bbf49d~mv2.png/v1/fill/w_475,h_90,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Buddy%20Guard%20-%20Horizontal.png" />
+      <div fxLayoutAlign="space-between center">
+        <div fxLayoutAlign="space-around center" fxLayout="row">
+          <button mat-icon-button><mat-icon>menu</mat-icon></button>
+          <div>
+            <img routerLink="/" src="https://static.wixstatic.com/media/3df67c_cb863e11b4b84f02be5becddd8bbf49d~mv2.png/v1/fill/w_475,h_90,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Buddy%20Guard%20-%20Horizontal.png" />
+          </div>
         </div>
-        <div style="margin-left: 400px;">
+        <div>
           <button class="brown navbtn"><span>Разбери повече</span></button>
           <button class="brown navbtn">Buddies</button>
           <button *ngIf="role === 'Admin'" class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
@@ -28,8 +30,8 @@
                    class="notification-margin">
                 <mat-icon class="smallIcon" fxFlex="5">mail</mat-icon>
                 <div fxFlex="80" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10">
-                  <p>Имате нова заявка за {{ notification.startDate }}</p>
-                  <mat-card-subtitle>{{ notification.requestSentDate!.toString() | timeAgo }}</mat-card-subtitle>
+                  <p>Имате нова заявка за {{ datePipe.transform(notification.startDate, 'dd/MM/yyyy') }}</p>
+                  <mat-card-subtitle>{{ notification.requestSentDate!.toLocaleString() | timeAgo }}</mat-card-subtitle>
                 </div>
                 <div fxFlex="10" fxLayoutAlign="start end">
                   <button mat-mini-fab color="primary" class="read-btn">
@@ -42,25 +44,14 @@
       </div>
     </mat-toolbar>
 
-    <div fxLayoutAlign="start" style="display: block !important">
-      <mat-sidenav style="background-color: transparent; border: hidden;" #snav
-                   mode="side">
-        <div class="mt" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
-          <mat-chip *ngIf="role === 'User'" selected mat-list-item class="btn" routerLink="request">Заявка</mat-chip>
-          <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
-          <mat-chip selected mat-list-item class="btn">Въпроси</mat-chip>
-          <mat-chip selected mat-list-item class="btn" routerLink="/about">Контакти</mat-chip>
-          <mat-chip *ngIf="role === 'Admin'" selected mat-list-item class="btn" routerLink="/process-request">Заявки за обработка</mat-chip>
-        </div>
-      </mat-sidenav>
-    </div>
   </div>
   <mat-sidenav-container style="left: -7px;">
 
     <mat-sidenav-content @flyInOut fxFlexLayout="center end">
 
-
       <mat-icon (click)="scrollUp()" class="transform" color="accent">keyboard_arrow_up</mat-icon>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
+
+

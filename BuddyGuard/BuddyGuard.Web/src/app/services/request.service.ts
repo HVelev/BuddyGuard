@@ -48,8 +48,20 @@ export class RequestService {
     return this.http.get<NomenclatureDTO<number>[]>(url, {});
   }
 
+  public getSmallDogWalkLengths(): Observable<NomenclatureDTO<number>[]> {
+    const url = this.buildUrl() + '/GetSmallDogWalkLengths';
+
+    return this.http.get<NomenclatureDTO<number>[]>(url, {});
+  }
+
   public getBigDogServices(): Observable<NomenclatureDTO<number>[]> {
     const url = this.buildUrl() + '/GetBigDogServices';
+
+    return this.http.get<NomenclatureDTO<number>[]>(url, {});
+  }
+
+  public getBigDogWalkLengths(): Observable<NomenclatureDTO<number>[]> {
+    const url = this.buildUrl() + '/GetBigDogWalkLengths';
 
     return this.http.get<NomenclatureDTO<number>[]>(url, {});
   }
@@ -74,6 +86,12 @@ export class RequestService {
     return this.http.get<RequestDTO>(url, {
       params: httpParams
     });
+  }
+
+  public getAllUnreadRequests(): Observable<RequestDTO[]> {
+    const url = this.buildUrl() + '/GetAllUnreadRequests';
+
+    return this.http.get<RequestDTO[]>(url);
   }
 
   private buildUrl(): string {

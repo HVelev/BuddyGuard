@@ -38,5 +38,9 @@ namespace BuddyGuard.Core.Data.Models
         public int LocationId { get; set; }
         
         public Location Location { get; set; }
+
+        public List<RequestService> RequestServices { get; set; }
+
+        public List<AnimalRequest> Pets { get; set; }
     }
 }

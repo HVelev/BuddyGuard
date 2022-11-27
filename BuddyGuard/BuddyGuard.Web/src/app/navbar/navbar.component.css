@@ -1,8 +1,9 @@
 
-mat-toolbar, mat-sidenav-container {
+  mat-sidenav-container {
     background-color: white;
     height: 100%;
     margin-top: -5px;
+    display: inline-block !important;
 }
 
 mat-sidenav-content {
@@ -23,9 +24,19 @@ mat-sidenav-content {
   border-color: orange;
 }
 
+mat-toolbar {
+    background-color: transparent !important;
+}
+
 img {
     width: 100%;
+    min-width: 100px;
     cursor: pointer;
+}
+
+.max-width {
+    width: 100% !important;
+    background-color: transparent;
 }
 
 ::deep #mat-menu-panel-0 > div {

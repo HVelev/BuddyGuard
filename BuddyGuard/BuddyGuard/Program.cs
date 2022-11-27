@@ -1,4 +1,3 @@
-using BuddyGuard.API.Models;
 using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Models;
@@ -50,10 +49,7 @@ identityBuilder.AddSignInManager<SignInManager<User>>();
 
 identityBuilder.AddUserManager<UserManager<User>>();
 
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.Converters.Add(new DateConverter());
-});
+builder.Services.AddControllers();
 
 builder.Services.AddMvc();
 builder.Services.AddCors(service =>

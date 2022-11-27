@@ -4,6 +4,7 @@ export class RequestDTO {
   public constructor(obj?: Partial<RequestDTO>) {
     Object.assign(this, obj);
   }
+  public id!: number;
 
   public firstName!: string;
 

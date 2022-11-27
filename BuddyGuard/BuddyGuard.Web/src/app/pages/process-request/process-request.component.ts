@@ -20,8 +20,8 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  public requests: EditRequestDTO[] = [];
-  public displayedColumns: string[] = ['name', 'location', 'startDate', 'endDate', 'actions'];
+  public requests: RequestDTO[] = [];
+  public displayedColumns: string[] = ['location', 'startDate', 'endDate', 'actions'];
   public datePipe: DatePipe;
   public dataSource: MatTableDataSource<RequestDTO>;
   public dialog: MatDialog;
@@ -37,11 +37,10 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.service.getRequest(6).subscribe({
-      next: (value: RequestDTO) => {
+    this.service.getAllUnreadRequests().subscribe({
+      next: (value: RequestDTO[]) => {
         
-        this.dataSource.data = [value];
-        debugger;
+        this.dataSource.data = value;
       }
     });
   }
@@ -50,13 +49,14 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  public openRequest(data: EditRequestDTO) {
+  public async openRequest(id: number) {
+    const response = await this.service.getRequest(id).toPromise();
 
     const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
       width: '100%',
       height: '100%',
       maxWidth: '100%',
-      data: data,
+      data: response
     });
 
     this.dialogRef = dialogRef;

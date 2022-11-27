@@ -375,167 +375,172 @@ namespace BuddyGuard.Core.Data.Configuration
             },
             new Location()
             {
-                Id = 73, Name = "Подуяне",
+                Id = 73, Name = "Павлово",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 74, Name = "Полигона",
+                Id = 74, Name = "Подуяне",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 75, Name = "Разсадника-Коньовица",
+                Id = 75, Name = "Полигона",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 76, Name = "Редута",
+                Id = 76, Name = "Разсадника-Коньовица",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 77, Name = "Република",
+                Id = 77, Name = "Редута",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 78, Name = "Света Троица",
+                Id = 78, Name = "Република",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 79, Name = "Свобода",
+                Id = 79, Name = "Света Троица",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 80, Name = "Сердика",
+                Id = 80, Name = "Свобода",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 81, Name = "Сеславци",
+                Id = 81, Name = "Сердика",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 82, Name = "Симеоново",
+                Id = 82, Name = "Сеславци",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 83, Name = "Славия",
+                Id = 83, Name = "Симеоново",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 84, Name = "Слатина",
+                Id = 84, Name = "Славия",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 85, Name = "Стефан Караджа",
+                Id = 85, Name = "Слатина",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 86, Name = "Стрелбище",
+                Id = 86, Name = "Стефан Караджа",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 87, Name = "Студентски град",
+                Id = 87, Name = "Стрелбище",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 88, Name = "Сухата река",
+                Id = 88, Name = "Студентски град",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 89, Name = "Суходол",
+                Id = 89, Name = "Сухата река",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 90, Name = "Требич",
+                Id = 90, Name = "Суходол",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 91, Name = "Триъгълника",
+                Id = 91, Name = "Требич",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 92, Name = "Факултета",
+                Id = 92, Name = "Триъгълника",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 93, Name = "Филиповци",
+                Id = 93, Name = "Факултета",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 94, Name = "Фондови жилища",
+                Id = 94, Name = "Филиповци",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 95, Name = "Хаджи Димитър",
+                Id = 95, Name = "Фондови жилища",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 96, Name = "Хиподрума",
+                Id = 96, Name = "Хаджи Димитър",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 97, Name = "Хладилника",
+                Id = 97, Name = "Хиподрума",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 98, Name = "Христо Ботев",
+                Id = 98, Name = "Хладилника",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 99, Name = "Цариградски комплекс",
+                Id = 99, Name = "Христо Ботев",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 100, Name = "Център",
+                Id = 100, Name = "Цариградски комплекс",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 101, Name = "Челопечене",
+                Id = 101, Name = "Център",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 102, Name = "Чепинско шосе",
+                Id = 102, Name = "Челопечене",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 103, Name = "Южен парк",
+                Id = 103, Name = "Чепинско шосе",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 104, Name = "Ючбунар",
+                Id = 104, Name = "Южен парк",
                 PriceId = 1
             },
             new Location()
             {
-                Id = 105, Name = "Яворов",
+                Id = 105, Name = "Ючбунар",
+                PriceId = 1
+            },
+            new Location()
+            {
+                Id = 106, Name = "Яворов",
                 PriceId = 1
             });
         }

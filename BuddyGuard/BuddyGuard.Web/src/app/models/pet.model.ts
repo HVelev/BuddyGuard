@@ -11,5 +11,7 @@ export class PetDTO {
 
   public animalType!: string;
 
+  public dogWalkLength!: string;
+
   public services?: string[];
 }

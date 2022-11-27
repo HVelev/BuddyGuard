@@ -70,6 +70,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { ProcessRequestComponent } from './pages/process-request/process-request.component';
 import { ProcessRequestDialogComponent } from './pages/process-request/models/process-request-dialog/process-request-dialog.component';
 import { DatePipe } from '@angular/common';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { DatePipe } from '@angular/common';
     RegisterComponent,
     ProcessRequestComponent,
     ProcessRequestDialogComponent,
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,

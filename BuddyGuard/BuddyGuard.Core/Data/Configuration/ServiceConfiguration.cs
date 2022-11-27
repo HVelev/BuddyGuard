@@ -90,7 +90,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Id = 9,
                 AnimalTypeId = 1,
                 Name = "Две разходки без камера",
-                WalkLength = "Комбинирана (30мин + 60мин)",
+                WalkLength = "Комбинирани (30мин + 60мин)",
                 IsForCustomer = false,
                 PriceId = 6
             },

@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Authorization\" />
+    <Folder Include="Security\" />
   </ItemGroup>
 
 </Project>

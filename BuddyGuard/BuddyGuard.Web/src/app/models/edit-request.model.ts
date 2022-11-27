@@ -11,15 +11,17 @@ export class EditRequestDTO {
 
   public totalAmount!: number;
 
-  public startDate!: string;
+  public startDate!: Date;
 
-  public endDate!: string;
+  public endDate!: Date;
 
   public isRead!: boolean;
 
   public isAccepted!: boolean;
 
   public requestSentDate?: Date;
+
+  public meetingDate?: Date;
 
   public comment?: string;
     

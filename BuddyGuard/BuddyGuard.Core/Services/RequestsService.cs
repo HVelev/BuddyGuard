@@ -3,6 +3,7 @@ using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,10 @@ namespace BuddyGuard.Core.Services
             {
                 LocationId = form.LocationId,
                 UserId = form.UserId,
-                StartDate = DateTime.Parse(form.StartDate),
-                EndDate = DateTime.Parse(form.EndDate),
+                StartDate = form.StartDate,
+                EndDate = form.EndDate,
                 RequestSentDate = DateTime.Now,
+                MeetingDate = form.MeetingDate,
                 Comment = form.Comment,
                 IsRead = false,
                 IsAccepted = false
@@ -96,8 +98,12 @@ namespace BuddyGuard.Core.Services
                                       StartDate = requestDb.StartDate,
                                       EndDate = requestDb.EndDate,
                                       SentDate = requestDb.RequestSentDate,
-                                      Comment = requestDb.Comment
+                                      Comment = requestDb.Comment,
+                                      ClientServices = requestDb.RequestServices.Where(x => x.AnimalRequestId == null).Select(x => x.Service.Name).ToArray(),
+                                      MeetingDate = requestDb.MeetingDate,
                                   }).First();
+
+            var animalRequestServices = dbContext.RequestServices.Where(x => x.RequestId == requestId && x.AnimalRequestId != null).Include(x => x.Service).ToList();
 
             PetDTO[] pets = (from requestDb in dbContext.Requests
                              join animalRequest in dbContext.AnimalRequests on requestDb.Id equals animalRequest.RequestId
@@ -107,12 +113,34 @@ namespace BuddyGuard.Core.Services
                                  Name = animalRequest.AnimalName,
                                  AnimalType = animalType.Name,
                                  PetDescription = animalRequest.PetDescription,
-                                 Species = animalRequest.AnimalSpecies
+                                 Species = animalRequest.AnimalSpecies,
+                                 DogWalkLength = dbContext.RequestServices.Where(x => x.RequestId == requestId && x.AnimalRequestId == animalRequest.Id && x.Service.WalkLength != null).Select(x => x.Service.Name).First(),
+                                 Services = dbContext.RequestServices.Where(x => x.RequestId == requestId && x.AnimalRequestId == animalRequest.Id).Include(x => x.Service).Select(x => x.Service.Name).ToArray()
                              }).ToArray();
 
             request.Pets = pets;
 
             return request;
+        }
+
+        public List<RequestDTO> GetAllUnreadRequests()
+        {
+            return dbContext.Requests.Include(r => r.Location).Include(r => r.User).Include(r => r.RequestServices).ThenInclude(rs => rs.Service).OrderByDescending(x => x.RequestSentDate).Select(x => new RequestDTO
+            {
+                Id = x.Id,
+                FirstName = x.User.FirstName,
+                LastName = x.User.LastName,
+                Phone = x.User.PhoneNumber,
+                Email = x.User.Email,
+                MeetingDate = x.MeetingDate,
+                EndDate = x.EndDate,
+                StartDate = x.StartDate,
+                SentDate = x.RequestSentDate,
+                Location = x.Location.Name,
+                ClientServices = x.RequestServices.Where(x => x.AnimalRequestId == null).Select(x => x.Service.Name).ToArray(),
+                Comment = x.Comment,
+                Pets = x.Pets.Select(x => new PetDTO()).ToArray()
+            }).ToList();
         }
     }
 }

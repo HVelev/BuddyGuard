@@ -13,11 +13,13 @@
 
         public int LocationId { get; set; }
 
-        public string StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public string EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public DateTime RequestSentDate { get; set; }
+
+        public DateTime? MeetingDate { get; set; }
 
         public string? Comment { get; set; }
 
