@@ -1,9 +1,6 @@
 img {
   width: 70%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
+  margin-top: 20px
 }
 .smallimg {
     width: 40%;
@@ -15,38 +12,44 @@ img {
 
 .insertable {
   position: relative;
-  width: 50%;
-  margin-left: 250px;
   margin-top: 60px;
 }
 
   /* Make the image responsive */
   .insertable img {
-    width: 130%;
     height: auto;
   }
 
   /* Style the button and place it in the middle of the insertable/image */
   .insertable .btn {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(10%, -200%);
-    -ms-transform: translate(-50%, -50%);
     color: white;
-    font-size: 30px;
+    font-size: 2.8vw;
     padding: 12px 24px;
     border: none;
     cursor: pointer;
     border-radius: 35px;
   }
 
+  .btn {
+      margin-left: 2%;
+      margin-top: 5%;
+  }
+
 .center {
-  padding-left: 30%;
-  padding-right: 30%;
   padding-top: 3%;
   text-align: center;
   overflow-wrap: break-word;
+}
+
+.p {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.justify-center {
+    justify-content: center;
+    display: flex;
 }
 
 .relative {

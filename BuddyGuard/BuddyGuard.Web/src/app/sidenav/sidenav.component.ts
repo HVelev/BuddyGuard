@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,6 +11,10 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
   @ViewChild('snav') navElement!: MatSidenav;
 
+  @Input() events!: Observable<void>;
+
+  private eventsSubscription!: Subscription;
+
   public isToggled = true;
   public role: string | undefined | null;
 
@@ -17,6 +22,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.role = sessionStorage.getItem('role');
+    this.eventsSubscription = this.events.subscribe(() => { this.navElement.toggle(); });
   }
 
   public ngAfterViewInit(): void {
@@ -27,7 +33,6 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     });
 
     this.navElement.fixedInViewport = true;
-    this.navElement.open();
   }
 
 }

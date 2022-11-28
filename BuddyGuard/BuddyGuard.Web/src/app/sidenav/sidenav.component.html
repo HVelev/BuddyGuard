@@ -1,6 +1,6 @@
-<div fxLayoutAlign="start" style="display: block !important;">
+<mat-sidenav-container autosize>
   <mat-sidenav fullscreen style="background-color: transparent; border: hidden;" #snav
-               mode="side">
+               mode="over">
     <div class="mt" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
       <mat-chip *ngIf="role === 'User'" selected mat-list-item class="btn" routerLink="request">Заявка</mat-chip>
       <mat-chip selected mat-list-item class="btn">Цени</mat-chip>
@@ -9,4 +9,4 @@
       <mat-chip *ngIf="role === 'Admin'" selected mat-list-item class="btn" routerLink="/process-request">Заявки за обработка</mat-chip>
     </div>
   </mat-sidenav>
-</div>
+</mat-sidenav-container>

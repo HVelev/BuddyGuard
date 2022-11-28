@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Comic';
+    src: url('./app/font/comici-webfont.woff') format('woff');
+}
+
 body {
-  font-family: Comic Sans MS, Comic Sans, cursive
+  font-family: 'Comic', cursive !important
 }
 
 .mat-sidenav-container {
@@ -86,10 +91,6 @@ app-login {
   position: absolute;
 }
 
-app-footer {
-  position: sticky !important;
-  top: 100% !important;
-}
 /*mat-sidenav-content {
   animation: fadeOutAnimation ease 1s;
 }

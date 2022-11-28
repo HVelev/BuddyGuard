@@ -6,6 +6,10 @@
     display: inline-block !important;
 }
 
+ mat-toolbar {
+     margin-top: 10px;
+ }
+
 mat-sidenav-content {
     margin-top: 90px;
 }
@@ -25,7 +29,7 @@ mat-sidenav-content {
 }
 
 mat-toolbar {
-    background-color: transparent !important;
+    background-color: white !important;
 }
 
 img {
@@ -36,7 +40,7 @@ img {
 
 .max-width {
     width: 100% !important;
-    background-color: transparent;
+    background-color: white;
 }
 
 ::deep #mat-menu-panel-0 > div {
@@ -50,7 +54,7 @@ img {
 
 .fixed {
     position: fixed;
-    z-index: 100;
+    z-index: 1;
 }
 
 .btn {
@@ -67,13 +71,15 @@ img {
   max-height: none !important;
 }
 
-.navbtn {
-  background-color: transparent;
-  font-family: Comic Sans MS, Comic Sans, cursive;
-  font-size: 30px;
-  margin: 10px;
-  border: hidden;
-  cursor: pointer;
+@media (min-width: 30px) {
+  .navbtn {
+    background-color: transparent;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-size: max(3vw, min(20px, 50px));
+    margin: 10px;
+    border: hidden;
+    cursor: pointer;
+  }
 }
 
 .brown {

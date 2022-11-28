@@ -1,4 +1,10 @@
 mat-sidenav {
     margin-top: 30vh !important;
     margin-left: 2%;
+    box-shadow: none !important;
+}
+
+.sidebtn {
+    position: fixed;
+    margin: 0;
 }

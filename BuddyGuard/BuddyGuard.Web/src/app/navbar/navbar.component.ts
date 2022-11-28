@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Subject } from 'rxjs';
 import { EditRequestDTO } from '../models/edit-request.model';
 import { LoginService } from '../services/login.service';
 import { ProcessRequestService } from '../services/process-request.service';
@@ -59,6 +60,9 @@ export class NavbarComponent implements OnInit {
   private processRequestService: ProcessRequestService;
   private loginService: LoginService;
   private registerService: RegisterService;
+
+  public eventsSubject: Subject<void> = new Subject<void>();
+
 
   public isToggled = true;
   public notifications: EditRequestDTO[] = [];
@@ -126,6 +130,9 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  public emitEventToChild() {
+    this.eventsSubject.next();
+  }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
