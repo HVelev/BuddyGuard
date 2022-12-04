@@ -9,6 +9,13 @@ namespace BuddyGuard.Core.Contracts
 
         RequestDTO GetRequest(int requestId);
 
-        List<RequestDTO> GetAllUnreadRequests();
+        List<RequestDTO> GetAllRequests(bool isForNotif);
+
+        void DeleteRequest(int id);
+
+        public void MarkRequestAsRead(int id);
+
+        public void AcceptRequest(int id);
+
     }
 }

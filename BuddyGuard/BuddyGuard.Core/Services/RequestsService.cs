@@ -32,6 +32,7 @@ namespace BuddyGuard.Core.Services
                 RequestSentDate = DateTime.Now,
                 MeetingDate = form.MeetingDate,
                 Comment = form.Comment,
+                Price = form.TotalAmount,
                 IsRead = false,
                 IsAccepted = false
             };
@@ -90,6 +91,7 @@ namespace BuddyGuard.Core.Services
                                   where requestDb.Id == requestId
                                   select new RequestDTO
                                   {
+                                      Id = requestId,
                                       FirstName = user.FirstName,
                                       LastName = user.LastName,
                                       Email = user.Email,
@@ -101,11 +103,13 @@ namespace BuddyGuard.Core.Services
                                       Comment = requestDb.Comment,
                                       ClientServices = requestDb.RequestServices.Where(x => x.AnimalRequestId == null).Select(x => x.Service.Name).ToArray(),
                                       MeetingDate = requestDb.MeetingDate,
+                                      Price = requestDb.Price
                                   }).First();
 
             var animalRequestServices = dbContext.RequestServices.Where(x => x.RequestId == requestId && x.AnimalRequestId != null).Include(x => x.Service).ToList();
 
             PetDTO[] pets = (from requestDb in dbContext.Requests
+                             where requestDb.Id == requestId
                              join animalRequest in dbContext.AnimalRequests on requestDb.Id equals animalRequest.RequestId
                              join animalType in dbContext.AnimalTypes on animalRequest.AnimalTypeId equals animalType.Id
                              select new PetDTO
@@ -123,9 +127,9 @@ namespace BuddyGuard.Core.Services
             return request;
         }
 
-        public List<RequestDTO> GetAllUnreadRequests()
+        public List<RequestDTO> GetAllRequests(bool isForNotif)
         {
-            return dbContext.Requests.Include(r => r.Location).Include(r => r.User).Include(r => r.RequestServices).ThenInclude(rs => rs.Service).OrderByDescending(x => x.RequestSentDate).Select(x => new RequestDTO
+            return dbContext.Requests.Where(r => isForNotif ? !r.IsRead : true && !r.IsAccepted).Include(r => r.Location).Include(r => r.User).Include(r => r.RequestServices).ThenInclude(rs => rs.Service).OrderByDescending(x => x.RequestSentDate).Select(x => new RequestDTO
             {
                 Id = x.Id,
                 FirstName = x.User.FirstName,
@@ -141,6 +145,31 @@ namespace BuddyGuard.Core.Services
                 Comment = x.Comment,
                 Pets = x.Pets.Select(x => new PetDTO()).ToArray()
             }).ToList();
+        }
+
+        public void MarkRequestAsRead(int id)
+        {
+            var request = dbContext.Requests.Where(x => x.Id == id).First();
+            request.IsRead = true;
+
+            dbContext.SaveChanges();
+        }
+
+        public void AcceptRequest(int id)
+        {
+            var request = dbContext.Requests.Where(x => x.Id == id).First();
+            request.IsAccepted = true;
+
+            dbContext.SaveChanges();
+        }
+
+        public void DeleteRequest(int id)
+        {
+            var entity = dbContext.Requests.Where(x => x.Id == id).First();
+
+            dbContext.Requests.Remove(entity);
+
+            dbContext.SaveChanges();
         }
     }
 }

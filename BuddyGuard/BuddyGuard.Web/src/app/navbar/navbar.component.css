@@ -6,10 +6,6 @@
     display: inline-block !important;
 }
 
- mat-toolbar {
-     margin-top: 10px;
- }
-
 mat-sidenav-content {
     margin-top: 90px;
 }
@@ -28,8 +24,10 @@ mat-sidenav-content {
   border-color: orange;
 }
 
-mat-toolbar {
-    background-color: white !important;
+.nav {
+  background-color: white !important;
+  margin-top: 10px;
+  height: auto !important;
 }
 
 img {

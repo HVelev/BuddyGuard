@@ -52,7 +52,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("RequestId");
 
-                    b.ToTable("AnimalRequests", (string)null);
+                    b.ToTable("AnimalRequests");
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.AnimalType", b =>
@@ -69,7 +69,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AnimalTypes", (string)null);
+                    b.ToTable("AnimalTypes");
 
                     b.HasData(
                         new
@@ -94,6 +94,37 @@ namespace BuddyGuard.Core.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Buddy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("image")
+                        .HasColumnName("Image");
+
+                    b.Property<DateTime>("PublishedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Buddies");
+                });
+
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -113,7 +144,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("PriceId");
 
-                    b.ToTable("Locations", (string)null);
+                    b.ToTable("Locations");
 
                     b.HasData(
                         new
@@ -551,198 +582,204 @@ namespace BuddyGuard.Core.Migrations
                         new
                         {
                             Id = 73,
-                            Name = "Подуяне",
+                            Name = "Павлово",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 74,
-                            Name = "Полигона",
+                            Name = "Подуяне",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 75,
-                            Name = "Разсадника-Коньовица",
+                            Name = "Полигона",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 76,
-                            Name = "Редута",
+                            Name = "Разсадника-Коньовица",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 77,
-                            Name = "Република",
+                            Name = "Редута",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 78,
-                            Name = "Света Троица",
+                            Name = "Република",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 79,
-                            Name = "Свобода",
+                            Name = "Света Троица",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 80,
-                            Name = "Сердика",
+                            Name = "Свобода",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 81,
-                            Name = "Сеславци",
+                            Name = "Сердика",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 82,
-                            Name = "Симеоново",
+                            Name = "Сеславци",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 83,
-                            Name = "Славия",
+                            Name = "Симеоново",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 84,
-                            Name = "Слатина",
+                            Name = "Славия",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 85,
-                            Name = "Стефан Караджа",
+                            Name = "Слатина",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 86,
-                            Name = "Стрелбище",
+                            Name = "Стефан Караджа",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 87,
-                            Name = "Студентски град",
+                            Name = "Стрелбище",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 88,
-                            Name = "Сухата река",
+                            Name = "Студентски град",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 89,
-                            Name = "Суходол",
+                            Name = "Сухата река",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 90,
-                            Name = "Требич",
+                            Name = "Суходол",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 91,
-                            Name = "Триъгълника",
+                            Name = "Требич",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 92,
-                            Name = "Факултета",
+                            Name = "Триъгълника",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 93,
-                            Name = "Филиповци",
+                            Name = "Факултета",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 94,
-                            Name = "Фондови жилища",
+                            Name = "Филиповци",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 95,
-                            Name = "Хаджи Димитър",
+                            Name = "Фондови жилища",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 96,
-                            Name = "Хиподрума",
+                            Name = "Хаджи Димитър",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 97,
-                            Name = "Хладилника",
+                            Name = "Хиподрума",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 98,
-                            Name = "Христо Ботев",
+                            Name = "Хладилника",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 99,
-                            Name = "Цариградски комплекс",
+                            Name = "Христо Ботев",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 100,
-                            Name = "Център",
+                            Name = "Цариградски комплекс",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 101,
-                            Name = "Челопечене",
+                            Name = "Център",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 102,
-                            Name = "Чепинско шосе",
+                            Name = "Челопечене",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 103,
-                            Name = "Южен парк",
+                            Name = "Чепинско шосе",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 104,
-                            Name = "Ючбунар",
+                            Name = "Южен парк",
                             PriceId = 1
                         },
                         new
                         {
                             Id = 105,
+                            Name = "Ючбунар",
+                            PriceId = 1
+                        },
+                        new
+                        {
+                            Id = 106,
                             Name = "Яворов",
                             PriceId = 1
                         });
@@ -777,7 +814,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Price", b =>
@@ -793,7 +830,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prices", (string)null);
+                    b.ToTable("Prices");
 
                     b.HasData(
                         new
@@ -920,6 +957,9 @@ namespace BuddyGuard.Core.Migrations
                     b.Property<DateTime?>("MeetingDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("RequestSentDate")
                         .HasColumnType("datetime2");
 
@@ -936,7 +976,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Requests", (string)null);
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.RequestService", b =>
@@ -956,7 +996,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("RequestId");
 
-                    b.ToTable("RequestServices", (string)null);
+                    b.ToTable("RequestServices");
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Service", b =>
@@ -987,7 +1027,7 @@ namespace BuddyGuard.Core.Migrations
 
                     b.HasIndex("PriceId");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Services");
 
                     b.HasData(
                         new
@@ -1069,7 +1109,7 @@ namespace BuddyGuard.Core.Migrations
                             IsForCustomer = false,
                             Name = "Две разходки без камера",
                             PriceId = 6,
-                            WalkLength = "Комбинирана (30мин + 60мин)"
+                            WalkLength = "Комбинирани (30мин + 60мин)"
                         },
                         new
                         {
@@ -1330,14 +1370,14 @@ namespace BuddyGuard.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b21c365d-4205-414e-ab5c-df5f8a1f542c",
-                            ConcurrencyStamp = "da0e3ca2-6e71-4846-94cf-9e96c960ce91",
+                            Id = "e16d5ab6-f04b-4668-8258-4710ebd1e9e2",
+                            ConcurrencyStamp = "6c5cb7e0-b371-4c8c-bba9-8ddb895bdaf3",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "1813705b-802e-4648-b386-f035fec67129",
-                            ConcurrencyStamp = "b452dfc0-3068-4a41-af33-58450ae7c6ff",
+                            Id = "7d618c09-f8e7-4307-984c-2a50ec7817b1",
+                            ConcurrencyStamp = "8982e816-3634-4571-9904-de3514986590",
                             Name = "User"
                         });
                 });
@@ -1457,7 +1497,7 @@ namespace BuddyGuard.Core.Migrations
                         .IsRequired();
 
                     b.HasOne("BuddyGuard.Core.Data.Models.Request", "Request")
-                        .WithMany()
+                        .WithMany("Pets")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1465,6 +1505,17 @@ namespace BuddyGuard.Core.Migrations
                     b.Navigation("AnimalType");
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Buddy", b =>
+                {
+                    b.HasOne("BuddyGuard.Core.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Location", b =>
@@ -1511,7 +1562,7 @@ namespace BuddyGuard.Core.Migrations
                         .HasForeignKey("AnimalRequestId");
 
                     b.HasOne("BuddyGuard.Core.Data.Models.Request", "Request")
-                        .WithMany()
+                        .WithMany("RequestServices")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1594,6 +1645,13 @@ namespace BuddyGuard.Core.Migrations
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Location", b =>
                 {
                     b.Navigation("Requests");
+                });
+
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Request", b =>
+                {
+                    b.Navigation("Pets");
+
+                    b.Navigation("RequestServices");
                 });
 
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.User", b =>

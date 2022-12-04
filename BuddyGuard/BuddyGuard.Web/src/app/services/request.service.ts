@@ -88,10 +88,44 @@ export class RequestService {
     });
   }
 
+  public getAllRequests(): Observable<RequestDTO[]> {
+    const url = this.buildUrl() + '/GetAllRequests';
+
+    return this.http.get<RequestDTO[]>(url);
+  }
+
   public getAllUnreadRequests(): Observable<RequestDTO[]> {
     const url = this.buildUrl() + '/GetAllUnreadRequests';
 
     return this.http.get<RequestDTO[]>(url);
+  }
+
+  public markRequestAsRead(id: number): Observable<void> {
+    const url = this.buildUrl() + '/MarkRequestAsRead';
+
+    const httpParams = new HttpParams().append('id', id);
+
+    return this.http.put<void>(url, {}, {
+      params: httpParams
+    });
+  }
+
+  public acceptRequest(id: number): Observable<void> {
+    const url = this.buildUrl() + '/AcceptRequest';
+
+    const httpParams = new HttpParams().append('id', id);
+
+    return this.http.put<void>(url, {}, {
+      params: httpParams
+    });
+  }
+
+  public deleteRequest(id: number): Observable<void> {
+    const httpParams = new HttpParams().append('id', id);
+
+    return this.http.delete<void>(`${this.buildUrl()}/DeleteRequest`, {
+      params: httpParams
+    });
   }
 
   private buildUrl(): string {

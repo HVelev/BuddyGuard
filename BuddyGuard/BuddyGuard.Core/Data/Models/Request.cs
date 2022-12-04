@@ -29,6 +29,8 @@ namespace BuddyGuard.Core.Data.Models
 
         public string? Comment { get; set; }
 
+        public decimal Price { get; set; }
+
         [Required]
         public string UserId { get; set; }
 

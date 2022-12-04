@@ -74,21 +74,17 @@ html {
 
 html, body {
   margin: 0;
-  height: 100%;
 }
 
 app-root {
-  margin: 0;
-  height: 100% !important;
-  width: 100% !important;
-  position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-app-login {
-  margin: 0;
-  height: 90% !important;
-  width: 100% !important;
-  position: absolute;
+app-footer {
+    margin-top: auto;
+  padding-top: 10px;
 }
 
 /*mat-sidenav-content {

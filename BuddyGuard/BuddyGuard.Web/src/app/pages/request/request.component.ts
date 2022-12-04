@@ -57,7 +57,7 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
   public minStartDate: Date | undefined;
   public maxEndDate: Date | undefined;
   public animals: FormArray = new FormArray([new FormGroup({
-    nameControl: new FormControl('asd', Validators.required),
+    nameControl: new FormControl('asd', [Validators.required, Validators.maxLength(100)]),
     animalTypeControl: new FormControl(undefined, Validators.required),
     speciesControl: new FormControl(),
     animalServiceControl: new FormControl(),
@@ -152,7 +152,13 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
       next: (value: any) => {
         this.minStartDate = value._d;
       }
-    })
+    });
+
+    this.form.get('customerServiceControl')!.valueChanges.subscribe({
+      next: () => {
+        this.calculate();
+      }
+    });
   }
 
   ngAfterContentInit(): void {
@@ -181,7 +187,7 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
 
   public calculate() {
     this.finalPrice = 0;
-    debugger;
+
     for (let control of this.FormArrayControls.controls) {
       if (control.get('dogWalkLengthControl')!.value) {
         this.finalPrice += control.get('dogWalkLengthControl')!.value.price;
@@ -314,9 +320,7 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
 
       const startDate: Date = new Date(dateLocationGroup.get('startDateControl')!.value);
       const endDate: Date = new Date(dateLocationGroup.get('endDateControl')!.value);
-      debugger;
       const meetingDate: Date = new Date(dateLocationGroup.get('meetingDateControl')!.value);
-      debugger;
       const form = new EditRequestDTO({
         locationId: dateLocationGroup.get('locationControl')!.value?.value ?? dateLocationGroup.get('locationControl')!.value,
         startDate: startDate,

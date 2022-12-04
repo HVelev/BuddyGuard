@@ -240,12 +240,14 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-    </div>
-    <div>
-      <button mat-raised-button color="primary">Приемане на заявка</button>
+    <h2>Обща сума: {{ form.get('priceControl')!.value.toFixed(2) }}</h2>
+    <div fxLayoutAlign="space-between">
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="acceptRequest()">Приемане на заявка</button>
+      </div>
     </div>
   </mat-step>
   <!--<mat-step [stepControl]="form" [editable]="true">

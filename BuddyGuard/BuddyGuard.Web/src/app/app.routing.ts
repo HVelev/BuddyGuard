@@ -1,8 +1,9 @@
 import { Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { AuthGuardGuard } from "./guards/auth-guard.guard";
+import { AuthGuard } from "./guards/auth-guard.guard";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AboutComponent } from "./pages/about/about.component";
+import { BuddiesComponent } from "./pages/buddies/buddies.component";
 import { IndexComponent } from "./pages/index/index.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { ProcessRequestComponent } from "./pages/process-request/process-request.component";
@@ -34,8 +35,12 @@ export const appRoutes: Routes = [
   {
     path: 'request',
     component: RequestComponent,
-    canActivate: [AuthGuardGuard],
+    canActivate: [AuthGuard],
     
+  },
+  {
+    path: 'buddies',
+    component: BuddiesComponent
   },
   {
     path: '',

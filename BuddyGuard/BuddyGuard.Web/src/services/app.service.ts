@@ -6,13 +6,4 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class AppService {
-  private http: HttpClient;
-
-  constructor(http: HttpClient) {
-    this.http = http;
-  }
-
-  public getWeatherForecast(): Observable<string> {
-    return this.http.get('/WeatherForecast/GetWeather', { responseType: 'text' });
-  }
 }

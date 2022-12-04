@@ -30,5 +30,7 @@ export class RequestDTO {
 
   public comment?: string;
 
+  public price!: number;
+
   public pets!: PetDTO[];
 }

@@ -5,6 +5,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnI
 import { MatSidenav } from '@angular/material/sidenav';
 import { Subject } from 'rxjs';
 import { EditRequestDTO } from '../models/edit-request.model';
+import { RequestDTO } from '../models/request.model';
 import { LoginService } from '../services/login.service';
 import { ProcessRequestService } from '../services/process-request.service';
 import { RegisterService } from '../services/register.service';
@@ -57,7 +58,7 @@ const fadeOut = trigger('fadeOut', [
 export class NavbarComponent implements OnInit {
   @ViewChild('snav') navElement!: MatSidenav;
 
-  private processRequestService: ProcessRequestService;
+  private requestService: RequestService;
   private loginService: LoginService;
   private registerService: RegisterService;
 
@@ -65,7 +66,7 @@ export class NavbarComponent implements OnInit {
 
 
   public isToggled = true;
-  public notifications: EditRequestDTO[] = [];
+  public notifications: RequestDTO[] = [];
   public role: string | undefined | null;
   public datePipe: DatePipe;
 
@@ -87,14 +88,14 @@ export class NavbarComponent implements OnInit {
 
   constructor(changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    processRequestService: ProcessRequestService,
+    requestService: RequestService,
     loginService: LoginService,
     registerService: RegisterService,
     datePipe: DatePipe) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    this.processRequestService = processRequestService;
+    this.requestService = requestService;
     this.loginService = loginService;
     this.role = sessionStorage.getItem('role');
     this.registerService = registerService;
@@ -109,8 +110,8 @@ export class NavbarComponent implements OnInit {
     });
 
     if (this.role) {
-      this.processRequestService.getAllUnreadRequests().subscribe({
-        next: (value: EditRequestDTO[]) => {
+      this.requestService.getAllUnreadRequests().subscribe({
+        next: (value: RequestDTO[]) => {
           this.notifications = value;
         }
       });

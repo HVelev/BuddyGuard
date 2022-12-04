@@ -37,19 +37,25 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.service.getAllUnreadRequests().subscribe({
-      next: (value: RequestDTO[]) => {
-        
-        this.dataSource.data = value;
-      }
-    });
+    this.getAllRequests();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
+  public getAllRequests(): void {
+    this.service.getAllRequests().subscribe({
+      next: (value: RequestDTO[]) => {
+
+        this.dataSource.data = value;
+      }
+    });
+  }
+
   public async openRequest(id: number) {
+    this.service.markRequestAsRead(id).subscribe();
+
     const response = await this.service.getRequest(id).toPromise();
 
     const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
@@ -61,8 +67,18 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
 
     this.dialogRef = dialogRef;
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe({
+      next: () => {
+        this.getAllRequests();
+      }
+    });
+  }
+
+  public deleteRequest(id: number) {
+    this.service.deleteRequest(id).subscribe({
+      next: () => {
+        this.getAllRequests();
+      }
     });
   }
 }

@@ -117,11 +117,47 @@ namespace BuddyGuard.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult GetAllUnreadRequests()
+        public IActionResult GetAllRequests()
         {
-            var result = requestService.GetAllUnreadRequests();
+            var result = requestService.GetAllRequests(false);
 
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAllUnreadRequests()
+        {
+            var result = requestService.GetAllRequests(true);
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPut]
+        public IActionResult MarkRequestAsRead([FromQuery] int id)
+        {
+            requestService.MarkRequestAsRead(id);
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPut]
+        public IActionResult AcceptRequest([FromQuery] int id)
+        {
+            requestService.AcceptRequest(id);
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpDelete]
+        public IActionResult DeleteRequest([FromQuery] int id)
+        {
+            requestService.DeleteRequest(id);
+
+            return Ok();
         }
     }
 }

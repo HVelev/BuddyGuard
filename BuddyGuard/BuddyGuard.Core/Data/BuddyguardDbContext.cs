@@ -28,6 +28,8 @@ namespace BuddyGuard.Core.Data
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<Buddy> Buddies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<RequestService>().HasKey(x => new { x.ServiceId, x.RequestId });

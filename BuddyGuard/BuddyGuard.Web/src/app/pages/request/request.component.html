@@ -134,7 +134,13 @@
                     <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
                       <mat-form-field appearance="fill">
                         <mat-label>Име</mat-label>
-                        <input matInput formControlName="nameControl" placeholder="Име">
+                        <input matInput formControlName="nameControl" placeholder="Име" (click)="click($event)">
+                        <mat-error *ngIf="FormArrayControls.controls[i].get('nameControl')!.hasError('required')">
+                          Името е <strong>задължително</strong>
+                        </mat-error>
+                        <mat-error *ngIf="FormArrayControls.controls[i].get('nameControl')!.hasError('maxlength')">
+                          Името не може да е по-дълго от <strong>20 символа</strong>
+                        </mat-error>
                       </mat-form-field>
                       <mat-form-field appearance="fill" fxFlex="100">
                         <mat-label>Какъв вид е Вашето животно?</mat-label>

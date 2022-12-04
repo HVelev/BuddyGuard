@@ -71,6 +71,7 @@ import { ProcessRequestComponent } from './pages/process-request/process-request
 import { ProcessRequestDialogComponent } from './pages/process-request/models/process-request-dialog/process-request-dialog.component';
 import { DatePipe } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { BuddiesComponent } from './pages/buddies/buddies.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     ProcessRequestComponent,
     ProcessRequestDialogComponent,
     SidenavComponent,
+    BuddiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,7 +150,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     DialogModule,
     FlexLayoutModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }, DatePipe],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }, { provide: Document, useValue: document }, DatePipe],
   bootstrap: [
     AppComponent
   ]

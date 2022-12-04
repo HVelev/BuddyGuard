@@ -29,6 +29,8 @@ namespace BuddyGuard.Core.Models
 
         public string? Comment { get; set; }
 
+        public decimal Price { get;set; }
+
         public PetDTO[] Pets { get; set; }
     }
 }
