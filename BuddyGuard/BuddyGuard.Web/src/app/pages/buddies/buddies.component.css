@@ -68,3 +68,7 @@
   .add-photo-card > * {
     margin-top: 20px;
   }
+
+img {
+    margin-top: 10px;
+}

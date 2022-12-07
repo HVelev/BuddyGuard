@@ -87,6 +87,11 @@ app-footer {
   padding-top: 10px;
 }
 
+:host >> .content {
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+}
+
 /*mat-sidenav-content {
   animation: fadeOutAnimation ease 1s;
 }

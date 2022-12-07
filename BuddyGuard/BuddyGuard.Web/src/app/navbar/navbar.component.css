@@ -95,3 +95,7 @@ img {
   width: 100px;
 }
 
+.scrollable {
+    overflow-x: scroll;
+}
+

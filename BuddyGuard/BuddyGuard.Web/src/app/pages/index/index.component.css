@@ -55,7 +55,5 @@ img {
 .relative {
   width: 12%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-270%, 390%);
+  left: 10%;
 }

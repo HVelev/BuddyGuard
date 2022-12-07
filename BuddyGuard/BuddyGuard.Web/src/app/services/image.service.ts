@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -20,7 +20,13 @@ export class ImageService {
   imageLink: any;
 
 
-  constructor(private http: HttpClient) { }
+  constructor
+    (
+      private http: HttpClient,
+      private handler: HttpBackend
+  ) {
+    this.http = new HttpClient(handler);
+  }
 
   async uploadImage(imageFile: File, infoObject: any) {
     let formData = new FormData();
