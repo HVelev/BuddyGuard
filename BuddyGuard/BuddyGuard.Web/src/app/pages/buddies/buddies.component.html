@@ -55,24 +55,52 @@
   </mat-card>
 
 </div>-->
-<div class="add-photo-container" *ngIf="role && role === 'Admin'">
-  <mat-card class="add-photo-card">
-    <mat-card-header>
-      <mat-card-title>Add Info</mat-card-title>
-    </mat-card-header>
-    <mat-form-field>
-      <input matInput [(ngModel)]="imageTitle" placeholder="Title">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput [(ngModel)]="imageDescription" placeholder="Description">
-    </mat-form-field>
-    <input #imageInput type="file" (change)="imageInputChange(imageInput)" accept="image/*">
-    <button mat-raised-button color="primary" (click)="addImage()">Add Image</button>
-    <button mat-raised-button color="primary" (click)="getImages()">Get Images</button>
-
+<div class="container" *ngIf="role && role === 'Admin'">
+  <mat-card class="add-photo-card" fxLayout="column">
+    <div fxLayoutAlign="center center">
+      <mat-card-header>
+        <mat-card-title>Добавяне на снимка</mat-card-title>
+      </mat-card-header>
+    </div>
+    <div fxLayoutAlign="center center">
+      <mat-form-field fxFlex="50">
+        <input matInput [(ngModel)]="imageDescription" placeholder="Описание">
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center">
+      <div fxFlex="50">
+        <label for="formFile" class="form-label">Снимка</label>
+        <input #imageInput class="form-control" type="file" id="formFile" (change)="imageInputChange(imageInput)" accept="image/*">
+      </div>
+    </div>
+    <div fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" (click)="addImage()">Добави</button>
+    </div>
+    <div fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" (click)="getImages()">Get Images</button>
+    </div>
   </mat-card>
 </div>
-<div fxLayout="row wrap" fxLayoutAlign="space-around">
-    <img  fxFlex="30" *ngFor="let image of images" [src]="image.link" alt="Alternate Text" />
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <h2 class="brown"><strong>Приятелчета, за които сме се грижили:</strong></h2>
+  <!--<div fxLayout="row wrap" fxLayoutAlign="end">
+    <div class="mt" fxFlex="30" *ngFor="let image of images">
+      <div fxLayoutAlign="space-between">
+        <button mat-mini-fab color="accent">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <img fxFlex="70" [src]="image.link" alt="Alternate Text" />
+    </div>
+  </div>-->
+  <div class="d-flex flex-wrap" fxLayoutAlign="center">
+    <div *ngFor="let img of images" class="card m-3">
+      <button mat-mini-fab color="accent">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <img class="original"
+           [alt]="img.link"
+           [src]="img.link" />
+    </div>
+  </div>
 </div>

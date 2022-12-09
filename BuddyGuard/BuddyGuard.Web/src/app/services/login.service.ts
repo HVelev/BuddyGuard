@@ -12,10 +12,12 @@ export class LoginService {
   private domain = 'https://localhost:7285/';
 
   public onUserLogin: Subject<any>;
+  public onUserLogout: Subject<void>;
 
   constructor(http: HttpClient) {
     this.http = http;
     this.onUserLogin = new Subject();
+    this.onUserLogout = new Subject();
   }
 
   public login(user: LoginDTO): Observable<Object> {

@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { EditPetDTO } from "../models/edit-pet.model";
 import { EditRequestDTO } from "../models/edit-request.model";
 import { RequestDTO } from "../models/request.model";
@@ -17,11 +17,14 @@ export class RequestService {
   private domain = 'https://localhost:7285/';
   private datePipe: DatePipe;
 
+  public onNotificationClick: Subject<any>;
+
   constructor(http: HttpClient,
     datePipe: DatePipe
   ) {
     this.http = http;
     this.datePipe = datePipe;
+    this.onNotificationClick = new Subject();
   }
 
   public getAnimalTypes(): Observable<NomenclatureDTO<number>[]> {
