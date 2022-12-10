@@ -55,7 +55,7 @@
   </mat-card>
 
 </div>-->
-<div class="container" *ngIf="role && role === 'Admin'">
+<div class="container" *ngIf="role && role === 'Admin'" [formGroup]="form">
   <mat-card class="add-photo-card" fxLayout="column">
     <div fxLayoutAlign="center center">
       <mat-card-header>
@@ -64,13 +64,16 @@
     </div>
     <div fxLayoutAlign="center center">
       <mat-form-field fxFlex="50">
-        <input matInput [(ngModel)]="imageDescription" placeholder="Описание">
+        <input matInput [(ngModel)]="imageDescription" placeholder="Описание" formControlName="descriptionControl">
       </mat-form-field>
     </div>
     <div fxLayoutAlign="center center">
       <div fxFlex="50">
         <label for="formFile" class="form-label">Снимка</label>
-        <input #imageInput class="form-control" type="file" id="formFile" (change)="imageInputChange(imageInput)" accept="image/*">
+        <input #imageInput class="form-control" type="file" id="formFile" (change)="imageInputChange(imageInput)" accept="image/*" formControlName="imageControl">
+        <mat-error *ngIf="form.get('imageControl')!.touched && form.get('imageControl')!.dirty && form.get('imageControl')!.hasError('required')" fxLayoutAlign="start">
+          Трябва да изберете снимка
+        </mat-error>
       </div>
     </div>
     <div fxLayoutAlign="center center">
@@ -95,7 +98,7 @@
   </div>-->
   <div class="d-flex flex-wrap" fxLayoutAlign="center">
     <div *ngFor="let img of images" class="card m-3">
-      <button mat-mini-fab color="accent">
+      <button mat-mini-fab color="accent" (click)="deleteImage(img.id)">
         <mat-icon>delete</mat-icon>
       </button>
       <img class="original"

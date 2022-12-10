@@ -1,8 +1,6 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BuddiesService } from '../../../services/buddies.service';
-import { EditBuddyDTO } from '../../models/edit-buddy.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageService } from '../../services/image.service';
 
 @Component({
@@ -90,15 +88,26 @@ export class BuddiesComponent implements OnInit {
   //  }
   //}
   private imageService: ImageService;
+  private snackbar: MatSnackBar;
 
   public imageTitle: string | undefined;
   public imageDescription: string | undefined;
   public imageFile!: File;
   public images: any[] = [];
   public role: string | undefined | null;
+  public form: FormGroup;
 
-  constructor(imageService: ImageService) {
+  constructor
+    (
+      imageService: ImageService,
+      snackbar: MatSnackBar
+    ) {
     this.imageService = imageService;
+    this.snackbar = snackbar;
+    this.form = new FormGroup({
+      descriptionControl: new FormControl(),
+      imageControl: new FormControl(undefined, Validators.required)
+    });
   }
 
   ngOnInit() {
@@ -111,15 +120,36 @@ export class BuddiesComponent implements OnInit {
   }
 
   addImage() {
-    let infoObject = {
-      title: this.imageTitle,
-      description: this.imageDescription
-    }
-    this.imageService.uploadImage(this.imageFile, infoObject);
-    this.imageTitle = "";
-    this.imageDescription = "";
+    this.form.get('imageControl')!.markAsDirty();
+    this.form.get('imageControl')!.markAsTouched();
 
-    this.getData();
+    if (this.form.valid) {
+      let infoObject = {
+        title: this.imageTitle,
+        description: this.imageDescription
+      }
+
+      this.imageService.uploadImage(this.imageFile, infoObject).subscribe({
+        next: () => {
+          this.snackbar.open('Успешно качена снимка', 'Затвори', {
+            duration: 4000
+          });
+
+          this.form.get('imageControl')!.reset();
+          this.imageTitle = "";
+          this.imageDescription = "";
+
+          this.getData();
+        },
+        error: () => {
+          this.snackbar.open('Възникна проблем при качването на снимката Ви', 'Затвори', {
+            duration: 4000,
+            panelClass: 'red-snackbar'
+          });
+        }
+      });
+
+    }
   }
 
   private getData() {
@@ -132,5 +162,9 @@ export class BuddiesComponent implements OnInit {
 
   getImages() {
     this.imageService.getAlbum();
+  }
+
+  public deleteImage(id: string) {
+    this.imageService.deleteImage(id).subscribe();
   }
 }

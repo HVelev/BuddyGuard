@@ -3,7 +3,9 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStep, MatStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 import { forEach } from 'lodash';
 import { Moment } from 'moment';
 import { EditPetDTO } from '../../models/edit-pet.model';
@@ -34,6 +36,8 @@ export const MY_DATE_FORMATS = {
 })
 export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit {
   private service: RequestService;
+  private snackbar: MatSnackBar;
+  private router: Router;
 
   @ViewChild('animalType')
   public animalTypeMatSelect!: MatSelect;
@@ -74,7 +78,9 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
   }
 
   constructor(service: RequestService,
-    private dateAdapter: DateAdapter<Date>
+    private dateAdapter: DateAdapter<Date>,
+    snackbar: MatSnackBar,
+    router: Router
   ) {
     this.service = service;
 
@@ -139,6 +145,10 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
       customerServiceControl: new FormControl(),
       commentControl: new FormControl()
     });
+
+    this.router = router;
+
+    this.snackbar = snackbar;
   }
 
   ngOnInit(): void {
@@ -335,7 +345,15 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
         pets: pets
       });
 
-      this.service.submitForm(form).subscribe();
+      this.service.submitForm(form).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+
+          this.snackbar.open("Успешно подадена форма. Очаквайте отговор по имейл!", "Затвори", {
+            duration: 4000
+          });
+        }
+      });
     }
   }
 }
