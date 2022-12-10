@@ -24,7 +24,7 @@ export class ImageService {
     this.http = new HttpClient(handler);
   }
 
-  async uploadImage(imageFile: File, infoObject: any) {
+  uploadImage(imageFile: File, infoObject: any) {
     let formData = new FormData();
     formData.append('image', imageFile, imageFile.name);
     formData.append('album', 'sMqFwZH6S5deVG6');
@@ -33,7 +33,7 @@ export class ImageService {
       "authorization": 'Client-ID ' + this.clientId
     });
 
-    const imageData: any = await this.http.post(this.url, formData, { headers: header }).toPromise();
+    return this.http.post(this.url, formData, { headers: header });
   }
 
   async getAlbum() {
@@ -50,5 +50,15 @@ export class ImageService {
     });
 
     return this.http.get('https://api.imgur.com/3/album/wrvBdET/images', { headers: header });
+  }
+
+  public deleteImage(id: string): Observable<void> {
+    let header = new HttpHeaders({
+      "authorization": 'Client-ID ' + this.clientId
+    });
+
+    return this.http.delete<void>(`https://api.imgur.com/3/image/${id}`, {
+      headers: header
+    });
   }
 }
