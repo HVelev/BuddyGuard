@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-index',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
+  private loginService: LoginService;
 
-  constructor() { }
+  public role: string | null;
+
+  constructor(loginService: LoginService) {
+    this.loginService = loginService;
+
+    this.role = sessionStorage.getItem('role');
+}
 
   ngOnInit(): void {
-  }
+    this.loginService.onUserLogin.subscribe({
+      next: (value: string) => {
+        this.role = value;
+      }
+    });
 
+    this.loginService.onUserLogout.subscribe({
+      next: () => {
+        this.role = null;
+      }
+    });
+  }
 }

@@ -1,5 +1,5 @@
 
-<div>
+<div class="overflow-hidden">
   <div class="fixed max-width scrollable">
     <mat-toolbar class="nav">
       <div fxLayoutAlign="space-between center" fxFlex="100">
@@ -10,9 +10,9 @@
           </div>
         </div>
         <div>
-          <button class="brown navbtn"><span>Разбери повече</span></button>
+          <button class="brown navbtn" *ngIf="role !== 'Admin'"><span>Разбери повече</span></button>
           <button class="brown navbtn" routerLink="/buddies" *ngIf="role">Buddies</button>
-          <button *ngIf="role === 'Admin'" class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
+          <button matBadge="{{ notifications.length }}" matBadgeSize="medium" [matBadgeHidden]="notifications.length === 0" *ngIf="role === 'Admin'" class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
           <button *ngIf="!role ?? true" class="brown navbtn" routerLink="login"><span>Влез</span></button>
           <button *ngIf="!role ?? true" class="brown navbtn" routerLink="register"><span>Регистрирай се</span></button>
           <button *ngIf="role ?? false" class="brown navbtn" routerLink="/" (click)="logout()">Излез</button>
@@ -29,7 +29,7 @@
                    fxLayoutAlign="center center"
                    class="notification-margin">
                 <mat-icon class="smallIcon" fxFlex="5">mail</mat-icon>
-                <div fxFlex="80" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10">
+                <div fxFlex="80" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10" (click)="openRequestDialog(notification.id)">
                   <p>Имате нова заявка за {{ datePipe.transform(notification.startDate, 'dd/MM/yyyy') }}</p>
                   <mat-card-subtitle>{{ notification.sentDate!.toLocaleString() | timeAgo }}</mat-card-subtitle>
                 </div>

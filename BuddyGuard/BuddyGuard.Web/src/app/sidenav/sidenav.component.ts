@@ -33,6 +33,12 @@ export class SidenavComponent implements OnInit, AfterViewInit {
       }
     });
 
+    this.loginService.onUserLogout.subscribe({
+      next: () => {
+        this.role = null;
+      }
+    });
+
     this.eventsSubscription = this.events.subscribe(() => { this.navElement.toggle(); });
   }
 

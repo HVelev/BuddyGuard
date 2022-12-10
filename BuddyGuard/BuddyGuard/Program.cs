@@ -107,4 +107,19 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapAreaControllerRoute(
+    name: "Admin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
+app.MapAreaControllerRoute(
+    name: "User",
+    areaName: "User",
+    pattern: "User/{controller=Home}/{action=Index}/{id?}");
+
+app.MapAreaControllerRoute(
+    name: "Shared",
+    areaName: "Shared",
+    pattern: "Shared/{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

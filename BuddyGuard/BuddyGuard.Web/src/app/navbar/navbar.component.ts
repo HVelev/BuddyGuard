@@ -2,10 +2,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MediaMatcher } from '@angular/cdk/layout';
 import { DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { EditRequestDTO } from '../models/edit-request.model';
 import { RequestDTO } from '../models/request.model';
+import { ProcessRequestDialogComponent } from '../pages/process-request/models/process-request-dialog/process-request-dialog.component';
 import { LoginService } from '../services/login.service';
 import { ProcessRequestService } from '../services/process-request.service';
 import { RegisterService } from '../services/register.service';
@@ -61,6 +64,8 @@ export class NavbarComponent implements OnInit {
   private requestService: RequestService;
   private loginService: LoginService;
   private registerService: RegisterService;
+  private router: Router;
+  private dialog: MatDialog;
 
   public eventsSubject: Subject<void> = new Subject<void>();
 
@@ -91,7 +96,10 @@ export class NavbarComponent implements OnInit {
     requestService: RequestService,
     loginService: LoginService,
     registerService: RegisterService,
-    datePipe: DatePipe) {
+    datePipe: DatePipe,
+    router: Router,
+    dialog: MatDialog
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -100,27 +108,59 @@ export class NavbarComponent implements OnInit {
     this.role = sessionStorage.getItem('role');
     this.registerService = registerService;
     this.datePipe = datePipe;
+    this.router = router;
+    this.dialog = dialog;
   }
 
   public ngOnInit(): void {
     this.loginService.onUserLogin.subscribe({
       next: (value: string) => {
         this.role = value;
+        debugger;
+        if (value === 'Admin') {
+          this.updateNotifications();
+        }
       }
     });
 
     if (this.role) {
-      this.requestService.getAllUnreadRequests().subscribe({
-        next: (value: RequestDTO[]) => {
-          this.notifications = value;
-        }
-      });
+      this.updateNotifications();
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  public openRequestDialog(id: number) {
+    this.openRequest(id);
+  }
+
+  public openRequest(id: number) {
+    this.requestService.markRequestAsRead(id).subscribe();
+
+    this.requestService.getRequest(id).subscribe({
+      next: (value: any) => {
+        const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
+          width: '100%',
+          height: '100%',
+          maxWidth: '100%',
+          data: value
+        });
+
+        dialogRef.afterClosed().subscribe({
+          next: () => {
+            this.updateNotifications();
+          }
+        });
+      }
+    });
   }
 
   public logout() {
     this.loginService.logout();
     this.role = undefined;
+    this.loginService.onUserLogout.next();
   }
 
   public scrollUp() {
@@ -131,11 +171,17 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  public updateNotifications(): void {
+    this.requestService.getAllUnreadRequests().subscribe({
+      next: (value: RequestDTO[]) => {
+        this.notifications = value;
+        console.log(value);
+      }
+    });
+  }
+
   public emitEventToChild() {
     this.eventsSubject.next();
-  }
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }
 

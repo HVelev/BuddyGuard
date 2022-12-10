@@ -96,6 +96,9 @@ img {
 }
 
 .scrollable {
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}

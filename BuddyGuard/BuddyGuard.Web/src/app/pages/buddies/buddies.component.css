@@ -69,6 +69,49 @@
     margin-top: 20px;
   }
 
-img {
-    margin-top: 10px;
+.mt {
+    margin: 10px;
 }
+
+.mat-mini-fab {
+    position: absolute !important;
+    left: 90%;
+    bottom: 90%;
+}
+
+.item {
+  width: 100%
+}
+
+  .container > div {
+    flex: 0 30%;
+  }
+
+.original {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+.item {
+  width: 100%
+}
+
+
+  .container > div {
+    flex: 0 50%;
+    /*demo*/
+  }
+.img-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+}
+
+  .img-container img {
+    width: 50%;
+  }

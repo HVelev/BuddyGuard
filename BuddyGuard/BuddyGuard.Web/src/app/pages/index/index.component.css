@@ -51,9 +51,3 @@ img {
     justify-content: center;
     display: flex;
 }
-
-.relative {
-  width: 12%;
-  position: absolute;
-  left: 10%;
-}

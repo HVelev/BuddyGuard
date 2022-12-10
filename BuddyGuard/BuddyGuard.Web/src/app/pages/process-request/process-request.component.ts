@@ -1,11 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { EditRequestDTO } from '../../models/edit-request.model';
 import { RequestDTO } from '../../models/request.model';
-import { ProcessRequestService } from '../../services/process-request.service';
 import { RequestService } from '../../services/request.service';
 import { ProcessRequestDialogComponent } from './models/process-request-dialog/process-request-dialog.component';
 
@@ -42,6 +40,8 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+
+    
   }
 
   public getAllRequests(): void {
@@ -53,23 +53,26 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public async openRequest(id: number) {
+  public openRequest(id: number) {
     this.service.markRequestAsRead(id).subscribe();
 
-    const response = await this.service.getRequest(id).toPromise();
+    this.service.getRequest(id).subscribe({
+      next: (value: any) => {
+        const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
+          width: '100%',
+          height: '100%',
+          maxWidth: '100%',
+          data: value
+        });
 
-    const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
-      width: '100%',
-      height: '100%',
-      maxWidth: '100%',
-      data: response
-    });
+        this.dialogRef = dialogRef;
 
-    this.dialogRef = dialogRef;
-
-    dialogRef.afterClosed().subscribe({
-      next: () => {
-        this.getAllRequests();
+        dialogRef.afterClosed().subscribe({
+          next: () => {
+            this.getAllRequests();
+            this.service.getAllUnreadRequests();
+          }
+        });
       }
     });
   }

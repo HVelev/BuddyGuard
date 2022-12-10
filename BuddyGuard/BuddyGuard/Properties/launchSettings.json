@@ -2,13 +2,13 @@
   "profiles": {
     "BuddyGuard": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://172.20.10.11;http://localhost:5285"
+      "applicationUrl": "https://localhost:7285;http://localhost:5285"
     },
     "IIS Express": {
       "commandName": "IISExpress",

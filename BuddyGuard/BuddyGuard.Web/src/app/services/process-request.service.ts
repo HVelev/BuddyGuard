@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { EditRequestDTO } from '../models/edit-request.model';
 
 @Injectable({
@@ -10,6 +10,7 @@ export class ProcessRequestService {
   private http: HttpClient;
   private controller = 'ProcessRequest';
   private domain = 'https://localhost:7285/';
+
 
   constructor(http: HttpClient) {
     this.http = http;

@@ -2,7 +2,7 @@
   <img class="smallimg" src="https://static.wixstatic.com/media/3df67c_a684a8a4db11402d9e7d90c774fe7332~mv2.png/v1/crop/x_0,y_523,w_1414,h_153/fill/w_834,h_90,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/2.png" />
 </div>
 <div class="insertable justify-center">
-    <mat-chip routerLink="request" selected class="btn">
+    <mat-chip routerLink="request" selected class="btn" *ngIf="role === 'User'">
       Заяви услуга
     </mat-chip>
   <img src="https://static.wixstatic.com/media/3df67c_28f2244592014b4bb4d332499775c867~mv2.jpg/v1/fill/w_1218,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/photo%2520main_edited.jpg" />

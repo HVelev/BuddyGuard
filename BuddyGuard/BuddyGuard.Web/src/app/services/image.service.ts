@@ -18,13 +18,9 @@ export class ImageService {
   private url: string = 'https://api.imgur.com/3/image';
   private clientId: string = '626d467ff2044c4';
   imageLink: any;
+  private http: HttpClient;
 
-
-  constructor
-    (
-      private http: HttpClient,
-      private handler: HttpBackend
-  ) {
+  constructor(handler: HttpBackend) {
     this.http = new HttpClient(handler);
   }
 
