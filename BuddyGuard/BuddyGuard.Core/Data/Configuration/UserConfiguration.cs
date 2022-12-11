@@ -45,7 +45,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 LastName = "Velev",
                 UserName = "user",
                 NormalizedUserName = "USER",
-                Email = "hristo.velev98@gmail.com",
+                Email = "buddyguardapp@outlook.com",
                 NormalizedEmail = "BUDDYGUARDAPP@OUTLOOK.COM",
                 Address = "Mladost",
                 PhoneNumber = "0888888888"

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {}
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {}
   },
   "projects": {
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
+        "projectUniqueName": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
         "projectName": "BuddyGuard.Core",
-        "projectPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
-        "packagesPath": "C:\\Users\\hvelev\\.nuget\\packages\\",
-        "outputPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\obj\\",
+        "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
+        "packagesPath": "C:\\Users\\ic0o\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hvelev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ic0o\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
