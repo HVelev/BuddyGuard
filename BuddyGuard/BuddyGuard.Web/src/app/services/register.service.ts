@@ -9,7 +9,8 @@ import { RegisterDTO } from "../models/register.model";
 })
 export class RegisterService {
   private http: HttpClient;
-  private controller = 'Register';
+    private controller = '/Register';
+    private area = 'Shared';
   private domain = 'https://localhost:7285/';
 
   constructor(http: HttpClient) {
@@ -27,6 +28,6 @@ export class RegisterService {
   }
 
   private buildUrl(): string {
-    return this.domain + this.controller;
+      return this.domain + this.area + this.controller;
   }
 } 

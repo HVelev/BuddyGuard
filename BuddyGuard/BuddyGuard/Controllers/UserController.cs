@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BuddyGuard.API.Controllers
 {
+    [Area("Shared")]
     public class UserController : Controller
     {
         private readonly IUserService service;

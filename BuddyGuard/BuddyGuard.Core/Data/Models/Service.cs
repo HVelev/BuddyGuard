@@ -23,8 +23,6 @@ namespace BuddyGuard.Core.Data.Models
         public int? AnimalTypeId { get; set; }
 
         [Required]
-        public int PriceId { get; set; }
-
-        public Price Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

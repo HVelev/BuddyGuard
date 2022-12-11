@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BuddyGuard.API.Controllers
 {
+    [Area("Admin")]
     public class ProcessRequestController : Controller
     {
         private readonly IProcessRequestService processRequestService;

@@ -8,7 +8,8 @@ import { LoginDTO } from "../models/login.model";
 })
 export class LoginService {
   private http: HttpClient;
-  private controller = 'Login';
+    private controller = '/Login';
+    private area = 'Shared';
   private domain = 'https://localhost:7285/';
 
   public onUserLogin: Subject<any>;
@@ -42,6 +43,6 @@ export class LoginService {
   }
 
   private buildUrl(): string {
-    return this.domain + this.controller;
+      return this.domain + this.area + this.controller;
   }
 } 

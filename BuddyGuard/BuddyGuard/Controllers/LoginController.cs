@@ -13,6 +13,7 @@ using System.Text;
 
 namespace BuddyGuard.API.Controllers
 {
+    [Area("Shared")]
     public class LoginController : Controller
     {
         private IConfiguration _config;

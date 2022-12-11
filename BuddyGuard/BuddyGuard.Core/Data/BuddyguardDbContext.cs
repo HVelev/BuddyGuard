@@ -22,13 +22,9 @@ namespace BuddyGuard.Core.Data
 
         public DbSet<AnimalType> AnimalTypes { get; set; }
 
-        public DbSet<Price> Prices { get; set; }
-
         public DbSet<Location> Locations { get; set; }
 
         public DbSet<Post> Posts { get; set; }
-
-        public DbSet<Buddy> Buddies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -37,8 +33,9 @@ namespace BuddyGuard.Core.Data
             builder.Entity<Request>().HasOne(x => x.Location).WithMany(x => x.Requests).IsRequired().OnDelete(DeleteBehavior.NoAction);
 
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserRoleConfiguration());
             builder.ApplyConfiguration(new AnimalTypeConfiguration());
-            builder.ApplyConfiguration(new PriceConfiguration());
             builder.ApplyConfiguration(new LocationConfiguration());
             builder.ApplyConfiguration(new ServiceConfiguration());
 

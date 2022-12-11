@@ -2,10 +2,8 @@ import { DatePipe } from "@angular/common";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { EditPetDTO } from "../models/edit-pet.model";
 import { EditRequestDTO } from "../models/edit-request.model";
 import { RequestDTO } from "../models/request.model";
-import { UserDTO } from "../models/user.model";
 import { NomenclatureDTO } from "../shared/models/nomenclature-dto";
 
 @Injectable({
@@ -13,7 +11,8 @@ import { NomenclatureDTO } from "../shared/models/nomenclature-dto";
 })
 export class RequestService {
   private http: HttpClient;
-  private controller = 'Request';
+  private controller = '/Request';
+  private area = 'User';
   private domain = 'https://localhost:7285/';
   private datePipe: DatePipe;
 
@@ -132,6 +131,6 @@ export class RequestService {
   }
 
   private buildUrl(): string {
-    return this.domain + this.controller;
+    return this.domain + this.area + this.controller;
   }
 } 

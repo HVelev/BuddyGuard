@@ -20,7 +20,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки без камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 2
+                Price = 7.99M
             },
             new Service()
             {
@@ -29,7 +29,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки с камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 3
+                Price = 13.99M
             },
             new Service()
             {
@@ -38,7 +38,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка без камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 1
+                Price = 4.99M
             },
             new Service()
             {
@@ -47,7 +47,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка с камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 2
+                Price = 7.99M
             },
             new Service()
             {
@@ -56,7 +56,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки без камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 4
+                Price = 15.99M
             },
             new Service()
             {
@@ -65,7 +65,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки с камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 9
+                Price = 23.99M
             },
             new Service()
             {
@@ -74,7 +74,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка без камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 11
+                Price = 9.99M
             },
             new Service()
             {
@@ -83,7 +83,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка с камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 3
+                Price = 13.99M
             },
             new Service()
             {
@@ -92,7 +92,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки без камера",
                 WalkLength = "Комбинирани (30мин + 60мин)",
                 IsForCustomer = false,
-                PriceId = 6
+                Price = 11.99M
             },
             new Service()
             {
@@ -101,7 +101,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки с камера",
                 WalkLength = "Комбинирани (30мин + 60мин)",
                 IsForCustomer = false,
-                PriceId = 8
+                Price = 18.99M
             },
             new Service()
             {
@@ -110,7 +110,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки без камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 6
+                Price = 11.99M
             },
             new Service()
             {
@@ -119,7 +119,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки с камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 8
+                Price = 18.99M
             },
             new Service()
             {
@@ -128,7 +128,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка без камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 2
+                Price = 7.99M
             },
             new Service()
             {
@@ -137,7 +137,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка с камера",
                 WalkLength = "30 минути",
                 IsForCustomer = false,
-                PriceId = 6
+                Price = 11.99M
             },
             new Service()
             {
@@ -146,7 +146,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки без камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 5
+                Price = 20.99M
             },
             new Service()
             {
@@ -155,7 +155,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки с камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 10
+                Price = 5.99M
             },
             new Service()
             {
@@ -164,7 +164,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка без камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 3
+                Price = 4.99M
             },
             new Service()
             {
@@ -173,7 +173,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Разходка с камера",
                 WalkLength = "60 минути",
                 IsForCustomer = false,
-                PriceId = 8
+                Price = 14.99M
             },
             new Service()
             {
@@ -182,7 +182,7 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки без камера",
                 IsForCustomer = false,
                 WalkLength = "Комбинирани (30мин + 60мин)",
-                PriceId = 7
+                Price = 16.99M
             },
             new Service()
             {
@@ -191,21 +191,21 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Две разходки с камера",
                 IsForCustomer = false,
                 WalkLength = "Комбинирани (30мин + 60мин)",
-                PriceId = 9
+                Price = 23.99M
             },
             new Service()
             {
                 Id = 21,
                 Name = "Еднократно ресане",
                 IsForCustomer = false,
-                PriceId = 17
+                Price = 4.99M
             },
             new Service()
             {
                 Id = 22,
                 Name = "Цялостно къпане",
                 IsForCustomer = false,
-                PriceId = 18
+                Price = 14.99M
             },
             new Service()
             {
@@ -213,35 +213,35 @@ namespace BuddyGuard.Core.Data.Configuration
                 AnimalTypeId = 3,
                 Name = "Разходка навън",
                 IsForCustomer = false,
-                PriceId = 19
+                Price = 5.99M
             },
             new Service()
             {
                 Id = 24,
                 Name = "Ветеринарен преглед",
                 IsForCustomer = false,
-                PriceId = 15
+                Price = 19.99M
             },
             new Service()
             {
                 Id = 25,
                 Name = "Събиране на поща",
                 IsForCustomer = true,
-                PriceId = 13
+                Price = 3.50M
             },
             new Service()
             {
                 Id = 26,
                 Name = "Посрещане/Изпращане на пратка",
                 IsForCustomer = true,
-                PriceId = 13
+                Price = 3.50M
             },
             new Service()
             {
                 Id = 27,
                 Name = "Еднократно поливане на цветя",
                 IsForCustomer = true,
-                PriceId = 14
+                Price = 2.99M
             });
         }
     }

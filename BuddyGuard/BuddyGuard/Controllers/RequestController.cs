@@ -1,16 +1,12 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Models;
 using BuddyGuard.Core.Services;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Web.Http.Filters;
 
 namespace BuddyGuard.Controllers
 {
+    [Area("User")]
     public class RequestController : Controller
     {
         private readonly IRequestService requestService;
@@ -129,6 +125,10 @@ namespace BuddyGuard.Controllers
         [HttpGet]
         public IActionResult GetAllUnreadRequests()
         {
+            var emailService = new MailService();
+
+            emailService.SendConfirmationEmail("kaloian_dankov@abv.bg");
+
             var result = requestService.GetAllRequests(true);
 
             return Ok(result);

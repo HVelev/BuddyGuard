@@ -22,9 +22,7 @@ namespace BuddyGuard.Core.Data.Models
         public string Name { get; set; }
 
         [Required]
-        public int PriceId { get; set; }
-
-        public Price Price { get; set; }
+        public decimal Price { get; set; }
 
         public IList<Request> Requests { get; set; }
     }

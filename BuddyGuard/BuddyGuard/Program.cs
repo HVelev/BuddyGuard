@@ -31,7 +31,7 @@ builder.Services.AddTransient<IRequestService, RequestsService>();
 builder.Services.AddTransient<IProcessRequestService, ProcessRequestService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<INomenclatureService, NomenclatureService>();
-builder.Services.AddTransient<IBuddiesService, BuddiesService>();
+builder.Services.AddTransient<IMailService, MailService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();

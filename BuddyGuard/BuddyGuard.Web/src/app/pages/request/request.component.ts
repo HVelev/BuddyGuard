@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -6,8 +6,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStep, MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
-import { forEach } from 'lodash';
-import { Moment } from 'moment';
+import { map, startWith } from 'rxjs';
 import { EditPetDTO } from '../../models/edit-pet.model';
 import { EditRequestDTO } from '../../models/edit-request.model';
 import { RequestService } from '../../services/request.service';
@@ -34,7 +33,7 @@ export const MY_DATE_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ]
 })
-export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit {
+export class RequestComponent implements OnInit, AfterViewInit {
   private service: RequestService;
   private snackbar: MatSnackBar;
   private router: Router;
@@ -47,6 +46,7 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
   public form: FormGroup;
   public animalTypes: NomenclatureDTO<number>[] = [];
   public locations: NomenclatureDTO<number>[] = [];
+  public locationOptions: NomenclatureDTO<number>[] = [];
   public clientServices: NomenclatureDTO<number>[] = [];
   public smallDogServices: NomenclatureDTO<number>[] = [];
   public smallDogWalkLengths: NomenclatureDTO<number>[] = [];
@@ -77,7 +77,7 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
     return this.form.get('dateLocationGroupControl') as FormGroup;
   }
 
-  constructor(service: RequestService,
+  public constructor(service: RequestService,
     private dateAdapter: DateAdapter<Date>,
     snackbar: MatSnackBar,
     router: Router
@@ -95,6 +95,7 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
     this.service.getLocations().subscribe({
       next: (value: NomenclatureDTO<number>[]) => {
         this.locations = value;
+        this.locationOptions = value;
       }
     });
 
@@ -151,7 +152,7 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
     this.snackbar = snackbar;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.dateLocationGroup.get('startDateControl')!.valueChanges.subscribe({
       next: (value: any) => {
         this.maxEndDate = value._d;
@@ -169,14 +170,17 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
         this.calculate();
       }
     });
-  }
 
-  ngAfterContentInit(): void {
-    this.form.get('customerServiceControl')!.valueChanges.subscribe({
-      next: (value: any) => {
-        debugger;
-      }
-    });
+    this.dateLocationGroup.get('locationControl')!.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filter(val))
+    )
+      .subscribe({
+        next: (value: NomenclatureDTO<number>[]) => {
+          this.locations = value;
+        }
+      });
   }
 
   ngAfterViewInit(): void {
@@ -285,9 +289,12 @@ export class RequestComponent implements OnInit, AfterContentInit, AfterViewInit
     return data && data.displayName ? data.displayName : '';
   }
 
+  public filter(val: string): NomenclatureDTO<number>[] {
+    return this.locationOptions.filter(location =>
+      location.displayName.toLowerCase().includes(val));
+  }
+
   public submitForm() {
-
-
     if (this.form.valid) {
       const dateLocationGroup = this.form.controls['dateLocationGroupControl'];
 

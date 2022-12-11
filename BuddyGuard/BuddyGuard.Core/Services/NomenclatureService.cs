@@ -1,5 +1,6 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -37,13 +38,12 @@ namespace BuddyGuard.Core.Services
                                                  where service.AnimalTypeId == 3
                                                  || (!service.IsForCustomer
                                                     && !service.AnimalTypeId.HasValue)
-                                                 join price in db.Prices on service.PriceId equals price.Id
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
                                                  {
                                                      Value = service.Id,
                                                      DisplayName = service.Name,
-                                                     Price = price.Amount
+                                                     Price = service.Price
                                                  }).ToList();
 
             return catServices;
@@ -53,13 +53,12 @@ namespace BuddyGuard.Core.Services
         {
             List<NomenclatureDTO<int>> clientServices = (from service in db.Services
                                                  where service.IsForCustomer
-                                                 join price in db.Prices on service.PriceId equals price.Id
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
                                                  {
                                                      Value = service.Id,
                                                      DisplayName = service.Name,
-                                                     Price = price.Amount
+                                                     Price = service.Price
                                                  }).ToList();
 
             return clientServices;
@@ -70,13 +69,12 @@ namespace BuddyGuard.Core.Services
             List<NomenclatureDTO<int>> dogServices = (from service in db.Services
                                                  where (service.AnimalTypeId == 1 && service.WalkLength == null)
                                                  || (!service.IsForCustomer && !service.AnimalTypeId.HasValue)
-                                                 join price in db.Prices on service.PriceId equals price.Id
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
                                                  {
                                                      Value = service.Id,
                                                      DisplayName = service.Name,
-                                                     Price = price.Amount
+                                                     Price = service.Price
                                                  }).ToList();
 
             return dogServices;
@@ -86,13 +84,12 @@ namespace BuddyGuard.Core.Services
         {
             List<NomenclatureDTO<int>> dogServices = (from service in db.Services
                                                       where service.AnimalTypeId == 1 && service.WalkLength != null
-                                                      join price in db.Prices on service.PriceId equals price.Id
                                                       orderby service.Name
                                                       select new NomenclatureDTO<int>
                                                       {
                                                           Value = service.Id,
                                                           DisplayName = $"{service.Name} - {service.WalkLength}",
-                                                          Price = price.Amount
+                                                          Price = service.Price
                                                       }).ToList();
 
             return dogServices;
@@ -103,13 +100,12 @@ namespace BuddyGuard.Core.Services
             List<NomenclatureDTO<int>> dogServices = (from service in db.Services
                                                  where (service.AnimalTypeId == 2 && service.WalkLength == null)
                                                  || (!service.IsForCustomer && !service.AnimalTypeId.HasValue)
-                                                 join price in db.Prices on service.PriceId equals price.Id
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
                                                  {
                                                      Value = service.Id,
                                                      DisplayName = service.Name,
-                                                     Price = price.Amount
+                                                     Price = service.Price
                                                  }).ToList();
 
             return dogServices;
@@ -119,13 +115,12 @@ namespace BuddyGuard.Core.Services
         {
             List<NomenclatureDTO<int>> dogServices = (from service in db.Services
                                                       where service.AnimalTypeId == 2 && service.WalkLength != null
-                                                      join price in db.Prices on service.PriceId equals price.Id
                                                       orderby service.Name
                                                       select new NomenclatureDTO<int>
                                                       {
                                                           Value = service.Id,
                                                           DisplayName = $"{service.Name} - {service.WalkLength}",
-                                                          Price = price.Amount
+                                                          Price = service.Price
                                                       }).ToList();
 
             return dogServices;
@@ -134,13 +129,12 @@ namespace BuddyGuard.Core.Services
         public List<NomenclatureDTO<int>> LocationsNomenclatures()
         {
             List<NomenclatureDTO<int>> locations = (from location in db.Locations
-                                               join price in db.Prices on location.PriceId equals price.Id
                                                orderby location.Name
                                                select new NomenclatureDTO<int>
                                                {
                                                    Value = location.Id,
                                                    DisplayName = location.Name,
-                                                   Price = price.Amount
+                                                   Price = location.Price
                                                }).ToList();
 
             return locations;

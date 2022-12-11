@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BuddyGuard.API.Controllers
 {
+    [Area("Shared")]
     public class RegisterController : Controller
     {
         private readonly UserManager<User> userManager;

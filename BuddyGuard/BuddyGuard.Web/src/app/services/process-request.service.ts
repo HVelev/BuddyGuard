@@ -8,7 +8,8 @@ import { EditRequestDTO } from '../models/edit-request.model';
 })
 export class ProcessRequestService {
   private http: HttpClient;
-  private controller = 'ProcessRequest';
+    private controller = '/ProcessRequest';
+    private area = 'Admin';
   private domain = 'https://localhost:7285/';
 
 
@@ -23,6 +24,6 @@ export class ProcessRequestService {
   }
 
   private buildUrl(): string {
-    return this.domain + this.controller;
+      return this.domain + this.area + this.controller;
   }
 }
