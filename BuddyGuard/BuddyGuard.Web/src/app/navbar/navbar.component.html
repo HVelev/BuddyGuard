@@ -10,7 +10,7 @@
           </div>
         </div>
         <div>
-          <button class="brown navbtn" *ngIf="role !== 'Admin'" routerLink="/about"><span>Разбери повече</span></button>
+          <button class="brown navbtn" *ngIf="role !== 'Admin'"><span>Разбери повече</span></button>
           <button class="brown navbtn" routerLink="/buddies" *ngIf="role">Buddies</button>
           <button matBadge="{{ notifications.length }}" matBadgeSize="medium" [matBadgeHidden]="notifications.length === 0" *ngIf="role === 'Admin'" class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
           <button *ngIf="!role ?? true" class="brown navbtn" routerLink="login"><span>Влез</span></button>
@@ -47,7 +47,7 @@
   </div>
   <mat-sidenav-container style="left: -7px;" autosize>
     
-    <mat-sidenav-content fxFlexLayout="center end">
+    <mat-sidenav-content @flyInOut fxFlexLayout="center end">
 
       <mat-icon (click)="scrollUp()" class="transform" color="accent">keyboard_arrow_up</mat-icon>
 <app-sidenav [events]="eventsSubject.asObservable()">

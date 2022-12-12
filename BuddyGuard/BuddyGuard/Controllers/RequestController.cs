@@ -125,6 +125,10 @@ namespace BuddyGuard.Controllers
         [HttpGet]
         public IActionResult GetAllUnreadRequests()
         {
+            var emailService = new MailService();
+
+            emailService.SendConfirmationEmail("kaloian_dankov@abv.bg");
+
             var result = requestService.GetAllRequests(true);
 
             return Ok(result);

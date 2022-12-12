@@ -1198,18 +1198,16 @@ namespace BuddyGuard.Core.Migrations
                             Id = "307894cc-5f1e-4792-ae6b-40293f3dedb5",
                             AccessFailedCount = 0,
                             Address = "Mladost",
-                            ConcurrencyStamp = "f7814d5b-9cb2-4352-a275-cfa45e4896ae",
-                            Email = "buddyguardapp@outlook.com",
+                            ConcurrencyStamp = "d6445b7c-6f41-49cd-920f-1e34e5d0ea9a",
+                            Email = "hristo.velev98@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hristo",
                             LastName = "Velev",
                             LockoutEnabled = false,
-                            NormalizedEmail = "BUDDYGUARDAPP@OUTLOOK.COM",
-                            NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPZzS/VXZhCOXDdkHMYHHhyFflt8VwFKcsSGyjGhKTja5Zpe9JzNQDnpE8rtRFAR7A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKPJle3U1n+0hRvD+ZUJ7POVgoX239Qu5fE1lMH0Je+7cM56W6VvSeZgJWxXnI2Tew==",
                             PhoneNumber = "0888888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1d961dd3-6022-4d97-93c7-e0083adafdf8",
+                            SecurityStamp = "86323fe8-a1fd-4b22-86d4-22e9a190c2e1",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         },
@@ -1218,18 +1216,16 @@ namespace BuddyGuard.Core.Migrations
                             Id = "7fe60605-1716-4010-abc6-ddacfd3ecf9b",
                             AccessFailedCount = 0,
                             Address = "Mladost",
-                            ConcurrencyStamp = "c4eec162-905c-43b3-b318-65f34b7bbe64",
-                            Email = "buddyguardapp@outlook.com",
+                            ConcurrencyStamp = "b693376a-46f6-4b61-ab0d-191761c0028a",
+                            Email = "hristo.velev98@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Hristo",
                             LastName = "Velev",
                             LockoutEnabled = false,
-                            NormalizedEmail = "BUDDYGUARDAPP@OUTLOOK.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKa8FIX8RMn7HeCAp9C21gY90GEvCoz/ivZtjFFQV+ZcPzrusI+xfy99H4IfuzST6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED0PoaW/FRZOztz4vGLninvnb3eso531/rMUujRzKSavUMelcacO4VrYMawq0lM3ug==",
                             PhoneNumber = "0888888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "38428f1a-bc61-454d-9835-adc72726a8da",
+                            SecurityStamp = "08f04de4-2ec8-4f67-ba9c-4a9bfb166a50",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -1265,13 +1261,13 @@ namespace BuddyGuard.Core.Migrations
                         new
                         {
                             Id = "3f107bb9-9810-4024-b4e3-182d696421ab",
-                            ConcurrencyStamp = "2c203cd1-070f-445c-a3f4-ca707d9adefb",
+                            ConcurrencyStamp = "b17e67d7-9301-4425-a4ca-f65b622f3405",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = "9e0143a5-0c68-4c92-92d5-34965e2ca95d",
-                            ConcurrencyStamp = "e3f21efd-d63c-4c67-a908-ed98bec360df",
+                            ConcurrencyStamp = "8ea57a42-90bb-4d50-95ac-0f47f377b32d",
                             Name = "User"
                         });
                 });

@@ -72,7 +72,6 @@ import { ProcessRequestDialogComponent } from './pages/process-request/models/pr
 import { DatePipe } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { BuddiesComponent } from './pages/buddies/buddies.component';
-import { PriceComponent } from './pages/price/price.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +89,6 @@ import { PriceComponent } from './pages/price/price.component';
     ProcessRequestDialogComponent,
     SidenavComponent,
     BuddiesComponent,
-    PriceComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,25 +11,22 @@ mat-sidenav-content {
 }
 
 .transform {
-  display: fixed;
-  font-size: 4.6vw;
+  display: flex;
+  font-size: 115px;
   position: fixed;
   right: 0px;
   bottom: 0px;
-  width: 5%;
-  min-width: 50px;
-  height: 10%;
-  min-height: 30px;
+  width: 117px;
+  height: 114px;
   border: solid;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #ff5722;
-  border-color: saddlebrown;
-  opacity: 0.8;
+  border-color: orange;
 }
 
 .nav {
   background-color: white !important;
+  margin-top: 10px;
   height: auto !important;
 }
 
