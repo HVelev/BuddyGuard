@@ -17,12 +17,14 @@ namespace BuddyGuard.Core.Data.Configuration
             builder.HasData(new IdentityRole()
             {
                 Id = "3f107bb9-9810-4024-b4e3-182d696421ab",
-                Name = "Admin"
+                Name = "Admin",
+                NormalizedName = "ADMIN"
             },
             new IdentityRole()
             {
                 Id = "9e0143a5-0c68-4c92-92d5-34965e2ca95d",
-                Name = "User"
+                Name = "User",
+                NormalizedName = "USER"
             });
         }
     }

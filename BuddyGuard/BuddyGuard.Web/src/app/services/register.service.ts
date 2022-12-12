@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { LoginDTO } from "../models/login.model";
 import { RegisterDTO } from "../models/register.model";
+import { StringNomenclatureDTO } from "../shared/models/string-nomenclature-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,12 @@ export class RegisterService {
         'Content-Type': 'application/json'
       })
     });
+  }
+
+  public getRoles(): Observable<StringNomenclatureDTO[]> {
+    const url = this.buildUrl() + '/GetRoles';
+
+    return this.http.get<StringNomenclatureDTO[]>(url, {});
   }
 
   private buildUrl(): string {

@@ -1,60 +1,3 @@
-<!--<div class="container">
-  <div *ngFor="let progressInfo of progressInfos">
-    <span>{{ progressInfo.fileName }}</span>
-    <mat-toolbar class="progress-bar">
-      <mat-progress-bar color="accent"
-                        [value]="progressInfo.value"></mat-progress-bar>
-      <span class="progress">{{ progressInfo.value }}%</span>
-    </mat-toolbar>
-  </div>
-
-  <mat-form-field>
-    <div>
-      <mat-toolbar>
-        <input matInput readonly [value]="selectedFileNames.length ? selectedFileNames : 'Select Images'" />
-
-        <button style="z-index: 2;"
-                mat-flat-button
-                color="primary"
-                [disabled]="!selectedFiles"
-                (click)="uploadFiles()">
-          Upload
-        </button>
-      </mat-toolbar>
-
-      <input style="width: 100%; z-index: 1;"
-             type="file"
-             id="fileInput"
-             name="fileInput"
-             accept="image/*" multiple
-             (change)="selectFiles($event)" />
-    </div>
-  </mat-form-field>
-
-  <div>
-    <img *ngFor='let preview of previews' [src]="preview" class="preview">
-  </div>
-
-  <div *ngIf="message.length" class="message">
-    <ul *ngFor="let msg of message; let i = index">
-      <li>{{ msg }}</li>
-    </ul>
-  </div>
-
-  <mat-card class="list-card">
-    <mat-card-header fxLayoutAlign="center">
-      <mat-card-title>Приятелчета, за които сме се грижили</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list role="list">
-        <mat-list-item role="listitem" class="list-item">
-          <img [src]="images[0]" />
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
-
-</div>-->
 <div class="container" *ngIf="role && role === 'Admin'" [formGroup]="form">
   <mat-card class="add-photo-card" fxLayout="column">
     <div fxLayoutAlign="center center">
@@ -86,16 +29,6 @@
 </div>
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
   <h2 class="brown"><strong>Приятелчета, за които сме се грижили:</strong></h2>
-  <!--<div fxLayout="row wrap" fxLayoutAlign="end">
-    <div class="mt" fxFlex="30" *ngFor="let image of images">
-      <div fxLayoutAlign="space-between">
-        <button mat-mini-fab color="accent">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-      <img fxFlex="70" [src]="image.link" alt="Alternate Text" />
-    </div>
-  </div>-->
   <div class="d-flex flex-wrap" fxLayoutAlign="center">
     <div *ngFor="let img of images" class="card m-3">
       <button mat-mini-fab color="accent" (click)="deleteImage(img.id)">

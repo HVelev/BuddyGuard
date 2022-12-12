@@ -22,7 +22,7 @@ export class RequestDTO {
 
   public location!: string;
 
-  public exactLocation!: string;
+  public address!: string;
 
   public meetingDate?: Date;
 

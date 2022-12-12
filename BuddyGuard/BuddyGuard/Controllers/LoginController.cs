@@ -3,11 +3,14 @@ using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using BuddyGuard.Core.Services;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -20,13 +23,15 @@ namespace BuddyGuard.API.Controllers
         private SignInManager<User> signInManager;
         private UserManager<User> userManager;
         private BuddyguardDbContext dbContext;
+        private IHttpContextAccessor contextAccessor;
 
-        public LoginController(IConfiguration config, SignInManager<User> signInManager, UserManager<User> userManager, BuddyguardDbContext dbContext)
+        public LoginController(IConfiguration config, SignInManager<User> signInManager, UserManager<User> userManager, BuddyguardDbContext dbContext, IHttpContextAccessor contextAccessor)
         {
             _config = config;
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.dbContext = dbContext;
+            this.contextAccessor = contextAccessor;
         }
 
         [AllowAnonymous]
@@ -49,12 +54,17 @@ namespace BuddyGuard.API.Controllers
 
                 if (result.Succeeded)
                 {
+                    List<Claim> claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Role, role.Name)
+                    };
+
                     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
                     var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                       _config["Jwt:Issuer"],
-                      null,
+                      claims,
                       expires: DateTime.Now.AddMinutes(120),
                       signingCredentials: credentials);
 
@@ -86,10 +96,11 @@ namespace BuddyGuard.API.Controllers
         {
             try
             {
+                var isInRole = User.IsInRole("User");
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_config["Jwt:SecretKey"]);
                 var securityKey = Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]);
-                var idk = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                var claim = tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     ValidAudience = _config["Jwt:Audience"],
@@ -101,6 +112,60 @@ namespace BuddyGuard.API.Controllers
                 var jwtToken = (JwtSecurityToken)validatedToken;
 
                 return Ok(true);
+            }
+            catch
+            {
+                return Ok(false);
+            }
+        }
+
+        public async Task<IActionResult> IsLoggedInAsUser(string token)
+        {
+            try
+            {
+                var isInRole = User.IsInRole("User");
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_config["Jwt:SecretKey"]);
+                var securityKey = Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]);
+                var claim = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidAudience = _config["Jwt:Audience"],
+                    ValidIssuer = _config["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(securityKey),
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                return Ok(true && isInRole);
+            }
+            catch
+            {
+                return Ok(false);
+            }
+        }
+        
+        public IActionResult IsLoggedInAsAdmin(string token)
+        {
+            try
+            {
+                var isInRole = User.IsInRole("Admin");
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_config["Jwt:SecretKey"]);
+                var securityKey = Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]);
+                var claim = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidAudience = _config["Jwt:Audience"],
+                    ValidIssuer = _config["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(securityKey),
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                return Ok(true && isInRole);
             }
             catch
             {

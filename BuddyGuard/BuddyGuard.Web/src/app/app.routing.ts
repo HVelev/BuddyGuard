@@ -3,6 +3,7 @@ import { AppComponent } from "./app.component";
 import { AuthGuard } from "./guards/auth-guard.guard";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AboutComponent } from "./pages/about/about.component";
+import { AcceptRequestsComponent } from "./pages/accept-requests/accept-requests.component";
 import { BuddiesComponent } from "./pages/buddies/buddies.component";
 import { IndexComponent } from "./pages/index/index.component";
 import { LoginComponent } from "./pages/login/login.component";
@@ -15,23 +16,31 @@ export const appRoutes: Routes = [
 
   {
     path: 'index',
-    component: IndexComponent
+    component: IndexComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'process-request',
-    component: ProcessRequestComponent
+    component: ProcessRequestComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'accept-requests',
+    component: AcceptRequestsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'request',
@@ -41,15 +50,17 @@ export const appRoutes: Routes = [
   },
   {
     path: 'price',
-    component: PriceComponent
+    component: PriceComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'buddies',
-    component: BuddiesComponent
+    component: BuddiesComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '',
-    component: IndexComponent
+    component: IndexComponent,
   }
 
 ]

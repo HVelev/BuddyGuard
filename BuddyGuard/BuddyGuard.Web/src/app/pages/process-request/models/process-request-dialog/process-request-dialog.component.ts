@@ -1,7 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EditRequestDTO } from '../../../../models/edit-request.model';
 import { RequestDTO } from '../../../../models/request.model';
 import { RequestService } from '../../../../services/request.service';
 
@@ -12,6 +12,7 @@ import { RequestService } from '../../../../services/request.service';
 })
 export class ProcessRequestDialogComponent implements OnInit {
   private service: RequestService;
+  private datePipe: DatePipe;
 
   public form: FormGroup;
   public animals: FormArray = new FormArray([new FormGroup({
@@ -23,20 +24,23 @@ export class ProcessRequestDialogComponent implements OnInit {
     descriptionControl: new FormControl()
   })]);
 
-  constructor(
+  public constructor(
     public dialogRef: MatDialogRef<ProcessRequestDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RequestDTO,
-    service: RequestService
+    service: RequestService,
+    datePipe: DatePipe
   ) {
+    this.datePipe = datePipe;
+
     this.form = new FormGroup({
       nameControl: new FormControl(data.firstName),
       phoneControl: new FormControl(data.phone),
       locationControl: new FormControl(data.location),
-      exactLocationControl: new FormControl(data.exactLocation),
+      addressControl: new FormControl(data.address),
       emailControl: new FormControl(data.email),
-      startDateControl: new FormControl(data.startDate),
-      endDateControl: new FormControl(data.endDate),
-      meetingDateControl: new FormControl(data.meetingDate),
+      startDateControl: new FormControl(this.datePipe.transform(data.startDate, 'dd/MM/YYYY')),
+      endDateControl: new FormControl(this.datePipe.transform(data.endDate, 'dd/MM/YYYY')),
+      meetingDateControl: new FormControl(data.meetingDate ?? 'Неуточнено'),
       customerServiceControl: new FormControl(data.clientServices),
       commentControl: new FormControl(data.comment),
       priceControl: new FormControl(data.price),
@@ -46,18 +50,14 @@ export class ProcessRequestDialogComponent implements OnInit {
     this.service = service;
   }
 
-  public get FormArrayControls(): FormArray {
+  public get formArrayControls(): FormArray {
     return this.form.get('animalArrayControl') as FormArray;
   }
 
-  ngOnInit(): void {
-    this.fillForm();
-
+  public ngOnInit(): void {
     this.animals.clear();
 
     for (let pet of this.data.pets) {
-      console.log(pet.services);
-
       this.animals.push(new FormGroup({
         nameControl: new FormControl(pet.name),
         animalTypeControl: new FormControl(pet.animalType),
@@ -69,16 +69,8 @@ export class ProcessRequestDialogComponent implements OnInit {
     }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   public isOthersSelected(index: number): boolean | undefined {
-    if (!this.FormArrayControls.at(index).get('animalTypeControl')) {
-      return undefined;
-    }
-
-    if (!this.FormArrayControls.at(index).get('animalTypeControl')!.value) {
+    if (!this.formArrayControls.at(index).get('animalTypeControl') || !this.formArrayControls.at(index).get('animalTypeControl')!.value) {
       return undefined;
     }
 
@@ -93,15 +85,15 @@ export class ProcessRequestDialogComponent implements OnInit {
     });
   }
 
+  public rejectRequest() {
+    this.service.rejectRequest(this.data.id).subscribe({
+      next: () => {
+        this.dialogRef.close();
+      }
+    });
+  }
+
   public close() {
     this.dialogRef.close();
   }
-
-  private fillForm() {
-    //this.form.get('nameControl')?.setValue(this.data.name);
-    //this.form.get('phoneControl')?.setValue(this.data.phone);
-    //this.form.get('emailControl')?.setValue(this.data.email);
-    //this.form.get('locationControl')?.setValue(this.data.location);
-  }
-
 }

@@ -5,6 +5,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { RegisterDTO } from '../../models/register.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { StringNomenclatureDTO } from '../../shared/models/string-nomenclature-dto';
 
 @Component({
   selector: 'app-register',
@@ -17,8 +18,9 @@ export class RegisterComponent implements OnInit {
   private router: Router;
 
   public form: FormGroup;
+  public roles: StringNomenclatureDTO[] = [];
 
-  constructor(service: RegisterService,
+  public constructor(service: RegisterService,
     snackbar: MatSnackBar,
     router: Router
   ) {
@@ -41,7 +43,12 @@ export class RegisterComponent implements OnInit {
     this.router = router;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.service.getRoles().subscribe({
+      next: (value: StringNomenclatureDTO[]) => {
+        this.roles = value;
+      }
+    });
   }
 
   public register(): void {
@@ -53,7 +60,7 @@ export class RegisterComponent implements OnInit {
       lastName: this.form.get('lastNameControl')!.value,
       phone: this.form.get('phoneControl')!.value,
       password: this.form.get('passwordControl')!.value,
-      role: this.form.get('roleControl')!.value,
+      role: this.form.get('roleControl')!.value!.displayName,
     });
 
     this.service.register(formDTO).subscribe({
@@ -71,7 +78,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  passwordMatchingValidatior: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  private passwordMatchingValidatior: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('passwordControl');
     const confirmPassword = control.get('confirmPasswordControl');
 

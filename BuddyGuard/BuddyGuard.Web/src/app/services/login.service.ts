@@ -38,6 +38,20 @@ export class LoginService {
     return this.http.get<boolean>(url, { params: httpParams });
   }
 
+  public isLoggedInAsUser(token: string): Observable<boolean> {
+    const url = this.buildUrl() + '/IsLoggedInAsUser';
+    const httpParams = new HttpParams().append('token', token);
+
+    return this.http.get<boolean>(url, { params: httpParams });
+  }
+
+  public isLoggedInAsAdmin(token: string): Observable<boolean> {
+    const url = this.buildUrl() + '/IsLoggedInAsAdmin';
+    const httpParams = new HttpParams().append('token', token);
+
+    return this.http.get<boolean>(url, { params: httpParams });
+  }
+
   public logout(): void {
     sessionStorage.clear();
   }

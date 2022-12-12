@@ -1,4 +1,5 @@
-﻿using BuddyGuard.Core.Models;
+﻿using BuddyGuard.Core.Data.Models;
+using BuddyGuard.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuddyGuard.Core.Contracts
@@ -11,11 +12,11 @@ namespace BuddyGuard.Core.Contracts
 
         List<RequestDTO> GetAllRequests(bool isForNotif);
 
-        void DeleteRequest(int id);
+        string DeleteRequest(int id);
 
         public void MarkRequestAsRead(int id);
 
-        public void AcceptRequest(int id);
+        public string AcceptRequest(int id);
 
     }
 }

@@ -4,7 +4,11 @@ mat-sidenav {
     box-shadow: none !important;
 }
 
-.sidebtn {
-    position: fixed;
-    margin: 0;
+.btn {
+  color: white;
+  font-size: 18px;
+  width: 200px;
+  border: none;
+  cursor: pointer;
+  border-radius: 35px;
 }

@@ -11,13 +11,13 @@ export class IndexComponent implements OnInit {
 
   public role: string | null;
 
-  constructor(loginService: LoginService) {
+  public constructor(loginService: LoginService) {
     this.loginService = loginService;
 
     this.role = sessionStorage.getItem('role');
 }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loginService.onUserLogin.subscribe({
       next: (value: string) => {
         this.role = value;

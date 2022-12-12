@@ -69,7 +69,7 @@ export class RequestComponent implements OnInit, AfterViewInit {
     descriptionControl: new FormControl()
   })]);
 
-  public get FormArrayControls(): FormArray {
+  public get formArrayControls(): FormArray {
     return this.form.get('animalArrayControl') as FormArray;
   }
 
@@ -141,7 +141,8 @@ export class RequestComponent implements OnInit, AfterViewInit {
         startDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
         endDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
         meetingDateControl: new FormControl(),
-        locationControl: new FormControl(undefined, Validators.required)
+        locationControl: new FormControl(undefined, Validators.required),
+        addressControl: new FormControl(undefined, Validators.required)
       }),
       customerServiceControl: new FormControl(),
       commentControl: new FormControl()
@@ -175,7 +176,7 @@ export class RequestComponent implements OnInit, AfterViewInit {
       .pipe(
         startWith(''),
         map(val => this.filter(val))
-    )
+      )
       .subscribe({
         next: (value: NomenclatureDTO<number>[]) => {
           this.locations = value;
@@ -202,7 +203,7 @@ export class RequestComponent implements OnInit, AfterViewInit {
   public calculate() {
     this.finalPrice = 0;
 
-    for (let control of this.FormArrayControls.controls) {
+    for (let control of this.formArrayControls.controls) {
       if (control.get('dogWalkLengthControl')!.value) {
         this.finalPrice += control.get('dogWalkLengthControl')!.value.price;
       }
@@ -214,7 +215,7 @@ export class RequestComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.finalPrice += this.getDays(this.form.get('dateLocationGroupControl')!.get('startDateControl')!.value, this.form.get('dateLocationGroupControl')!.get('endDateControl')!.value) * 9.99 * this.FormArrayControls.length;
+    this.finalPrice += this.getDays(this.form.get('dateLocationGroupControl')!.get('startDateControl')!.value, this.form.get('dateLocationGroupControl')!.get('endDateControl')!.value) * 9.99 * this.formArrayControls.length;
 
     this.finalPrice += this.form.get('dateLocationGroupControl')!.get('locationControl')!.value.price;
 
@@ -246,15 +247,11 @@ export class RequestComponent implements OnInit, AfterViewInit {
     (this.form.get('animalArrayControl')! as FormArray).at(0).get('animalTypeControl')!.markAsPristine();
   }
 
-  public click(event: any) {
-    debugger;
-  }
-
   public onAnimalTypeSelectionChange(event: MatSelectChange, index: number) {
-    this.FormArrayControls.at(index).get('speciesControl')!.reset();
-    this.FormArrayControls.at(index).get('animalServiceControl')!.reset();
-    this.FormArrayControls.at(index).get('dogWalkLengthControl')!.reset();
-    this.FormArrayControls.at(index).get('descriptionControl')!.reset();
+    this.formArrayControls.at(index).get('speciesControl')!.reset();
+    this.formArrayControls.at(index).get('animalServiceControl')!.reset();
+    this.formArrayControls.at(index).get('dogWalkLengthControl')!.reset();
+    this.formArrayControls.at(index).get('descriptionControl')!.reset();
 
     this.currentlySelectedPet = event.value.displayName;
 
@@ -278,11 +275,11 @@ export class RequestComponent implements OnInit, AfterViewInit {
   }
 
   public isOthersSelected(index: number): boolean | undefined {
-    if (!this.FormArrayControls.at(index).get('animalTypeControl')!.value) {
+    if (!this.formArrayControls.at(index).get('animalTypeControl')!.value) {
       return undefined;
     }
 
-    return this.FormArrayControls.at(index).get('animalTypeControl')!.value.displayName === 'Друго';
+    return this.formArrayControls.at(index).get('animalTypeControl')!.value.displayName === 'Друго';
   }
 
   public displayFn(data: NomenclatureDTO<number>): string {
@@ -317,8 +314,8 @@ export class RequestComponent implements OnInit, AfterViewInit {
 
         pet.name = group.get('nameControl')!.value;
         pet.species = group.get('speciesControl')!.value;
-        pet.petDescription = group.get('descriptionControl')!.value,
-          pet.animalTypeId = group.get('animalTypeControl')!.value?.value ?? group.get('animalTypeControl')!.value;
+        pet.petDescription = group.get('descriptionControl')!.value;
+        pet.animalTypeId = group.get('animalTypeControl')!.value?.value ?? group.get('animalTypeControl')!.value;
         pet.services = [];
 
         if (group.get('animalServiceControl')!.value && Array.isArray(group.get('animalServiceControl')!.value)) {
@@ -337,9 +334,13 @@ export class RequestComponent implements OnInit, AfterViewInit {
 
       const startDate: Date = new Date(dateLocationGroup.get('startDateControl')!.value);
       const endDate: Date = new Date(dateLocationGroup.get('endDateControl')!.value);
-      const meetingDate: Date = new Date(dateLocationGroup.get('meetingDateControl')!.value);
+      const meetingDate: Date | undefined = dateLocationGroup.get('meetingDateControl')!.value ? new Date(dateLocationGroup.get('meetingDateControl')!.value) : undefined;
+      const location: number = dateLocationGroup.get('locationControl')!.value!.value;
+      const address: string = dateLocationGroup.get('addressControl')!.value;
+
       const form = new EditRequestDTO({
-        locationId: dateLocationGroup.get('locationControl')!.value?.value ?? dateLocationGroup.get('locationControl')!.value,
+        locationId: location,
+        address: address,
         startDate: startDate,
         endDate: endDate,
         isAccepted: false,

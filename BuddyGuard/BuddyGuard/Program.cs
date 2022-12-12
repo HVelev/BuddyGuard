@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using RequestsService = BuddyGuard.Core.Services.RequestsService;
 
@@ -35,16 +37,17 @@ builder.Services.AddTransient<IMailService, MailService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
-IdentityBuilder identityBuilder = builder.Services.AddIdentityCore<User>(options =>
+
+builder.Services.AddHttpContextAccessor();
+
+IdentityBuilder identityBuilder = builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
     options.SignIn.RequireConfirmedEmail = false;
-});
+}).AddEntityFrameworkStores<BuddyguardDbContext>();
 
-identityBuilder = new IdentityBuilder(identityBuilder.UserType, identityBuilder.Services);
-
-identityBuilder.AddEntityFrameworkStores<BuddyguardDbContext>();
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, UserClaimsPrincipalFactory<User, IdentityRole>>();
 
 identityBuilder.AddSignInManager<SignInManager<User>>();
 
@@ -63,6 +66,8 @@ builder.Services.AddCors(service =>
             .AllowAnyMethod();
         });
 });
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 builder.Services.AddAuthentication(options =>
 {

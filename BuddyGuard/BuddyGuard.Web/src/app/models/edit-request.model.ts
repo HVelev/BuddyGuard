@@ -9,6 +9,8 @@ export class EditRequestDTO {
 
   public locationId!: number;
 
+  public address!: string;
+
   public totalAmount!: number;
 
   public startDate!: Date;

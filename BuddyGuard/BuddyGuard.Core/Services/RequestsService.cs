@@ -26,6 +26,7 @@ namespace BuddyGuard.Core.Services
             var request = new Request
             {
                 LocationId = form.LocationId,
+                Address = form.Address,
                 UserId = form.UserId,
                 StartDate = form.StartDate,
                 EndDate = form.EndDate,
@@ -97,6 +98,7 @@ namespace BuddyGuard.Core.Services
                                       Email = user.Email,
                                       Phone = user.PhoneNumber,
                                       Location = location.Name,
+                                      Address = requestDb.Address,
                                       StartDate = requestDb.StartDate,
                                       EndDate = requestDb.EndDate,
                                       SentDate = requestDb.RequestSentDate,
@@ -155,21 +157,25 @@ namespace BuddyGuard.Core.Services
             dbContext.SaveChanges();
         }
 
-        public void AcceptRequest(int id)
+        public string AcceptRequest(int id)
         {
             var request = dbContext.Requests.Where(x => x.Id == id).First();
             request.IsAccepted = true;
 
             dbContext.SaveChanges();
+
+            return dbContext.Users.Where(x => x.Id == request.UserId).First().Email;
         }
 
-        public void DeleteRequest(int id)
+        public string DeleteRequest(int id)
         {
             var entity = dbContext.Requests.Where(x => x.Id == id).First();
 
             dbContext.Requests.Remove(entity);
 
             dbContext.SaveChanges();
+
+            return dbContext.Users.Where(x => x.Id == entity.UserId).First().Email;
         }
     }
 }

@@ -15,11 +15,14 @@ namespace BuddyGuard.Controllers
 
         private readonly INomenclatureService nomenclatureService;
 
-        public RequestController(IRequestService requestService, IUserService userService, INomenclatureService nomenclatureService)
+        private readonly IMailService mailService;
+
+        public RequestController(IRequestService requestService, IUserService userService, INomenclatureService nomenclatureService, IMailService mailService)
         {
             this.requestService = requestService;
             this.userService = userService;
             this.nomenclatureService = nomenclatureService;
+            this.mailService = mailService;
         }
 
         [Authorize]
@@ -143,7 +146,20 @@ namespace BuddyGuard.Controllers
         [HttpPut]
         public IActionResult AcceptRequest([FromQuery] int id)
         {
-            requestService.AcceptRequest(id);
+            var email = requestService.AcceptRequest(id);
+
+            mailService.SendConfirmationEmail(email);
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpDelete]
+        public IActionResult RejectRequest([FromQuery] int id)
+        {
+            var email = requestService.DeleteRequest(id);
+
+            mailService.SendRejectionEmail(email);
 
             return Ok();
         }

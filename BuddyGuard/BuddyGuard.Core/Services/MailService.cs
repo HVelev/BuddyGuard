@@ -32,7 +32,26 @@ namespace BuddyGuard.Core.Services
 
         public void SendRejectionEmail(string recipient)
         {
-            throw new NotImplementedException();
+            MailAddress to = new MailAddress(recipient);
+            MailAddress from = new MailAddress("buddyguardapp@outlook.com");
+            MailMessage message = new MailMessage(from, to);
+            message.Subject = "Отказана заявка 🐶";
+            message.Body = "Здравейте,\r\n\r\nВашата заявка е отказана. В момента няма свободни гледачи, които да поемат грижите за домашния Ви любимец. Извиняваме се за причиненото неудобтсво!\r\n\r\nПоздрави,\r\nBuddyguard";
+            SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587)
+            {
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential("buddyguardapp@outlook.com", "buddyguard123"),
+                EnableSsl = true
+            };
+            // code in brackets above needed if authentication required
+            try
+            {
+                client.Send(message);
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

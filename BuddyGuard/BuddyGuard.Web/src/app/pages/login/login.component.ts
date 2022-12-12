@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(service: LoginService, router: Router, snackbar: MatSnackBar)
+  public constructor(service: LoginService, router: Router, snackbar: MatSnackBar)
   {
     this.service = service;
     this.form = new FormGroup({
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.snackbar = snackbar;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
   public login(): void {

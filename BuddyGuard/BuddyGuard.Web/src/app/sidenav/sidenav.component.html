@@ -1,12 +1,12 @@
 <mat-sidenav-container autosize>
   <mat-sidenav fullscreen style="background-color: transparent; border: hidden;" #snav
                mode="push">
-    <div class="mt" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
       <mat-chip *ngIf="role === 'User'" selected mat-list-item class="btn" routerLink="request" (click)="snav.toggle()">Заявка</mat-chip>
-      <mat-chip selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/price">Цени</mat-chip>
-      <mat-chip selected mat-list-item class="btn" (click)="snav.toggle()">Въпроси</mat-chip>
-      <mat-chip selected mat-list-item class="btn" (click)="snav.toggle()">Контакти</mat-chip>
       <mat-chip *ngIf="role === 'Admin'" selected mat-list-item class="btn" routerLink="/process-request" (click)="snav.toggle()">Заявки за обработка</mat-chip>
+      <mat-chip *ngIf="role === 'Admin'" selected mat-list-item class="btn" routerLink="/accept-requests" (click)="snav.toggle()">Одобрени заявки</mat-chip>
+      <mat-chip *ngIf="!role || role === 'User'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/price">Цени</mat-chip>
+      <mat-chip *ngIf="!role || role === 'User'" selected mat-list-item class="btn" (click)="snav.toggle()">Контакти</mat-chip>
     </div>
   </mat-sidenav>
 </mat-sidenav-container>

@@ -1,5 +1,4 @@
-import { DatePipe } from "@angular/common";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { EditRequestDTO } from "../models/edit-request.model";
@@ -14,16 +13,14 @@ export class RequestService {
   private controller = '/Request';
   private area = 'User';
   private domain = 'https://localhost:7285/';
-  private datePipe: DatePipe;
 
   public onNotificationClick: Subject<any>;
+  public onRequestDialogClosed: Subject<void>;
 
-  constructor(http: HttpClient,
-    datePipe: DatePipe
-  ) {
+  constructor(http: HttpClient) {
     this.http = http;
-    this.datePipe = datePipe;
     this.onNotificationClick = new Subject();
+    this.onRequestDialogClosed = new Subject();
   }
 
   public getAnimalTypes(): Observable<NomenclatureDTO<number>[]> {
@@ -118,6 +115,16 @@ export class RequestService {
     const httpParams = new HttpParams().append('id', id);
 
     return this.http.put<void>(url, {}, {
+      params: httpParams
+    });
+  }
+
+  public rejectRequest(id: number): Observable<void> {
+    const url = this.buildUrl() + '/RejectRequest';
+
+    const httpParams = new HttpParams().append('id', id);
+
+    return this.http.delete<void>(url, {
       params: httpParams
     });
   }

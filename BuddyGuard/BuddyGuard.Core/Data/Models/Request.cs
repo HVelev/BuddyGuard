@@ -37,6 +37,9 @@ namespace BuddyGuard.Core.Data.Models
         public User User { get; set; }
 
         [Required]
+        public string Address { get; set; }
+
+        [Required]
         public int LocationId { get; set; }
         
         public Location Location { get; set; }

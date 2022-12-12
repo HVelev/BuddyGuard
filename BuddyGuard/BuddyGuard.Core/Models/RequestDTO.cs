@@ -21,7 +21,7 @@ namespace BuddyGuard.Core.Models
 
         public string Location { get; set; }
 
-        public string ExactLocation { get; set; }
+        public string Address { get; set; }
 
         public DateTime? MeetingDate { get; set; }
 

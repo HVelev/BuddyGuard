@@ -25,7 +25,7 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
   public dialog: MatDialog;
   public dialogRef: any;
 
-  constructor(service: RequestService,
+  public constructor(service: RequestService,
     datePipe: DatePipe,
     dialog: MatDialog) {
     this.service = service;
@@ -34,14 +34,12 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
     this.dialog = dialog;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getAllRequests();
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-
-    
   }
 
   public getAllRequests(): void {
@@ -70,7 +68,7 @@ export class ProcessRequestComponent implements OnInit, AfterViewInit {
         dialogRef.afterClosed().subscribe({
           next: () => {
             this.getAllRequests();
-            this.service.getAllUnreadRequests();
+            this.service.onRequestDialogClosed.next();
           }
         });
       }

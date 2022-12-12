@@ -116,14 +116,20 @@ export class NavbarComponent implements OnInit {
     this.loginService.onUserLogin.subscribe({
       next: (value: string) => {
         this.role = value;
-        debugger;
+
         if (value === 'Admin') {
           this.updateNotifications();
         }
       }
     });
 
-    if (this.role) {
+    this.requestService.onRequestDialogClosed.subscribe({
+      next: () => {
+        this.updateNotifications();
+      }
+    });
+
+    if (this.loginService.isLoggedInAsAdmin(sessionStorage.getItem('token') ?? '')) {
       this.updateNotifications();
     }
   }

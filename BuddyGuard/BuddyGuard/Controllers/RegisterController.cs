@@ -1,6 +1,8 @@
-﻿using BuddyGuard.Core.Data;
+﻿using BuddyGuard.Core.Contracts;
+using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
+using BuddyGuard.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +14,13 @@ namespace BuddyGuard.API.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly BuddyguardDbContext dbContext;
+        private readonly INomenclatureService nomenclatureService;
 
-        public RegisterController(UserManager<User> userManager, BuddyguardDbContext dbContext)
+        public RegisterController(UserManager<User> userManager, BuddyguardDbContext dbContext, INomenclatureService nomenclatureService)
         {
             this.userManager = userManager;
             this.dbContext = dbContext;
+            this.nomenclatureService = nomenclatureService;
         }
 
         [AllowAnonymous]
@@ -44,13 +48,7 @@ namespace BuddyGuard.API.Controllers
 
                 var result = await userManager.CreateAsync(user, userModel.Password);
 
-                IdentityRole role = dbContext.Roles.Where(x => x.Name == userModel.Role).First();
-
-                dbContext.UserRoles.Add(new IdentityUserRole<string>
-                {
-                    RoleId = role.Id,
-                    UserId = user.Id
-                });
+                await userManager.AddToRoleAsync(user, userModel.Role);
 
                 dbContext.SaveChanges();
 
@@ -61,6 +59,15 @@ namespace BuddyGuard.API.Controllers
 
                 throw;
             }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetRoles()
+        {
+            var result = nomenclatureService.RolesNomenclatures();
+
+            return Ok(result);
         }
     }
 }
