@@ -6,6 +6,7 @@ import { AboutComponent } from "./pages/about/about.component";
 import { BuddiesComponent } from "./pages/buddies/buddies.component";
 import { IndexComponent } from "./pages/index/index.component";
 import { LoginComponent } from "./pages/login/login.component";
+import { PriceComponent } from "./pages/price/price.component";
 import { ProcessRequestComponent } from "./pages/process-request/process-request.component";
 import { RegisterComponent } from "./pages/register/register.component";
 import { RequestComponent } from "./pages/request/request.component";
@@ -37,6 +38,10 @@ export const appRoutes: Routes = [
     component: RequestComponent,
     canActivate: [AuthGuard],
     
+  },
+  {
+    path: 'price',
+    component: PriceComponent
   },
   {
     path: 'buddies',
