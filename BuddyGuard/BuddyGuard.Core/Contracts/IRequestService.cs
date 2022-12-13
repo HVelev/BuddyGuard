@@ -8,15 +8,6 @@ namespace BuddyGuard.Core.Contracts
     {
         void SubmitForm(EditRequestDTO form);
 
-        RequestDTO GetRequest(int requestId);
-
-        List<RequestDTO> GetAllRequests(bool isForNotif);
-
-        string DeleteRequest(int id);
-
-        public void MarkRequestAsRead(int id);
-
-        public string AcceptRequest(int id);
 
     }
 }

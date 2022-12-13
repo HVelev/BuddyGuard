@@ -1,4 +1,5 @@
 ﻿using BuddyGuard.Core.Contracts;
+using BuddyGuard.Core.Enums;
 using BuddyGuard.Core.Models;
 using BuddyGuard.Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -15,17 +16,15 @@ namespace BuddyGuard.Controllers
 
         private readonly INomenclatureService nomenclatureService;
 
-        private readonly IMailService mailService;
 
-        public RequestController(IRequestService requestService, IUserService userService, INomenclatureService nomenclatureService, IMailService mailService)
+        public RequestController(IRequestService requestService, IUserService userService, INomenclatureService nomenclatureService)
         {
             this.requestService = requestService;
             this.userService = userService;
             this.nomenclatureService = nomenclatureService;
-            this.mailService = mailService;
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpPost]
         public IActionResult SubmitForm([FromBody] EditRequestDTO form)
         {
@@ -34,16 +33,7 @@ namespace BuddyGuard.Controllers
             return Ok();
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult GetRequest([FromQuery] int requestId)
-        {
-            RequestDTO result = requestService.GetRequest(requestId);
-
-            return Ok(result);
-        }
-
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetAnimalTypes()
         {
@@ -52,7 +42,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetLocations()
         {
@@ -61,7 +51,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetClientServices()
         {
@@ -70,7 +60,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetSmallDogServices()
         {
@@ -79,7 +69,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetSmallDogWalkLengths()
         {
@@ -88,7 +78,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetBigDogServices()
         {
@@ -97,7 +87,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
         
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetBigDogWalkLengths()
         {
@@ -106,71 +96,13 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = nameof(RoleEnums.User))]
         [HttpGet]
         public IActionResult GetCatServices()
         {
             var result = nomenclatureService.CatServicesNomenclatures();
 
             return Ok(result);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult GetAllRequests()
-        {
-            var result = requestService.GetAllRequests(false);
-
-            return Ok(result);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult GetAllUnreadRequests()
-        {
-            var result = requestService.GetAllRequests(true);
-
-            return Ok(result);
-        }
-
-        [Authorize]
-        [HttpPut]
-        public IActionResult MarkRequestAsRead([FromQuery] int id)
-        {
-            requestService.MarkRequestAsRead(id);
-
-            return Ok();
-        }
-
-        [Authorize]
-        [HttpPut]
-        public IActionResult AcceptRequest([FromQuery] int id)
-        {
-            var email = requestService.AcceptRequest(id);
-
-            mailService.SendConfirmationEmail(email);
-
-            return Ok();
-        }
-
-        [Authorize]
-        [HttpDelete]
-        public IActionResult RejectRequest([FromQuery] int id)
-        {
-            var email = requestService.DeleteRequest(id);
-
-            mailService.SendRejectionEmail(email);
-
-            return Ok();
-        }
-
-        [Authorize]
-        [HttpDelete]
-        public IActionResult DeleteRequest([FromQuery] int id)
-        {
-            requestService.DeleteRequest(id);
-
-            return Ok();
         }
     }
 }

@@ -14,13 +14,8 @@ export class RequestService {
   private area = 'User';
   private domain = 'https://localhost:7285/';
 
-  public onNotificationClick: Subject<any>;
-  public onRequestDialogClosed: Subject<void>;
-
   constructor(http: HttpClient) {
     this.http = http;
-    this.onNotificationClick = new Subject();
-    this.onRequestDialogClosed = new Subject();
   }
 
   public getAnimalTypes(): Observable<NomenclatureDTO<number>[]> {
@@ -76,65 +71,6 @@ export class RequestService {
     
    
     return this.http.post<void>(url, data);
-  }
-
-  public getRequest(requestId: number): Observable<RequestDTO> {
-    const url = this.buildUrl() + '/GetRequest';
-    const httpParams = new HttpParams().append('requestId', requestId);
-
-    return this.http.get<RequestDTO>(url, {
-      params: httpParams
-    });
-  }
-
-  public getAllRequests(): Observable<RequestDTO[]> {
-    const url = this.buildUrl() + '/GetAllRequests';
-
-    return this.http.get<RequestDTO[]>(url);
-  }
-
-  public getAllUnreadRequests(): Observable<RequestDTO[]> {
-    const url = this.buildUrl() + '/GetAllUnreadRequests';
-
-    return this.http.get<RequestDTO[]>(url);
-  }
-
-  public markRequestAsRead(id: number): Observable<void> {
-    const url = this.buildUrl() + '/MarkRequestAsRead';
-
-    const httpParams = new HttpParams().append('id', id);
-
-    return this.http.put<void>(url, {}, {
-      params: httpParams
-    });
-  }
-
-  public acceptRequest(id: number): Observable<void> {
-    const url = this.buildUrl() + '/AcceptRequest';
-
-    const httpParams = new HttpParams().append('id', id);
-
-    return this.http.put<void>(url, {}, {
-      params: httpParams
-    });
-  }
-
-  public rejectRequest(id: number): Observable<void> {
-    const url = this.buildUrl() + '/RejectRequest';
-
-    const httpParams = new HttpParams().append('id', id);
-
-    return this.http.delete<void>(url, {
-      params: httpParams
-    });
-  }
-
-  public deleteRequest(id: number): Observable<void> {
-    const httpParams = new HttpParams().append('id', id);
-
-    return this.http.delete<void>(`${this.buildUrl()}/DeleteRequest`, {
-      params: httpParams
-    });
   }
 
   private buildUrl(): string {

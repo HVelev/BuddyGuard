@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ImageDTO } from '../models/image.model';
 
 
 interface ImageInfo {
@@ -14,7 +15,6 @@ interface ImageInfo {
 })
 
 export class ImageService {
-  private images: any[] = [];
   private url: string = 'https://api.imgur.com/3/image';
   private clientId: string = '626d467ff2044c4';
   imageLink: any;
@@ -26,30 +26,25 @@ export class ImageService {
 
   uploadImage(imageFile: File, infoObject: any) {
     let formData = new FormData();
+
     formData.append('image', imageFile, imageFile.name);
-    formData.append('album', 'sMqFwZH6S5deVG6');
+    formData.append('description', 'test');
 
-    let header = new HttpHeaders({
-      "authorization": 'Client-ID ' + this.clientId
-    });
-
-    return this.http.post(this.url, formData, { headers: header });
+    return this.http.post('https://localhost:7285/Shared/Image/AddImage', formData);
   }
 
   async getAlbum() {
     let header = new HttpHeaders({
-      "authorization": 'Client-ID ' + this.clientId
+      "UserName": 'buddyguard'
     });
 
-    const imageData: any = await this.http.get('https://api.imgur.com/3/album/wrvBdET', { headers: header }).toPromise();
+    const imageData: any = await this.http.get('https://iam.amazonaws.com/?Action=CreateAccessKey', { headers: header }).toPromise();
+    //deleteHash = F5ykCrv8SBh1asi
+    //id = uqhPX10
   }
 
-  getImages(): Observable<any> {
-    let header = new HttpHeaders({
-      "authorization": 'Client-ID ' + this.clientId
-    });
-
-    return this.http.get('https://api.imgur.com/3/album/wrvBdET/images', { headers: header });
+  getImages(): Observable<ImageDTO[]> {
+    return this.http.get<ImageDTO[]>('https://localhost:7285/Shared/Image/GetImages');
   }
 
   public deleteImage(id: string): Observable<void> {
@@ -57,7 +52,7 @@ export class ImageService {
       "authorization": 'Client-ID ' + this.clientId
     });
 
-    return this.http.delete<void>(`https://api.imgur.com/3/image/${id}`, {
+    return this.http.post<void>(`https://api.imgur.com/3/album/F5ykCrv8SBh1asi/?ids=${id}`, {
       headers: header
     });
   }

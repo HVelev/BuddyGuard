@@ -6,7 +6,7 @@ namespace BuddyGuard.Core.Services
 {
     public class MailService : IMailService
     {
-        public void SendConfirmationEmail(string recipient)
+        public async Task SendConfirmationEmail(string recipient)
         {
             MailAddress to = new MailAddress(recipient);
             MailAddress from = new MailAddress("buddyguardapp@outlook.com");
@@ -22,7 +22,7 @@ namespace BuddyGuard.Core.Services
             // code in brackets above needed if authentication required
             try
             {
-                client.Send(message);
+                await client.SendMailAsync(message);
             }
             catch (SmtpException ex)
             {
@@ -30,7 +30,7 @@ namespace BuddyGuard.Core.Services
             }
         }
 
-        public void SendRejectionEmail(string recipient)
+        public async Task SendRejectionEmail(string recipient)
         {
             MailAddress to = new MailAddress(recipient);
             MailAddress from = new MailAddress("buddyguardapp@outlook.com");
@@ -46,7 +46,7 @@ namespace BuddyGuard.Core.Services
             // code in brackets above needed if authentication required
             try
             {
-                client.Send(message);
+                await client.SendMailAsync(message);
             }
             catch (SmtpException ex)
             {

@@ -26,3 +26,7 @@ form {
 .mt {
   margin-top: 2% !important;
 }
+
+.green {
+    color: green;
+}

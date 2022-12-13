@@ -1,10 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { RequestDTO } from '../../models/request.model';
-import { RequestService } from '../../services/request.service';
+import { ProcessRequestService } from '../../services/process-request.service';
 import { ProcessRequestDialogComponent } from './models/process-request-dialog/process-request-dialog.component';
 
 @Component({
@@ -14,18 +14,18 @@ import { ProcessRequestDialogComponent } from './models/process-request-dialog/p
   providers: [DatePipe]
 })
 export class ProcessRequestComponent implements OnInit, AfterViewInit {
-  private readonly service: RequestService;
+  private readonly service: ProcessRequestService;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public requests: RequestDTO[] = [];
-  public displayedColumns: string[] = ['location', 'startDate', 'endDate', 'actions'];
+  public displayedColumns: string[] = ['location', 'name', 'phone', 'startDate', 'endDate', 'actions'];
   public datePipe: DatePipe;
   public dataSource: MatTableDataSource<RequestDTO>;
   public dialog: MatDialog;
   public dialogRef: any;
 
-  public constructor(service: RequestService,
+  public constructor(service: ProcessRequestService,
     datePipe: DatePipe,
     dialog: MatDialog) {
     this.service = service;
