@@ -16,7 +16,7 @@ export class BuddiesComponent implements OnInit {
   public imageTitle: string | undefined;
   public imageDescription: string | undefined;
   public imageFile!: File;
-  public images: any[] = [];
+  public images: ImageDTO[] = [];
   public role: string | undefined | null;
   public form: FormGroup;
 
@@ -75,23 +75,25 @@ export class BuddiesComponent implements OnInit {
     }
   }
 
-  private getData() {
-    this.imageService.getImages().subscribe({
-      next: (value: ImageDTO[]) => {
-        const reader: FileReader = new FileReader();
-        for (let img of value) {
-          this.images.push(URL.createObjectURL(img.image!));
-        }
-        console.log(this.images);
+  public deleteImage(key: string) {
+    this.imageService.deleteImage(key).subscribe({
+      next: () => {
+        this.getData();
       }
     });
   }
 
-  getImages() {
+  public getImages() {
     this.imageService.getAlbum();
   }
 
-  public deleteImage(id: string) {
-    this.imageService.deleteImage(id).subscribe();
+  private getData() {
+    this.imageService.getImages().subscribe({
+      next: (value: ImageDTO[]) => {  
+        this.images = value;
+      }
+    });
   }
+
+
 }

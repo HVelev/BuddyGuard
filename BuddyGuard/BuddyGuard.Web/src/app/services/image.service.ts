@@ -3,7 +3,6 @@ import { HttpBackend, HttpClient, HttpHeaders, HttpParams } from '@angular/commo
 import { Observable } from 'rxjs';
 import { ImageDTO } from '../models/image.model';
 
-
 interface ImageInfo {
   title: string;
   description: string;
@@ -44,16 +43,15 @@ export class ImageService {
   }
 
   getImages(): Observable<ImageDTO[]> {
+
     return this.http.get<ImageDTO[]>('https://localhost:7285/Shared/Image/GetImages');
   }
 
-  public deleteImage(id: string): Observable<void> {
-    let header = new HttpHeaders({
-      "authorization": 'Client-ID ' + this.clientId
-    });
+  public deleteImage(key: string): Observable<void> {
+    const httpParams = new HttpParams().append('key', key);
 
-    return this.http.post<void>(`https://api.imgur.com/3/album/F5ykCrv8SBh1asi/?ids=${id}`, {
-      headers: header
+    return this.http.delete<void>(`https://localhost:7285/Shared/Image/DeleteImage`, {
+      params: httpParams
     });
   }
 }

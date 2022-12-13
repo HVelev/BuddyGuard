@@ -35,39 +35,59 @@ namespace BuddyGuard.Core.Services
             var bucketRegion = Amazon.RegionEndpoint.USEast1;
             var s3 = new AmazonS3Client(awsKey, awsSecretKey, bucketRegion);
 
-            var objects = await s3.ListObjectsAsync("buddyguard");
-
-            List<ImageDTO> images = new List<ImageDTO>();
-
-            foreach (var obj in objects.S3Objects)
+            try
             {
-                var image = await s3.GetObjectAsync("buddyguard", obj.Key);
+                var images = new List<ImageDTO>();
 
-                using (Stream responseStream = image.ResponseStream)
+                var objects = await s3.ListObjectsAsync("buddyguard");
+
+                foreach (var obj in objects.S3Objects.OrderByDescending(x => x.LastModified))
                 {
+                    var expires = DateTime.Now.AddHours(1);
+
+                    GetPreSignedUrlRequest request = new GetPreSignedUrlRequest
+                    {
+                        BucketName = "buddyguard",
+                        Key = obj.Key,
+                        Expires = expires,
+                    };
+
+                    var url = s3.GetPreSignedURL(request);
+
                     images.Add(new ImageDTO
                     {
-                        Name = image.Key,
-                        Image = ReadStream(responseStream)
+                        Name = request.Key,
+                        ImageUrl = url,
                     });
                 }
-            }
 
-            return images;
+                return images;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public static byte[] ReadStream(Stream responseStream)
+        public async Task<DeleteObjectsResponse> DeleteImage(string key)
         {
-            byte[] buffer = new byte[responseStream.Length];
-            using (MemoryStream ms = new MemoryStream())
+            var awsKey = "AKIAW4ROKHDZ7KHWLHUK";
+            var awsSecretKey = "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";
+            var bucketRegion = Amazon.RegionEndpoint.USEast1;
+            var s3 = new AmazonS3Client(awsKey, awsSecretKey, bucketRegion);
+
+            var request = new DeleteObjectsRequest
             {
-                int read;
-                while ((read = responseStream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
-            }
+                BucketName = "buddyguard",
+                Objects = new List<KeyVersion>()
+            };
+
+            request.Objects.Add(new KeyVersion
+            {
+                Key = key,
+            });
+
+            return await s3.DeleteObjectsAsync(request);
         }
     }
 }

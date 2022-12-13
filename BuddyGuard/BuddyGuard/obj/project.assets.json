@@ -5,14 +5,10 @@
       "AWSSDK.Core/3.7.102.2": {
         "type": "package",
         "compile": {
-          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {}
         }
       },
       "AWSSDK.S3/3.7.101.34": {
@@ -21,14 +17,10 @@
           "AWSSDK.Core": "[3.7.102.2, 4.0.0)"
         },
         "compile": {
-          "lib/netcoreapp3.1/AWSSDK.S3.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netcoreapp3.1/AWSSDK.S3.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp3.1/AWSSDK.S3.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/netcoreapp3.1/AWSSDK.S3.dll": {}
         }
       },
       "Humanizer.Core/2.8.26": {

@@ -73,7 +73,6 @@ C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyG
 C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.AssemblyInfoInputs.cache
 C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.AssemblyInfo.cs
 C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.csproj.CoreCompileInputs.cache
-C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\staticwebassets.development.json
@@ -196,3 +195,5 @@ C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Micros
 C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Owin.dll
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\AWSSDK.Core.dll
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\AWSSDK.S3.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\AWSSDK.Core.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\AWSSDK.S3.dll

@@ -14,5 +14,7 @@ namespace BuddyGuard.Core.Contracts
         Task<HttpStatusCode> AddImage(EditImageDTO image);
 
         Task<List<ImageDTO>> GetImages();
+
+        Task<DeleteObjectsResponse> DeleteImage(string key);
     }
 }

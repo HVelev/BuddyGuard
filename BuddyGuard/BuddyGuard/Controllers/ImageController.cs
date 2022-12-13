@@ -33,5 +33,16 @@ namespace BuddyGuard.API.Controllers
 
             return Ok(images);
         }
+        
+        [AllowAnonymous]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteImage([FromQuery] string key)
+        {
+            var response = imageService.DeleteImage(key);
+
+            response.Con
+
+            return Ok();
+        }
     }
 }

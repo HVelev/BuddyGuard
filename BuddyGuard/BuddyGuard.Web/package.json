@@ -32,6 +32,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@visurel/iconify-angular": "^11.0.0",
     "angular-materializecss-datepicker": "^0.1.2",
+    "aws-sdk": "^2.1274.0",
     "bootstrap": "^5.2.2",
     "igniteui-angular": "^14.2.4",
     "jquery": "^3.6.1",

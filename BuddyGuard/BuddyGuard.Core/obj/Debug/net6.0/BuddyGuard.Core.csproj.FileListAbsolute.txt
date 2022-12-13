@@ -136,3 +136,5 @@ C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\obj\Debug\net6.0\Budd
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\obj\Debug\net6.0\ref\BuddyGuard.Core.dll
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\AWSSDK.Core.dll
 C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\AWSSDK.S3.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\AWSSDK.Core.dll
+C:\Users\ic0o\Documents\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\AWSSDK.S3.dll

@@ -30,13 +30,13 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
   <h2 class="brown"><strong>Приятелчета, за които сме се грижили:</strong></h2>
   <div class="d-flex flex-wrap" fxLayoutAlign="center">
-    <div *ngFor="let img of images" class="card m-3">
-      <button mat-mini-fab color="accent">
+    <div *ngFor="let imgDto of images" class="card m-3">
+      <button mat-mini-fab color="accent" (click)="deleteImage(imgDto.name!)">
         <mat-icon>delete</mat-icon>
       </button>
       <img class="original"
-           [alt]="img"
-           [src]="img" />
+           [alt]="imgDto"
+           [src]="imgDto.imageUrl" />
     </div>
   </div>
 </div>

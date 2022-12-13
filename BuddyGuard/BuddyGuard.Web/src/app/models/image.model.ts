@@ -7,5 +7,5 @@ export class ImageDTO {
 
   public description?: string;
 
-  public image?: Blob;
+  public imageUrl?: string;
 }
