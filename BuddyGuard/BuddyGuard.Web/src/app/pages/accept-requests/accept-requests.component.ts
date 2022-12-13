@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { RequestDTO } from '../../models/request.model';
-import { RequestService } from '../../services/request.service';
+import { ProcessRequestService } from '../../services/process-request.service';
 
 @Component({
   selector: 'app-accept-requests',
@@ -12,18 +12,18 @@ import { RequestService } from '../../services/request.service';
   styleUrls: ['./accept-requests.component.css']
 })
 export class AcceptRequestsComponent implements OnInit {
-  private readonly service: RequestService;
+  private readonly service: ProcessRequestService;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public requests: RequestDTO[] = [];
-  public displayedColumns: string[] = ['location', 'address', 'startDate', 'endDate'];
+  public displayedColumns: string[] = ['location', 'address', 'name', 'phone', 'meetingDate', 'startDate', 'endDate'];
   public datePipe: DatePipe;
   public dataSource: MatTableDataSource<RequestDTO>;
   public dialog: MatDialog;
   public dialogRef: any;
 
-  public constructor(service: RequestService,
+  public constructor(service: ProcessRequestService,
     datePipe: DatePipe,
     dialog: MatDialog) {
     this.service = service;
@@ -41,7 +41,7 @@ export class AcceptRequestsComponent implements OnInit {
   }
 
   public getAllRequests(): void {
-    this.service.getAllRequests().subscribe({
+    this.service.getAllAcceptedRequests().subscribe({
       next: (value: RequestDTO[]) => {
 
         this.dataSource.data = value;

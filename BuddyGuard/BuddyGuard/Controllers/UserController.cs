@@ -20,8 +20,6 @@ namespace BuddyGuard.API.Controllers
         [HttpGet]
         public IActionResult GetUser([FromQuery] string id)
         {
-            var currentUser = this.HttpContext.User;
-
             UserDTO user = service.GetUser(id);
 
             return Ok(user);

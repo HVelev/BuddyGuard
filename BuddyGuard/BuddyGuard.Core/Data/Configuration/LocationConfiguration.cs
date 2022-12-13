@@ -290,7 +290,7 @@ namespace BuddyGuard.Core.Data.Configuration
             },
             new Location()
             {
-                Id = 56, Name = "Младост",
+                Id = 56, Name = "Младост 1",
                 Price = 4.99M
             },
             new Location()
@@ -375,7 +375,7 @@ namespace BuddyGuard.Core.Data.Configuration
             },
             new Location()
             {
-                Id = 73, Name = "Павлово",
+                Id = 73, Name = "Панчарево",
                 Price = 4.99M
             },
             new Location()

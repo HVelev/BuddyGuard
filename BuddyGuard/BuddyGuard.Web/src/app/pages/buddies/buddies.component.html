@@ -13,7 +13,7 @@
     <div fxLayoutAlign="center center">
       <div fxFlex="50">
         <label for="formFile" class="form-label">Снимка</label>
-        <input #imageInput class="form-control" type="file" id="formFile" (change)="imageInputChange(imageInput)" accept="image/*" formControlName="imageControl">
+        <input #imageInput class="form-control" type="file" id="formFile" (change)="imageInputChange(imageInput)" accept="file" formControlName="imageControl">
         <mat-error *ngIf="form.get('imageControl')!.touched && form.get('imageControl')!.dirty && form.get('imageControl')!.hasError('required')" fxLayoutAlign="start">
           Трябва да изберете снимка
         </mat-error>
@@ -31,12 +31,12 @@
   <h2 class="brown"><strong>Приятелчета, за които сме се грижили:</strong></h2>
   <div class="d-flex flex-wrap" fxLayoutAlign="center">
     <div *ngFor="let img of images" class="card m-3">
-      <button mat-mini-fab color="accent" (click)="deleteImage(img.id)">
+      <button mat-mini-fab color="accent">
         <mat-icon>delete</mat-icon>
       </button>
       <img class="original"
-           [alt]="img.link"
-           [src]="img.link" />
+           [alt]="img"
+           [src]="img" />
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { AuthGuard } from "./guards/auth-guard.guard";
+import { AuthGuard } from "./guards/auth.guard";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { AboutComponent } from "./pages/about/about.component";
 import { AcceptRequestsComponent } from "./pages/accept-requests/accept-requests.component";

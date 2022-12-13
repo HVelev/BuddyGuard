@@ -8,8 +8,8 @@ namespace BuddyGuard.Core.Contracts
 {
     public interface IMailService
     {
-        void SendConfirmationEmail(string recipient);
+        Task SendConfirmationEmail(string recipient);
 
-        void SendRejectionEmail(string recipient);
+        Task SendRejectionEmail(string recipient);
     }
 }

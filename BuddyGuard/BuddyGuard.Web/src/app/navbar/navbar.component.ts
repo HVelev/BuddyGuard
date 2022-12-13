@@ -61,7 +61,7 @@ const fadeOut = trigger('fadeOut', [
 export class NavbarComponent implements OnInit {
   @ViewChild('snav') navElement!: MatSidenav;
 
-  private requestService: RequestService;
+  private processRequestService: ProcessRequestService;
   private loginService: LoginService;
   private registerService: RegisterService;
   private router: Router;
@@ -93,7 +93,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    requestService: RequestService,
+    processRequestService: ProcessRequestService,
     loginService: LoginService,
     registerService: RegisterService,
     datePipe: DatePipe,
@@ -103,7 +103,7 @@ export class NavbarComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    this.requestService = requestService;
+    this.processRequestService = processRequestService;
     this.loginService = loginService;
     this.role = sessionStorage.getItem('role');
     this.registerService = registerService;
@@ -123,7 +123,7 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.requestService.onRequestDialogClosed.subscribe({
+    this.processRequestService.onRequestDialogClosed.subscribe({
       next: () => {
         this.updateNotifications();
       }
@@ -143,9 +143,9 @@ export class NavbarComponent implements OnInit {
   }
 
   public openRequest(id: number) {
-    this.requestService.markRequestAsRead(id).subscribe();
+    this.processRequestService.markRequestAsRead(id).subscribe();
 
-    this.requestService.getRequest(id).subscribe({
+    this.processRequestService.getRequest(id).subscribe({
       next: (value: any) => {
         const dialogRef = this.dialog.open(ProcessRequestDialogComponent, {
           width: '100%',
@@ -178,7 +178,7 @@ export class NavbarComponent implements OnInit {
   }
 
   public updateNotifications(): void {
-    this.requestService.getAllUnreadRequests().subscribe({
+    this.processRequestService.getAllUnreadRequests().subscribe({
       next: (value: RequestDTO[]) => {
         this.notifications = value;
         console.log(value);

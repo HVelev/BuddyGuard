@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RequestDTO } from '../../../../models/request.model';
-import { RequestService } from '../../../../services/request.service';
+import { ProcessRequestService } from '../../../../services/process-request.service';
 
 @Component({
   selector: 'app-process-request-dialog',
@@ -11,7 +11,7 @@ import { RequestService } from '../../../../services/request.service';
   styleUrls: ['./process-request-dialog.component.css']
 })
 export class ProcessRequestDialogComponent implements OnInit {
-  private service: RequestService;
+  private service: ProcessRequestService;
   private datePipe: DatePipe;
 
   public form: FormGroup;
@@ -27,7 +27,7 @@ export class ProcessRequestDialogComponent implements OnInit {
   public constructor(
     public dialogRef: MatDialogRef<ProcessRequestDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RequestDTO,
-    service: RequestService,
+    service: ProcessRequestService,
     datePipe: DatePipe
   ) {
     this.datePipe = datePipe;

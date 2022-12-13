@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageDTO } from '../../models/image.model';
 import { ImageService } from '../../services/image.service';
 
 @Component({
@@ -76,8 +77,12 @@ export class BuddiesComponent implements OnInit {
 
   private getData() {
     this.imageService.getImages().subscribe({
-      next: (value: any) => {
-        this.images = value.data;
+      next: (value: ImageDTO[]) => {
+        const reader: FileReader = new FileReader();
+        for (let img of value) {
+          this.images.push(URL.createObjectURL(img.image!));
+        }
+        console.log(this.images);
       }
     });
   }

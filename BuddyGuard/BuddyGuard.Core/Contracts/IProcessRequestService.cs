@@ -9,6 +9,11 @@ namespace BuddyGuard.Core.Contracts
 {
     public interface IProcessRequestService
     {
-        List<EditRequestDTO> GetAllUnreadRequests();
+        List<RequestDTO> GetAllRequests(bool isForNotif, bool isAccepted);
+        RequestDTO GetRequest(int requestId);
+        void MarkRequestAsRead(int id);
+        string AcceptRequest(int id);
+        string DeleteRequest(int id);
+
     }
 }

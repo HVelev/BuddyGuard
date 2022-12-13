@@ -12,6 +12,21 @@
         <td mat-cell *matCellDef="let element"> {{ element.address }} </td>
       </ng-container>
 
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Име</th>
+        <td mat-cell *matCellDef="let element"> {{ element.firstName }} {{ element.lastName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Телефон</th>
+        <td mat-cell *matCellDef="let element"> {{ element.phone }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="meetingDate">
+        <th mat-header-cell *matHeaderCellDef>Дата на среща</th>
+        <td mat-cell *matCellDef="let element"> {{ element.meetingDate ? datePipe.transform(element.meetingDate, 'dd/MM/YYYY') : 'Неуточнено' }} </td>
+      </ng-container>
+
       <ng-container matColumnDef="startDate">
         <th mat-header-cell *matHeaderCellDef>Начало</th>
         <td mat-cell *matCellDef="let element"> {{ datePipe.transform(element.startDate, 'dd/MM/yyyy') }} </td>
