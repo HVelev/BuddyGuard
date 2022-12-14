@@ -32,7 +32,7 @@ namespace BuddyGuard.UnitTests
         [Test]
         public void ValidLoginTest()
         {
-            loginServ
+            
         }
     }
 }
