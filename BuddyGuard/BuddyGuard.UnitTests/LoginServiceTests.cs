@@ -1,16 +1,18 @@
+using BuddyGuard.API.Controllers;
 using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
 
 namespace BuddyGuard.UnitTests
 {
     [TestFixture]
     public class LoginServiceTests
     {
-        private ILoginService loginService;
-
         private BuddyguardDbContext context;
 
         [SetUp]
@@ -25,14 +27,17 @@ namespace BuddyGuard.UnitTests
             context.Database.EnsureDeleted();
 
             context.Database.EnsureCreated();
-
-            loginService = new LoginService(context);
         }
 
         [Test]
-        public void ValidLoginTest()
+        public async Task ValidLoginTest()
         {
-            
+            ILoginService loginService = Mock.Of<ILoginService>();
+
+            User user = context.Users.Where(x => x.UserName == "admin").First();
+
+            var result = await loginService.Login(user, "Buddyguard123!");
+
         }
     }
 }

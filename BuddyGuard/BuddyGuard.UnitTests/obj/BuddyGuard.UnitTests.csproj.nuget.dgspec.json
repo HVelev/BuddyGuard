@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj": {}
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj": {}
   },
   "projects": {
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
+        "projectUniqueName": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
         "projectName": "BuddyGuard.Core",
-        "projectPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
-        "packagesPath": "C:\\Users\\hvelev\\.nuget\\packages\\",
-        "outputPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\obj\\",
+        "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj",
+        "packagesPath": "C:\\Users\\ic0o\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hvelev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ic0o\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +44,10 @@
             "AWSSDK.S3": {
               "target": "Package",
               "version": "[3.7.101.34, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -86,21 +90,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj": {
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj",
+        "projectUniqueName": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj",
         "projectName": "BuddyGuard.UnitTests",
-        "projectPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj",
-        "packagesPath": "C:\\Users\\hvelev\\.nuget\\packages\\",
-        "outputPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\obj\\",
+        "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\BuddyGuard.UnitTests.csproj",
+        "packagesPath": "C:\\Users\\ic0o\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.UnitTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\hvelev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ic0o\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -115,8 +119,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
-                "projectPath": "C:\\Personal projects\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj"
+              "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
+                "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj"
+              },
+              "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj": {
+                "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj"
               }
             }
           }
@@ -142,6 +149,10 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.1.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.2.1402.2112, )"
             },
             "NUnit": {
               "target": "Package",
@@ -176,7 +187,118 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj",
+        "projectName": "BuddyGuard.API",
+        "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard\\BuddyGuard.API.csproj",
+        "packagesPath": "C:\\Users\\ic0o\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\ic0o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://tfstl.technologica.com/tfs/DefaultCollection/_packaging/TechnoLogica.Common/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj": {
+                "projectPath": "C:\\Users\\ic0o\\Documents\\BuddyGuard\\HVelev\\BuddyGuard\\BuddyGuard\\BuddyGuard.Core\\BuddyGuard.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.101.34, )"
+            },
+            "Microsoft.AspNet.Identity.Owin": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Microsoft.AspNet.WebApi.Cors": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Negotiate": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
+            "Microsoft.AspNetCore.SpaServices": {
+              "target": "Package",
+              "version": "[3.1.31, )"
+            },
+            "Microsoft.AspNetCore.SpaServices.Extensions": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.Owin.Host.SystemWeb": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
