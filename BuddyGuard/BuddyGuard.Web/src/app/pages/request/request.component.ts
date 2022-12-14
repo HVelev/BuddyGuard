@@ -61,7 +61,7 @@ export class RequestComponent implements OnInit, AfterViewInit {
   public minStartDate: Date | undefined;
   public maxEndDate: Date | undefined;
   public animals: FormArray = new FormArray([new FormGroup({
-    nameControl: new FormControl('asd', [Validators.required, Validators.maxLength(100)]),
+    nameControl: new FormControl(undefined, [Validators.required, Validators.maxLength(100)]),
     animalTypeControl: new FormControl(undefined, Validators.required),
     speciesControl: new FormControl(),
     animalServiceControl: new FormControl(),

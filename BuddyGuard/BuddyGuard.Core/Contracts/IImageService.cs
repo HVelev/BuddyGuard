@@ -15,6 +15,6 @@ namespace BuddyGuard.Core.Contracts
 
         Task<List<ImageDTO>> GetImages();
 
-        Task<DeleteObjectsResponse> DeleteImage(string key);
+        Task DeleteImage(string key);
     }
 }

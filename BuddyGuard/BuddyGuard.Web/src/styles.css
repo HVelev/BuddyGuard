@@ -62,6 +62,11 @@ html {
   color: #683C39;
 }
 
+.green-background {
+  background-color: #00A300;
+  color: white;
+}
+
 .red-snackbar {
   background: #750000 !important;
 }

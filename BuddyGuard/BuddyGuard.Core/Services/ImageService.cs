@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Amazon.S3.Model;
 using BuddyGuard.Core.Models;
 using System.Net;
+using System.Threading.Tasks.Dataflow;
 
 namespace BuddyGuard.Core.Services
 {
@@ -15,6 +16,27 @@ namespace BuddyGuard.Core.Services
     {
         public async Task<HttpStatusCode> AddImage(EditImageDTO image)
         {
+            var fileName = image.Image.FileName;
+
+            var extension = Path.GetExtension(fileName);
+
+            if (extension == null 
+                || extension == string.Empty 
+                || extension != ".png" 
+                || extension != ".gif" 
+                || extension != ".svg"
+                || extension != ".jpg"
+                || extension != ".jpeg"
+                || extension != ".jfif"
+                || extension != ".pjp"
+                || extension != ".avif"
+                || extension != ".apng"
+                || extension != ".webp"
+                || extension != ".pjpeg")
+            {
+                throw new ArgumentException();
+            }
+
             var awsKey = "AKIAW4ROKHDZ7KHWLHUK";
             var awsSecretKey = "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";
             var bucketRegion = Amazon.RegionEndpoint.USEast1;
@@ -69,25 +91,25 @@ namespace BuddyGuard.Core.Services
             }
         }
 
-        public async Task<DeleteObjectsResponse> DeleteImage(string key)
+        public async Task DeleteImage(string key)
         {
             var awsKey = "AKIAW4ROKHDZ7KHWLHUK";
             var awsSecretKey = "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";
             var bucketRegion = Amazon.RegionEndpoint.USEast1;
             var s3 = new AmazonS3Client(awsKey, awsSecretKey, bucketRegion);
 
-            var request = new DeleteObjectsRequest
+
+            var obj = await s3.GetObjectAsync("buddyguard", key);
+
+
+            var request = new DeleteObjectRequest
             {
-                BucketName = "buddyguard",
-                Objects = new List<KeyVersion>()
+                BucketName= "buddyguard",
+                Key = key,
+                VersionId = obj.VersionId,
             };
 
-            request.Objects.Add(new KeyVersion
-            {
-                Key = key,
-            });
-
-            return await s3.DeleteObjectsAsync(request);
+            await s3.DeleteObjectAsync(request);
         }
     }
 }

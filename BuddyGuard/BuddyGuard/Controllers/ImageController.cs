@@ -20,9 +20,17 @@ namespace BuddyGuard.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddImage([FromForm] EditImageDTO image)
         {
-            await imageService.AddImage(image);
+            try
+            {
+                await imageService.AddImage(image);
 
-            return Ok();
+                return Ok();
+            }
+            catch (ArgumentException)
+            {
+
+                return UnprocessableEntity();
+            }
         }
 
         [AllowAnonymous]
@@ -38,9 +46,7 @@ namespace BuddyGuard.API.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteImage([FromQuery] string key)
         {
-            var response = imageService.DeleteImage(key);
-
-            response.Con
+            await imageService.DeleteImage(key);
 
             return Ok();
         }

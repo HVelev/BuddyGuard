@@ -74,6 +74,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { BuddiesComponent } from './pages/buddies/buddies.component';
 import { PriceComponent } from './pages/price/price.component';
 import { AcceptRequestsComponent } from './pages/accept-requests/accept-requests.component';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { AcceptRequestsComponent } from './pages/accept-requests/accept-requests
     BuddiesComponent,
     PriceComponent,
     AcceptRequestsComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

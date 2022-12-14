@@ -1,0 +1,8 @@
+mat-dialog-actions {
+  margin-top: auto;
+}
+
+mat-dialog-container {
+  display: flex;
+  flex-direction: column;
+}

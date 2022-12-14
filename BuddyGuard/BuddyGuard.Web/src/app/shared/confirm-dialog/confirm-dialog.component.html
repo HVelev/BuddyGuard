@@ -1,0 +1,9 @@
+
+  <h1 align="center" mat-dialog-title fxFlexAlign="center">{{ title }}</h1>
+  <div align="center" mat-dialog-content style="height: calc(100% - 96px);max-height: unset">
+    {{ message }}
+  </div>
+<div mat-dialog-actions fxLayoutAlign="space-between">
+  <button color="warn" mat-raised-button [mat-dialog-close]="false">Откажи</button>
+  <button class="green-background" mat-raised-button [mat-dialog-close]="true">Потвърди</button>
+</div>
