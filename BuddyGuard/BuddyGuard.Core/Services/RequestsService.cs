@@ -1,5 +1,6 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Common;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +15,14 @@ namespace BuddyGuard.Core.Services
 {
     public class RequestsService : IRequestService
     {
-        private readonly BuddyguardDbContext dbContext;
+        private readonly IRepository repository;
 
-        public RequestsService(BuddyguardDbContext db)
+        public RequestsService(IRepository repository)
         {
-            dbContext = db;
+            this.repository = repository;
         }
 
-        public void SubmitForm(EditRequestDTO form)
+        public async Task SubmitForm(EditRequestDTO form)
         {
             var request = new Request
             {
@@ -37,10 +38,9 @@ namespace BuddyGuard.Core.Services
                 IsRead = false,
                 IsAccepted = false
             };
+            var entity = repository.Add(request);
 
-            var entity = dbContext.Requests.Add(request).Entity;
-            
-            dbContext.SaveChanges();
+            await repository.SaveChangesAsync();
 
             foreach (var rs in form.Services)
             {
@@ -50,7 +50,7 @@ namespace BuddyGuard.Core.Services
                     ServiceId = rs
                 };
 
-                dbContext.RequestServices.Add(requestService);
+                repository.Add(requestService);
             }
 
             foreach (var pet in form.Pets)
@@ -64,9 +64,9 @@ namespace BuddyGuard.Core.Services
                     RequestId = entity.Id
                 };
 
-                var animalRequestEntity = dbContext.AnimalRequests.Add(petRequest).Entity;
+                var animalRequestEntity = repository.Add(petRequest);
 
-                dbContext.SaveChanges();
+                await repository.SaveChangesAsync();
 
                 foreach (var petService in pet.Services)
                 {
@@ -77,11 +77,11 @@ namespace BuddyGuard.Core.Services
                         AnimalRequestId = animalRequestEntity.Id
                     };
 
-                    dbContext.RequestServices.Add(requestService);
+                    repository.Add(requestService);
                 }
             }
 
-            dbContext.SaveChanges();
+            await repository.SaveChangesAsync();
         }
     }
 }

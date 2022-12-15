@@ -1,5 +1,6 @@
 using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Common;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -29,6 +30,7 @@ if (username == "HVelev")
 
 builder.Services.AddDbContext<BuddyguardDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddTransient<IRequestService, RequestsService>();
 builder.Services.AddTransient<IProcessRequestService, ProcessRequestService>();
 builder.Services.AddTransient<IUserService, UserService>();

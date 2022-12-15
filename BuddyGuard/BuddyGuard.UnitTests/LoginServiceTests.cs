@@ -3,13 +3,14 @@ using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
+using System.Runtime.CompilerServices;
 
 namespace BuddyGuard.UnitTests
 {
     [TestFixture]
     public class LoginServiceTests
     {
-        private ILoginService loginService;
+        public ILoginService loginService { get; set; }
 
         private BuddyguardDbContext context;
 
