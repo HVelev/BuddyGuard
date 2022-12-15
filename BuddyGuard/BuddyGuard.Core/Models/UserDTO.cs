@@ -11,6 +11,8 @@ namespace BuddyGuard.Core.Models
     {
         public string Id { get; set; }
 
+        public string Role { get; set; }
+
         [Required]
         public string FirstName { get; set; }
 
@@ -23,7 +25,6 @@ namespace BuddyGuard.Core.Models
         [Required]
         public string Phone { get; set; }
 
-        [Required]
-        public string Address { get; set; }
+
     }
 }

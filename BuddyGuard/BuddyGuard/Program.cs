@@ -30,6 +30,7 @@ if (username == "HVelev")
 
 builder.Services.AddDbContext<BuddyguardDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddTransient<IRequestService, RequestsService>();
 builder.Services.AddTransient<IProcessRequestService, ProcessRequestService>();

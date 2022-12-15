@@ -40,7 +40,6 @@ namespace BuddyGuard.API.Controllers
                 {
                     UserName = userModel.Username,
                     Email = userModel.Email,
-                    Address = userModel.Address,
                     FirstName = userModel.FirstName,
                     LastName = userModel.LastName,
                     PhoneNumber = userModel.Phone

@@ -10,11 +10,6 @@ namespace BuddyGuard.Core.Data.Models
 {
     public class User : IdentityUser
     {
-        public User()
-        {
-            Post = new List<Post>();
-        }
-
         [MaxLength(100)]
         [Required]
         public string FirstName { get; set; }
@@ -22,10 +17,5 @@ namespace BuddyGuard.Core.Data.Models
         [MaxLength(100)]
         [Required]
         public string LastName { get; set; }
-
-        [MaxLength(250)]
-        public string? Address { get; set; }
-
-        public List<Post> Post { get; set; }
     }
 }

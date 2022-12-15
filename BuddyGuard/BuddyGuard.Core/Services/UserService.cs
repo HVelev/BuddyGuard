@@ -25,8 +25,7 @@ namespace BuddyGuard.Core.Services
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Email = x.Email,
-                Phone = x.PhoneNumber,
-                Address = x.Address
+                Phone = x.PhoneNumber
             }).First();
         }
     }

@@ -752,38 +752,6 @@ namespace BuddyGuard.Core.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PublishedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Stars")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Posts");
-                });
-
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Request", b =>
                 {
                     b.Property<int>("Id")
@@ -1126,10 +1094,6 @@ namespace BuddyGuard.Core.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -1201,8 +1165,7 @@ namespace BuddyGuard.Core.Migrations
                         {
                             Id = "307894cc-5f1e-4792-ae6b-40293f3dedb5",
                             AccessFailedCount = 0,
-                            Address = "Mladost",
-                            ConcurrencyStamp = "0d2a34b1-e6c3-4df8-a696-b2c19f74c57f",
+                            ConcurrencyStamp = "b6d33791-964b-4df7-b6dd-2ae0738b289d",
                             Email = "buddyguardapp@outlook.com",
                             EmailConfirmed = false,
                             FirstName = "Hristo",
@@ -1210,10 +1173,10 @@ namespace BuddyGuard.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BUDDYGUARDAPP@OUTLOOK.COM",
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPmiKO075slsjI8AoMWA0tSkat6vWA1E6fBWh4+tsHtq0UAsXRSpDe2elv3GG4Hn1Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMuK0PXTZ1PH2ba6RpOHllu8qJa2RHeqbcHfFyVVjr/sKyrUUybtAdwZB4O6CZBe7Q==",
                             PhoneNumber = "0888888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2ccfaf1a-78aa-4e94-97d3-0a3ac7e540de",
+                            SecurityStamp = "fcf93cab-b75d-4898-b410-e65a6fe27ed8",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         },
@@ -1221,8 +1184,7 @@ namespace BuddyGuard.Core.Migrations
                         {
                             Id = "7fe60605-1716-4010-abc6-ddacfd3ecf9b",
                             AccessFailedCount = 0,
-                            Address = "Mladost",
-                            ConcurrencyStamp = "d1c1ddf1-0819-44e6-865c-b420cda58031",
+                            ConcurrencyStamp = "709b77f6-47a2-445b-9d1f-b17a9c2e352e",
                             Email = "buddyguardapp@outlook.com",
                             EmailConfirmed = false,
                             FirstName = "Hristo",
@@ -1230,10 +1192,10 @@ namespace BuddyGuard.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BUDDYGUARDAPP@OUTLOOK.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAapeHyYyLLSK46U1dHTlbxXS/jOByUgYV1CIpym/GJd2AySsibOkFaMXF9bUwOJEg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPig7XwuGXh87Gx9yy3PiQsS9vvSA91wvOZf3f9JIkVfdMwms10jpgmVbPjhYvPR+A==",
                             PhoneNumber = "0888888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e40842b9-385e-4ce3-9354-34f46f59bc43",
+                            SecurityStamp = "eacd3bb2-907b-4c66-ac57-c6a843473fee",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -1269,14 +1231,14 @@ namespace BuddyGuard.Core.Migrations
                         new
                         {
                             Id = "3f107bb9-9810-4024-b4e3-182d696421ab",
-                            ConcurrencyStamp = "3ca1e237-a8d1-4deb-ba1f-0f15916f21ca",
+                            ConcurrencyStamp = "1416def0-cdae-4723-a969-1f2dca077c43",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "9e0143a5-0c68-4c92-92d5-34965e2ca95d",
-                            ConcurrencyStamp = "81cdd548-4157-4e17-8b2d-1b35066b2e21",
+                            ConcurrencyStamp = "d053823c-0554-47d3-86a3-7f4bb97ae421",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -1419,13 +1381,6 @@ namespace BuddyGuard.Core.Migrations
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Post", b =>
-                {
-                    b.HasOne("BuddyGuard.Core.Data.Models.User", null)
-                        .WithMany("Post")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Request", b =>
                 {
                     b.HasOne("BuddyGuard.Core.Data.Models.Location", "Location")
@@ -1531,11 +1486,6 @@ namespace BuddyGuard.Core.Migrations
                     b.Navigation("Pets");
 
                     b.Navigation("RequestServices");
-                });
-
-            modelBuilder.Entity("BuddyGuard.Core.Data.Models.User", b =>
-                {
-                    b.Navigation("Post");
                 });
 #pragma warning restore 612, 618
         }
