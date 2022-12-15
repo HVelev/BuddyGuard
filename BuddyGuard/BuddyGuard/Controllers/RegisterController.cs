@@ -1,5 +1,6 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Common;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using BuddyGuard.Core.Services;
@@ -13,13 +14,13 @@ namespace BuddyGuard.API.Controllers
     public class RegisterController : Controller
     {
         private readonly UserManager<User> userManager;
-        private readonly BuddyguardDbContext dbContext;
+        private readonly IRepository repository;
         private readonly INomenclatureService nomenclatureService;
 
-        public RegisterController(UserManager<User> userManager, BuddyguardDbContext dbContext, INomenclatureService nomenclatureService)
+        public RegisterController(UserManager<User> userManager, IRepository repository, INomenclatureService nomenclatureService)
         {
             this.userManager = userManager;
-            this.dbContext = dbContext;
+            this.repository = repository;
             this.nomenclatureService = nomenclatureService;
         }
 
@@ -29,7 +30,7 @@ namespace BuddyGuard.API.Controllers
         {
             try
             {
-                var doesUserExist = dbContext.Users.Where(x => x.Email == userModel.Email).Count() > 0;
+                var doesUserExist = repository.All<User>().Where(x => x.Email == userModel.Email).Count() > 0;
 
                 if (doesUserExist)
                 {
@@ -49,7 +50,7 @@ namespace BuddyGuard.API.Controllers
 
                 await userManager.AddToRoleAsync(user, userModel.Role);
 
-                dbContext.SaveChanges();
+                repository.SaveChanges();
 
                 return Ok();
             }

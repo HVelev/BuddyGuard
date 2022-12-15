@@ -297,3 +297,6 @@ C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard\obj\D
 C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.pdb
 C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\BuddyGuard.API.genruntimeconfig.cache
 C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard\obj\Debug\net6.0\ref\BuddyGuard.API.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\EntityFramework.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard\bin\Debug\net6.0\Microsoft.AspNet.Identity.EntityFramework.dll

@@ -1,32 +1,27 @@
 ﻿using BuddyGuard.Core.Contracts;
-using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Common;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BuddyGuard.Core.Services
 {
     public class LoginService : ILoginService
     {
-        private BuddyguardDbContext db;
+        private IRepository repository;
 
         private IConfiguration _config;
 
         SignInManager<User> _signInManager;
 
-        public LoginService(BuddyguardDbContext db, IConfiguration _config, SignInManager<User> _signInManager)
+        public LoginService(IRepository repository, IConfiguration _config, SignInManager<User> _signInManager)
         {
-            this.db = db;
+            this.repository = repository;
             this._config = _config;
             this._signInManager = _signInManager;
         }
@@ -35,10 +30,10 @@ namespace BuddyGuard.Core.Services
         {
             try
             {
-                var role = (from users in db.Users
+                var role = (from users in repository.All<User>()
                             where users.Id == login.Id
-                            join usersRoles in db.UserRoles on users.Id equals usersRoles.UserId
-                            join roles in db.Roles on usersRoles.RoleId equals roles.Id
+                            join usersRoles in repository.All<IdentityUserRole<string>>() on users.Id equals usersRoles.UserId
+                            join roles in repository.All<IdentityRole>() on usersRoles.RoleId equals roles.Id
                             select roles).First();
 
                 var result = await _signInManager.CheckPasswordSignInAsync(login, password, false);

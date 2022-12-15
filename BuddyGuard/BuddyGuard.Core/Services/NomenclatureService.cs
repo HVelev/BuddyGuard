@@ -1,7 +1,9 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Common;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +14,17 @@ namespace BuddyGuard.Core.Services
 {
     public class NomenclatureService : INomenclatureService
     {
-        private readonly BuddyguardDbContext db;
+        private readonly IRepository repository;
 
-        public NomenclatureService(BuddyguardDbContext db)
+        public NomenclatureService(IRepository repository)
         {
-            this.db = db;
+            this.repository = repository;
         }
 
         public List<NomenclatureDTO<int>> AnimalTypesNomenclatures()
         {
-            List<NomenclatureDTO<int>> animalTypes = (from animalType in db.AnimalTypes
-                                                 orderby animalType.Name
+            List<NomenclatureDTO<int>> animalTypes = (from animalType in repository.All<AnimalType>()
+                                                      orderby animalType.Name
                                                  select new NomenclatureDTO<int>
                                                  {
                                                      Value = animalType.Id,
@@ -34,8 +36,8 @@ namespace BuddyGuard.Core.Services
 
         public List<NomenclatureDTO<int>> CatServicesNomenclatures()
         {
-            List<NomenclatureDTO<int>> catServices = (from service in db.Services
-                                                 where service.AnimalTypeId == 3
+            List<NomenclatureDTO<int>> catServices = (from service in repository.All<Service>()
+                                                      where service.AnimalTypeId == 3
                                                  || (!service.IsForCustomer
                                                     && !service.AnimalTypeId.HasValue)
                                                  orderby service.Name
@@ -51,8 +53,8 @@ namespace BuddyGuard.Core.Services
 
         public List<NomenclatureDTO<int>> ClientServicesNomenclatures()
         {
-            List<NomenclatureDTO<int>> clientServices = (from service in db.Services
-                                                 where service.IsForCustomer
+            List<NomenclatureDTO<int>> clientServices = (from service in repository.All<Service>()
+                                                         where service.IsForCustomer
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
                                                  {
@@ -66,8 +68,8 @@ namespace BuddyGuard.Core.Services
 
         public List<NomenclatureDTO<int>> SmallDogServicesNomenclatures()
         {
-            List<NomenclatureDTO<int>> dogServices = (from service in db.Services
-                                                 where (service.AnimalTypeId == 1 && service.WalkLength == null)
+            List<NomenclatureDTO<int>> dogServices = (from service in repository.All<Service>()
+                                                      where (service.AnimalTypeId == 1 && service.WalkLength == null)
                                                  || (!service.IsForCustomer && !service.AnimalTypeId.HasValue)
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
@@ -82,7 +84,7 @@ namespace BuddyGuard.Core.Services
 
         public List<NomenclatureDTO<int>> SmallDogWalkLengthNomenclatures()
         {
-            List<NomenclatureDTO<int>> dogServices = (from service in db.Services
+            List<NomenclatureDTO<int>> dogServices = (from service in repository.All<Service>()
                                                       where service.AnimalTypeId == 1 && service.WalkLength != null
                                                       orderby service.Name
                                                       select new NomenclatureDTO<int>
@@ -97,8 +99,8 @@ namespace BuddyGuard.Core.Services
 
         public List<NomenclatureDTO<int>> BigDogServicesNomenclatures()
         {
-            List<NomenclatureDTO<int>> dogServices = (from service in db.Services
-                                                 where (service.AnimalTypeId == 2 && service.WalkLength == null)
+            List<NomenclatureDTO<int>> dogServices = (from service in repository.All<Service>()
+                                                      where (service.AnimalTypeId == 2 && service.WalkLength == null)
                                                  || (!service.IsForCustomer && !service.AnimalTypeId.HasValue)
                                                  orderby service.Name
                                                  select new NomenclatureDTO<int>
@@ -113,7 +115,7 @@ namespace BuddyGuard.Core.Services
 
         public List<NomenclatureDTO<int>> BigDogWalkLengthNomenclatures()
         {
-            List<NomenclatureDTO<int>> dogServices = (from service in db.Services
+            List<NomenclatureDTO<int>> dogServices = (from service in repository.All<Service>()
                                                       where service.AnimalTypeId == 2 && service.WalkLength != null
                                                       orderby service.Name
                                                       select new NomenclatureDTO<int>
@@ -128,8 +130,8 @@ namespace BuddyGuard.Core.Services
 
         public List<NomenclatureDTO<int>> LocationsNomenclatures()
         {
-            List<NomenclatureDTO<int>> locations = (from location in db.Locations
-                                               orderby location.Name
+            List<NomenclatureDTO<int>> locations = (from location in repository.All<Location>()
+                                                    orderby location.Name
                                                select new NomenclatureDTO<int>
                                                {
                                                    Value = location.Id,
@@ -142,8 +144,8 @@ namespace BuddyGuard.Core.Services
 
         public List<StringNomenclatureDTO> RolesNomenclatures()
         {
-            List<StringNomenclatureDTO> roles = (from role in db.Roles
-                                          orderby role.Name
+            List<StringNomenclatureDTO> roles = (from role in repository.All<IdentityRole>()
+                                                 orderby role.Name
                                           select new StringNomenclatureDTO
                                           {
                                               Value = role.Id,

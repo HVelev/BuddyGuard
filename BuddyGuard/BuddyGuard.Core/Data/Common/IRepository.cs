@@ -41,7 +41,7 @@ namespace BuddyGuard.Core.Data.Common
         /// </summary>
         /// <param name="id">record identificator</param>
         /// <returns>Single record</returns>
-        Task<T> GetByIdAsync<T>(object id) where T : class;
+        T GetById<T>(object id) where T : class;
 
         Task<T> GetByIdsAsync<T>(object[] id) where T : class;
 
@@ -73,7 +73,7 @@ namespace BuddyGuard.Core.Data.Common
         /// Deletes a record from database
         /// </summary>
         /// <param name="id">Identificator of record to be deleted</param>
-        Task DeleteAsync<T>(object id) where T : class;
+        void Delete<T>(object id) where T : class;
 
         /// <summary>
         /// Deletes a record from database
@@ -95,6 +95,8 @@ namespace BuddyGuard.Core.Data.Common
         /// Saves all made changes in trasaction
         /// </summary>
         /// <returns>Error code</returns>
-        Task<int> SaveChangesAsync();
+        int SaveChanges();
+
+        void AsNoTracking<T>();
     }
 }

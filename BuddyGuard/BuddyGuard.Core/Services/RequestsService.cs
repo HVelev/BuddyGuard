@@ -22,7 +22,7 @@ namespace BuddyGuard.Core.Services
             this.repository = repository;
         }
 
-        public async Task SubmitForm(EditRequestDTO form)
+        public void SubmitForm(EditRequestDTO form)
         {
             var request = new Request
             {
@@ -40,7 +40,7 @@ namespace BuddyGuard.Core.Services
             };
             var entity = repository.Add(request);
 
-            await repository.SaveChangesAsync();
+            repository.SaveChanges();
 
             foreach (var rs in form.Services)
             {
@@ -51,6 +51,8 @@ namespace BuddyGuard.Core.Services
                 };
 
                 repository.Add(requestService);
+
+                repository.Detach(requestService);
             }
 
             foreach (var pet in form.Pets)
@@ -63,10 +65,10 @@ namespace BuddyGuard.Core.Services
                     AnimalTypeId = pet.AnimalTypeId,
                     RequestId = entity.Id
                 };
-
                 var animalRequestEntity = repository.Add(petRequest);
 
-                await repository.SaveChangesAsync();
+
+                repository.SaveChanges();
 
                 foreach (var petService in pet.Services)
                 {
@@ -81,7 +83,7 @@ namespace BuddyGuard.Core.Services
                 }
             }
 
-            await repository.SaveChangesAsync();
+            repository.SaveChanges();
         }
     }
 }

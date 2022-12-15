@@ -6,6 +6,6 @@ namespace BuddyGuard.Core.Contracts
 {
     public interface IRequestService
     {
-        Task SubmitForm(EditRequestDTO form);
+        void SubmitForm(EditRequestDTO form);
     }
 }

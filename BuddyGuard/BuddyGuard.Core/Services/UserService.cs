@@ -1,5 +1,7 @@
 ﻿using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Common;
+using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,16 @@ namespace BuddyGuard.Core.Services
 {
     public class UserService : IUserService
     {
-        private readonly BuddyguardDbContext db;
+        private readonly IRepository repository;
 
-        public UserService(BuddyguardDbContext db)
+        public UserService(IRepository repository)
         {
-            this.db = db;
+            this.repository = repository;
         }
 
         public UserDTO GetUser(string id)
         {
-            return db.Users.Where(x => x.Id == id).Select(x => new UserDTO
+            return repository.All<User>(x => x.Id == id).Select(x => new UserDTO
             {
                 FirstName = x.FirstName,
                 LastName = x.LastName,

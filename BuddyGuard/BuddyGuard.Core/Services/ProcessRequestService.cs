@@ -1,5 +1,8 @@
-﻿using BuddyGuard.Core.Contracts;
+﻿using Amazon.Runtime.Internal;
+using BuddyGuard.Core.Contracts;
 using BuddyGuard.Core.Data;
+using BuddyGuard.Core.Data.Common;
+using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,53 +15,57 @@ namespace BuddyGuard.Core.Services
 {
     public class ProcessRequestService : IProcessRequestService
     {
-        private readonly BuddyguardDbContext dbContext;
+        private readonly IRepository repository;
 
-        public ProcessRequestService(BuddyguardDbContext dbContext)
+        public ProcessRequestService(IRepository repository)
         {
-            this.dbContext = dbContext;
+            this.repository = repository;
         }
 
 
         public RequestDTO GetRequest(int requestId)
         {
-            RequestDTO request = (from requestDb in dbContext.Requests
-                                  join user in dbContext.Users on requestDb.UserId equals user.Id
-                                  join location in dbContext.Locations on requestDb.LocationId equals location.Id
-                                  where requestDb.Id == requestId
-                                  select new RequestDTO
-                                  {
-                                      Id = requestId,
-                                      FirstName = user.FirstName,
-                                      LastName = user.LastName,
-                                      Email = user.Email,
-                                      Phone = user.PhoneNumber,
-                                      Location = location.Name,
-                                      Address = requestDb.Address,
-                                      StartDate = requestDb.StartDate,
-                                      EndDate = requestDb.EndDate,
-                                      SentDate = requestDb.RequestSentDate,
-                                      Comment = requestDb.Comment,
-                                      ClientServices = requestDb.RequestServices.Where(x => x.AnimalRequestId == null).Select(x => x.Service.Name).ToArray(),
-                                      MeetingDate = requestDb.MeetingDate,
-                                      Price = requestDb.Price
-                                  }).First();
+            string location = repository.All<Request>(x => x.Id == requestId).Include(x => x.Location).First().Location.Name;
 
-            var animalRequestServices = dbContext.RequestServices.Where(x => x.RequestId == requestId && x.AnimalRequestId != null).Include(x => x.Service).ToList();
+            RequestDTO request = 
+                (from requests in repository.All<Request>()
+                join user in repository.All<User>() on requests.UserId equals user.Id
+                where requests.Id == requestId
+                select new RequestDTO
+                {
+                    Id = requestId,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Phone = user.PhoneNumber,
+                    Location = location,
+                    Address = requests.Address,
+                    StartDate = requests.StartDate,
+                    EndDate = requests.EndDate,
+                    SentDate = requests.RequestSentDate,
+                    Comment = requests.Comment,
+                    ClientServices = requests.RequestServices.Where(x => x.AnimalRequestId == null).Select(x => x.Service.Name).ToArray(),
+                    MeetingDate = requests.MeetingDate,
+                    Price = requests.Price
+                }
+            ).First();
 
-            PetDTO[] pets = (from requestDb in dbContext.Requests
-                             where requestDb.Id == requestId
-                             join animalRequest in dbContext.AnimalRequests on requestDb.Id equals animalRequest.RequestId
-                             join animalType in dbContext.AnimalTypes on animalRequest.AnimalTypeId equals animalType.Id
-                             select new PetDTO
-                             {
-                                 Name = animalRequest.AnimalName,
-                                 AnimalType = animalType.Name,
-                                 PetDescription = animalRequest.PetDescription,
-                                 Species = animalRequest.AnimalSpecies,
-                                 DogWalkLength = dbContext.RequestServices.Where(x => x.RequestId == requestId && x.AnimalRequestId == animalRequest.Id && x.Service.WalkLength != null).Select(x => x.Service.Name).First(),
-                                 Services = dbContext.RequestServices.Where(x => x.RequestId == requestId && x.AnimalRequestId == animalRequest.Id).Include(x => x.Service).Select(x => x.Service.Name).ToArray()
-                             }).ToArray();
+            var animalRequestServices = repository.All<RequestService>(x => x.RequestId == requestId && x.AnimalRequestId != null).Include(x => x.Service).ToList();
+
+            PetDTO[] pets = (from req in repository.All<Request>()
+            where req.Id == requestId
+            join ar in repository.All<AnimalRequest>() on req.Id equals ar.RequestId
+            join at in repository.All<AnimalType>() on ar.AnimalTypeId equals at.Id
+            select new PetDTO
+            {
+                Name = ar.AnimalName,
+                AnimalType = at.Name,
+                PetDescription = ar.PetDescription,
+                Species = ar.AnimalSpecies,
+                DogWalkLength = repository.All<RequestService>().Where(x => x.RequestId == requestId && x.AnimalRequestId == ar.Id && x.Service.WalkLength != null).Select(x => x.Service.Name).First(),
+                Services = repository.All<RequestService>().Where(x => x.RequestId == requestId && x.AnimalRequestId == ar.Id).Include(x => x.Service).Select(x => x.Service.Name).ToArray()
+            }
+            ).ToArray();
 
             request.Pets = pets;
 
@@ -67,7 +74,7 @@ namespace BuddyGuard.Core.Services
 
         public List<RequestDTO> GetAllRequests(bool isForNotif, bool isAccepted)
         {
-            var result = dbContext.Requests.Where(r => isForNotif ? !r.IsRead : true && r.IsAccepted == isAccepted).Include(r => r.Location).Include(r => r.User).Include(r => r.RequestServices).ThenInclude(rs => rs.Service);
+            var result = repository.All<Request>().Where(r => isForNotif ? !r.IsRead : true && r.IsAccepted == isAccepted).Include(r => r.Location).Include(r => r.User).Include(r => r.RequestServices).ThenInclude(rs => rs.Service);
 
             if (isForNotif)
             {
@@ -109,31 +116,35 @@ namespace BuddyGuard.Core.Services
 
         public void MarkRequestAsRead(int id)
         {
-            var request = dbContext.Requests.Where(x => x.Id == id).First();
+            var request = repository.GetById<Request>(id);
             request.IsRead = true;
 
-            dbContext.SaveChanges();
+            repository.SaveChanges();
         }
 
         public string AcceptRequest(int id)
         {
-            var request = dbContext.Requests.Where(x => x.Id == id).First();
+            var request = repository.GetById<Request>(id);
             request.IsAccepted = true;
 
-            dbContext.SaveChanges();
+            repository.SaveChanges();
 
-            return dbContext.Users.Where(x => x.Id == request.UserId).First().Email;
+            string email = repository.GetById<User>(request.UserId).Email;
+
+            return email;
         }
 
         public string DeleteRequest(int id)
         {
-            var entity = dbContext.Requests.Where(x => x.Id == id).First();
+            var entity = repository.GetById<Request>(id);
 
-            dbContext.Requests.Remove(entity);
+            repository.Delete<Request>(id);
 
-            dbContext.SaveChanges();
+            repository.SaveChanges();
 
-            return dbContext.Users.Where(x => x.Id == entity.UserId).First().Email;
+            string email = repository.GetById<User>(entity.UserId).Email;
+
+            return email;
         }
     }
 }

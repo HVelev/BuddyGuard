@@ -89,9 +89,9 @@ namespace BuddyGuard.Core.Data.Common
         /// Deletes a record from database
         /// </summary>
         /// <param name="id">Identificator of record to be deleted</param>
-        public async Task DeleteAsync<T>(object id) where T : class
+        public void Delete<T>(object id) where T : class
         {
-            T entity = await GetByIdAsync<T>(id);
+            T entity = GetById<T>(id);
 
             Delete<T>(entity);
         }
@@ -138,9 +138,9 @@ namespace BuddyGuard.Core.Data.Common
         /// </summary>
         /// <param name="id">record identificator</param>
         /// <returns>Single record</returns>
-        public async Task<T> GetByIdAsync<T>(object id) where T : class
+        public T GetById<T>(object id) where T : class
         {
-            return await DbSet<T>().FindAsync(id);
+            return DbSet<T>().Find(id);
         }
 
         public async Task<T> GetByIdsAsync<T>(object[] id) where T : class
@@ -152,9 +152,9 @@ namespace BuddyGuard.Core.Data.Common
         /// Saves all made changes in trasaction
         /// </summary>
         /// <returns>Error code</returns>
-        public async Task<int> SaveChangesAsync()
+        public int SaveChanges()
         {
-            return await this.Context.SaveChangesAsync();
+            return this.Context.SaveChanges();
         }
 
         /// <summary>
@@ -186,5 +186,17 @@ namespace BuddyGuard.Core.Data.Common
             DeleteRange(entities);
         }
 
+        public void AsNoTracking<T>()
+        {
+            Context.Requests.AsNoTracking();
+            Context.AnimalTypes.AsNoTracking();
+            Context.AnimalRequests.AsNoTracking();
+            Context.Services.AsNoTracking();
+            Context.RequestServices.AsNoTracking();
+            Context.Locations.AsNoTracking();
+            Context.Users.AsNoTracking();
+            Context.UserRoles.AsNoTracking();
+            Context.Roles.AsNoTracking();
+        }
     }
 }

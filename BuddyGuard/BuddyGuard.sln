@@ -9,7 +9,7 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BuddyGuard.Web", "BuddyGuar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuddyGuard.Core", "BuddyGuard.Core\BuddyGuard.Core.csproj", "{779B5F98-4476-4D2E-8D05-9A3888286E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuddyGuard.UnitTests", "BuddyGuard.UnitTests\BuddyGuard.UnitTests.csproj", "{CA36EED0-43EE-4D82-94C7-0BDFD4EA4772}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuddyGuard.UnitTests", "BuddyGuard.UnitTests\BuddyGuard.UnitTests.csproj", "{7EE4304B-E4A2-4046-85B0-26CFEF6A6431}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,10 @@ Global
 		{779B5F98-4476-4D2E-8D05-9A3888286E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{779B5F98-4476-4D2E-8D05-9A3888286E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{779B5F98-4476-4D2E-8D05-9A3888286E4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA36EED0-43EE-4D82-94C7-0BDFD4EA4772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA36EED0-43EE-4D82-94C7-0BDFD4EA4772}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA36EED0-43EE-4D82-94C7-0BDFD4EA4772}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA36EED0-43EE-4D82-94C7-0BDFD4EA4772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EE4304B-E4A2-4046-85B0-26CFEF6A6431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EE4304B-E4A2-4046-85B0-26CFEF6A6431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EE4304B-E4A2-4046-85B0-26CFEF6A6431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EE4304B-E4A2-4046-85B0-26CFEF6A6431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

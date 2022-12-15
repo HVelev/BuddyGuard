@@ -227,3 +227,26 @@ C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard.Core\
 C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\System.Security.Cryptography.Xml.dll
 C:\Users\ic0o\Documents\BuddyGuard\HVelev\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Abstractions.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Cookies.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Core.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.DataProtection.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.DataProtection.Abstractions.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Hosting.Abstractions.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Http.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Extensions.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNetCore.WebUtilities.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.Extensions.ObjectPool.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.Extensions.WebEncoders.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\System.Security.Cryptography.Xml.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\EntityFramework.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
+C:\Personal projects\BuddyGuard\BuddyGuard\BuddyGuard.Core\bin\Debug\net6.0\Microsoft.AspNet.Identity.EntityFramework.dll
