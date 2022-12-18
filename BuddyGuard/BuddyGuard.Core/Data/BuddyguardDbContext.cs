@@ -2,6 +2,7 @@
 using BuddyGuard.Core.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Xml;
 
 namespace BuddyGuard.Core.Data
 {
@@ -29,6 +30,7 @@ namespace BuddyGuard.Core.Data
             builder.Entity<RequestService>().HasKey(x => new { x.ServiceId, x.RequestId });
             builder.Entity<Request>().Property(x => x.LocationId).HasColumnName("LocationId");
             builder.Entity<Request>().HasOne(x => x.Location).WithMany(x => x.Requests).IsRequired().OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Request>(entity => entity.HasCheckConstraint("CK_Request_LocationId", "LocationId > 0"));
 
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());

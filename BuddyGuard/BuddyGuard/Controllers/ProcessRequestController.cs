@@ -22,7 +22,7 @@ namespace BuddyGuard.API.Controllers
         }
 
 
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpGet]
         public IActionResult GetAllUnreadRequests()
         {
@@ -31,7 +31,7 @@ namespace BuddyGuard.API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpGet]
         public IActionResult GetAllRequests()
         {
@@ -40,7 +40,7 @@ namespace BuddyGuard.API.Controllers
             return Ok(result);
         }
         
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpGet]
         public IActionResult GetAllAcceptedRequests()
         {
@@ -49,7 +49,7 @@ namespace BuddyGuard.API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpGet]
         public IActionResult GetRequest([FromQuery] int requestId)
         {
@@ -58,7 +58,7 @@ namespace BuddyGuard.API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpPut]
         public IActionResult MarkRequestAsRead([FromQuery] int id)
         {
@@ -67,7 +67,7 @@ namespace BuddyGuard.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpPut]
         public IActionResult AcceptRequest([FromQuery] int id)
         {
@@ -78,7 +78,7 @@ namespace BuddyGuard.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpDelete]
         public IActionResult RejectRequest([FromQuery] int id)
         {
@@ -89,7 +89,7 @@ namespace BuddyGuard.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = nameof(RoleEnums.Admin))]
+        [Authorize(Roles = nameof(RoleEnum.Admin))]
         [HttpDelete]
         public IActionResult DeleteRequest([FromQuery] int id)
         {

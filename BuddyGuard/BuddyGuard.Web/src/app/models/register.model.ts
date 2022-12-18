@@ -15,7 +15,5 @@ export class RegisterDTO {
 
   public password!: string;
 
-  public address!: string;
-
   public role!: string;
 }

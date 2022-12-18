@@ -13,7 +13,14 @@ namespace BuddyGuard.Core.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Location> builder)
         {
-            builder.HasData(new Location()
+            builder.HasData(CreateLocations());
+        }
+
+        public List<Location> CreateLocations()
+        {
+            return new List<Location>()
+            {
+                new Location()
             {
                 Id = 1, Name = "Абдовица",
                 Price = 4.99M
@@ -542,7 +549,8 @@ namespace BuddyGuard.Core.Data.Configuration
             {
                 Id = 106, Name = "Яворов",
                 Price = 4.99M
-            });
+            }
+            };
         }
     }
 }

@@ -7,7 +7,7 @@
     </div>
     <div fxLayoutAlign="center center">
       <mat-form-field fxFlex="50">
-        <input matInput [(ngModel)]="imageDescription" placeholder="Описание" formControlName="descriptionControl">
+        <input matInput placeholder="Описание" formControlName="descriptionControl">
       </mat-form-field>
     </div>
     <div fxLayoutAlign="center center">
@@ -22,21 +22,21 @@
     <div fxLayoutAlign="center center">
       <button mat-raised-button color="primary" (click)="addImage()">Добави</button>
     </div>
-    <div fxLayoutAlign="center center">
-      <button mat-raised-button color="primary" (click)="getImages()">Get Images</button>
-    </div>
   </mat-card>
 </div>
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
   <h2 class="brown"><strong>Приятелчета, за които сме се грижили:</strong></h2>
   <div class="d-flex flex-wrap" fxLayoutAlign="center">
-    <div *ngFor="let imgDto of images" class="card m-3">
-      <button mat-mini-fab color="warn" (click)="openDialog(imgDto.name!)">
+    <div *ngFor="let imgDto of images" class="card m-3 pic">
+      <button class="show-on-top" mat-mini-fab color="warn" (click)="openDialog(imgDto.name!)">
         <mat-icon>delete</mat-icon>
       </button>
       <img class="original"
            [alt]="imgDto"
            [src]="imgDto.imageUrl" />
+      <span class="imgtext">
+        <p>{{ imgDto.description }}</p>
+      </span>
     </div>
   </div>
 </div>

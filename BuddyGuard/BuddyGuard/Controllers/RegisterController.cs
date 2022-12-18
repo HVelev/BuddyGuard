@@ -28,9 +28,14 @@ namespace BuddyGuard.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO userModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             try
             {
-                var doesUserExist = repository.All<User>().Where(x => x.Email == userModel.Email).Count() > 0;
+                var doesUserExist = repository.All<User>().Where(x => x.Email == userModel.Email || x.UserName == userModel.Username).Count() > 0;
 
                 if (doesUserExist)
                 {

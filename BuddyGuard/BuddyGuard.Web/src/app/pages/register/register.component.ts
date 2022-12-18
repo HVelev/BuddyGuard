@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
     this.snackbar = snackbar;
 
     this.form = new FormGroup({
-      emailControl: new FormControl(undefined, Validators.required),
+      emailControl: new FormControl(undefined, [Validators.required, Validators.email]),
       usernameControl: new FormControl(undefined, Validators.required),
       passwordControl: new FormControl(undefined, Validators.required),
       confirmPasswordControl: new FormControl(undefined, Validators.required),
@@ -37,8 +37,7 @@ export class RegisterComponent implements OnInit {
       phoneControl: new FormControl(undefined, Validators.required),
       firstNameControl: new FormControl(undefined, Validators.required),
       lastNameControl: new FormControl(undefined, Validators.required),
-      addressControl: new FormControl(undefined, Validators.required),
-    }, this.passwordMatchingValidatior);
+    });
 
     this.router = router;
   }
@@ -52,36 +51,32 @@ export class RegisterComponent implements OnInit {
   }
 
   public register(): void {
-    const formDTO = new RegisterDTO({
-      email: this.form.get('emailControl')!.value,
-      username: this.form.get('usernameControl')!.value,
-      address: this.form.get('addressControl')!.value,
-      firstName: this.form.get('firstNameControl')!.value,
-      lastName: this.form.get('lastNameControl')!.value,
-      phone: this.form.get('phoneControl')!.value,
-      password: this.form.get('passwordControl')!.value,
-      role: this.form.get('roleControl')!.value!.displayName,
-    });
+    this.form.markAllAsTouched();
+    
+    if (this.form.valid) {
+      const formDTO = new RegisterDTO({
+        email: this.form.get('emailControl')!.value,
+        username: this.form.get('usernameControl')!.value,
+        firstName: this.form.get('firstNameControl')!.value,
+        lastName: this.form.get('lastNameControl')!.value,
+        phone: this.form.get('phoneControl')!.value,
+        password: this.form.get('passwordControl')!.value,
+        role: this.form.get('roleControl')!.value!.displayName,
+      });
 
-    this.service.register(formDTO).subscribe({
-      next: () => {
-        this.router.navigate(['/login']);
-      },
-      error: (error: any) => {
-        if (error.status === 422) {
-          this.snackbar.open('Вече съществува потребител със същия имейл', "Close", {
-            duration: 2000,
-            panelClass: 'red-snackbar'
-          });
+      this.service.register(formDTO).subscribe({
+        next: () => {
+          this.router.navigate(['/login']);
+        },
+        error: (error: any) => {
+          if (error.status === 422) {
+            this.snackbar.open('Вече съществува потребител със същия имейл', "Close", {
+              duration: 2000,
+              panelClass: 'red-snackbar'
+            });
+          }
         }
-      }
-    });
-  }
-
-  private passwordMatchingValidatior: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('passwordControl');
-    const confirmPassword = control.get('confirmPasswordControl');
-
-    return password?.value === confirmPassword?.value ? null : { notmatched: true };
+      });
+    }
   }
 }

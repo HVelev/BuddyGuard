@@ -22,15 +22,15 @@ namespace BuddyGuard.Core.Services
             this.repository = repository;
         }
 
-        public void SubmitForm(EditRequestDTO form)
+        public int SubmitForm(EditRequestDTO form)
         {
             var request = new Request
             {
                 LocationId = form.LocationId,
                 Address = form.Address,
                 UserId = form.UserId,
-                StartDate = form.StartDate,
-                EndDate = form.EndDate,
+                StartDate = form.StartDate.Value,
+                EndDate = form.EndDate.Value,
                 RequestSentDate = DateTime.Now,
                 MeetingDate = form.MeetingDate,
                 Comment = form.Comment,
@@ -51,8 +51,6 @@ namespace BuddyGuard.Core.Services
                 };
 
                 repository.Add(requestService);
-
-                repository.Detach(requestService);
             }
 
             foreach (var pet in form.Pets)
@@ -70,20 +68,25 @@ namespace BuddyGuard.Core.Services
 
                 repository.SaveChanges();
 
-                foreach (var petService in pet.Services)
+                if (pet.Services != null && pet.Services.Length > 0)
                 {
-                    RequestService requestService = new RequestService()
+                    foreach (var petService in pet.Services)
                     {
-                        RequestId = entity.Id,
-                        ServiceId = petService,
-                        AnimalRequestId = animalRequestEntity.Id
-                    };
+                        RequestService requestService = new RequestService()
+                        {
+                            RequestId = entity.Id,
+                            ServiceId = petService,
+                            AnimalRequestId = animalRequestEntity.Id
+                        };
 
-                    repository.Add(requestService);
+                        repository.Add(requestService);
+                    }
                 }
             }
 
             repository.SaveChanges();
+
+            return request.Id;
         }
     }
 }

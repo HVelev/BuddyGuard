@@ -15,8 +15,6 @@ export class BuddiesComponent implements OnInit {
   private imageService: ImageService;
   private snackbar: MatSnackBar;
 
-  public imageTitle: string | undefined;
-  public imageDescription: string | undefined;
   public imageFile!: File;
   public images: ImageDTO[] = [];
   public role: string | undefined | null;
@@ -68,8 +66,6 @@ export class BuddiesComponent implements OnInit {
     this.form.get('imageControl')!.markAsDirty();
     this.form.get('imageControl')!.markAsTouched();
 
-    console.log(this.imageFile.type);
-
     if (this.imageFile.size >= 10485760) {
       this.snackbar.open('Максималният размер за качване на снимка е 10MB', 'Затвори', {
         duration: 4000,
@@ -77,17 +73,14 @@ export class BuddiesComponent implements OnInit {
       });
 
       this.form.get('imageControl')!.reset();
-      this.imageTitle = "";
-      this.imageDescription = "";
-
+      this.form.get('descriptionControl')!.reset();
 
       return;
     }
 
     if (this.form.valid) {
       let infoObject = {
-        title: this.imageTitle,
-        description: this.imageDescription
+        description: this.form.get('descriptionControl')!.value
       }
 
       this.imageService.uploadImage(this.imageFile, infoObject).subscribe({
@@ -97,13 +90,11 @@ export class BuddiesComponent implements OnInit {
           });
 
           this.form.get('imageControl')!.reset();
-          this.imageTitle = "";
-          this.imageDescription = "";
+          this.form.get('descriptionControl')!.reset();
 
           this.getData();
         },
         error: (err: any) => {
-          debugger;
           if (err.status === 422) {
             this.snackbar.open('Файлът, който се опитвате да качите, има невалиден формат', 'Затвори', {
               duration: 4000,

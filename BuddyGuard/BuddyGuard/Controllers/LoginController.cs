@@ -1,15 +1,10 @@
 ﻿using BuddyGuard.Core.Contracts;
-using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Models;
 using BuddyGuard.Core.Enums;
 using BuddyGuard.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace BuddyGuard.API.Controllers
 {
@@ -19,7 +14,7 @@ namespace BuddyGuard.API.Controllers
         private UserManager<User> userManager;
         private ILoginService loginService;
 
-        public LoginController(UserManager<User> userManager, BuddyguardDbContext dbContext, IHttpContextAccessor contextAccessor, ILoginService loginService)
+        public LoginController(UserManager<User> userManager, ILoginService loginService)
         {
             this.userManager = userManager;
             this.loginService = loginService;
@@ -29,19 +24,24 @@ namespace BuddyGuard.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var user = await userManager.FindByNameAsync(login.Username);
+                try
+                {
+                    var user = await userManager.FindByNameAsync(login.Username);
 
-                LoginDTO userDto = await loginService.Login(user, login.Password);
+                    LoginDTO userDto = await loginService.Login(user, login.Password);
 
-                return Ok(userDto);
+                    return Ok(userDto);
+                }
+                catch (UnauthorizedAccessException)
+                {
+
+                    return Unauthorized();
+                }
             }
-            catch (UnauthorizedAccessException)
-            {
 
-                return Unauthorized();
-            }
+            return Unauthorized();
         }
 
         [AllowAnonymous]
@@ -53,9 +53,9 @@ namespace BuddyGuard.API.Controllers
             return Ok(result);
         }
 
-        public async Task<IActionResult> IsLoggedInAsUser(string token)
+        public IActionResult IsLoggedInAsUser(string token)
         {
-            var isInRole = User.IsInRole(nameof(RoleEnums.User));
+            var isInRole = User.IsInRole(nameof(RoleEnum.User));
 
             if (!isInRole)
             {
@@ -69,7 +69,7 @@ namespace BuddyGuard.API.Controllers
         
         public IActionResult IsLoggedInAsAdmin(string token)
         {
-            var isInRole = User.IsInRole(nameof(RoleEnums.Admin));
+            var isInRole = User.IsInRole(nameof(RoleEnum.Admin));
 
             if (!isInRole)
             {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,8 +52,8 @@ namespace BuddyGuard.Core.Services
             ).First();
 
             var animalRequestServices = repository.All<RequestService>(x => x.RequestId == requestId && x.AnimalRequestId != null).Include(x => x.Service).ToList();
-
-            PetDTO[] pets = (from req in repository.All<Request>()
+            
+            var petsQuery = from req in repository.All<Request>()
             where req.Id == requestId
             join ar in repository.All<AnimalRequest>() on req.Id equals ar.RequestId
             join at in repository.All<AnimalType>() on ar.AnimalTypeId equals at.Id
@@ -62,12 +63,19 @@ namespace BuddyGuard.Core.Services
                 AnimalType = at.Name,
                 PetDescription = ar.PetDescription,
                 Species = ar.AnimalSpecies,
-                DogWalkLength = repository.All<RequestService>().Where(x => x.RequestId == requestId && x.AnimalRequestId == ar.Id && x.Service.WalkLength != null).Select(x => x.Service.Name).First(),
-                Services = repository.All<RequestService>().Where(x => x.RequestId == requestId && x.AnimalRequestId == ar.Id).Include(x => x.Service).Select(x => x.Service.Name).ToArray()
-            }
-            ).ToArray();
+                DogWalkLength = repository.All<RequestService>().Where(x => x.RequestId == requestId && x.AnimalRequestId == ar.Id && x.Service.WalkLength != null).Select(x => x.Service.Name).FirstOrDefault(),
+                Services = animalRequestServices != null ? animalRequestServices.Select(x => x.Service.Name).ToArray() : null
+            };
 
-            request.Pets = pets;
+            var firstOrDefault = petsQuery.FirstOrDefault();
+
+            if (firstOrDefault != null)
+            {
+                var pets = petsQuery.ToArray();
+
+                request.Pets = pets;
+            }
+
 
             return request;
         }
@@ -102,6 +110,7 @@ namespace BuddyGuard.Core.Services
             {
                 return result.OrderBy(x => x.StartDate).Select(x => new RequestDTO
                 {
+                    Id = x.Id,
                     FirstName = x.User.FirstName,
                     LastName = x.User.LastName,
                     Phone = x.User.PhoneNumber,

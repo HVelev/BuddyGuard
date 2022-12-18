@@ -13,7 +13,14 @@ namespace BuddyGuard.Core.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<AnimalType> builder)
         {
-            builder.HasData(new AnimalType()
+            builder.HasData(CreatePetTypes());
+        }
+
+        public List<AnimalType> CreatePetTypes()
+        {
+            return new List<AnimalType>()
+            {
+                new AnimalType()
             {
                 Id = 1,
                 Name = "Малко куче"
@@ -32,7 +39,8 @@ namespace BuddyGuard.Core.Data.Configuration
             {
                 Id = 4,
                 Name = "Друго"
-            });
+            }
+            };
         }
-    }
+     }
 }

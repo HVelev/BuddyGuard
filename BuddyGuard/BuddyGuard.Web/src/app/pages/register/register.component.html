@@ -2,38 +2,64 @@
      fxLayoutAlign="center center"
      fxLayoutGap="2em"
      [formGroup]="form">
-  <img src="https://lh6.googleusercontent.com/Jw4dgmLjdR40kLusQBNBaDUNF4ZU_g8DA51bStbmnJmYyb9LQB8KMpz01SK-ypEsrxHXStj8gCqQRHCYJAB6wIB84g6q-3JhXfCEAGmK1RE4wLLZQ8RAcBE1RFX_HpAPuQ=w500" alt="Alternate Text" />
+  <img src="../../../assets/pics/AF1QipPY_x9ztT-vrIL_vnKzzsoKuGRFmIIwaU3smp4H=w1411-h353.png" alt="Alternate Text" />
   <mat-form-field appearance="fill">
     <mat-label>Име</mat-label>
     <input matInput formControlName="firstNameControl" placeholder="Име">
+    <mat-error *ngIf="form.get('firstNameControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Фамилия</mat-label>
     <input matInput formControlName="lastNameControl" placeholder="Фамилия">
+    <mat-error *ngIf="form.get('lastNameControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Имейл</mat-label>
     <input matInput formControlName="emailControl" placeholder="Имейл">
+    <mat-error *ngIf="form.get('emailControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
+    <mat-error *ngIf="form.get('emailControl')!.hasError('email')">
+      Невалиден имейл
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Потребителско име</mat-label>
     <input matInput formControlName="usernameControl" placeholder="Потребителско име">
+    <mat-error *ngIf="form.get('usernameControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Парола</mat-label>
     <input matInput formControlName="passwordControl" type="password" placeholder="Парола">
+    <mat-error *ngIf="form.get('passwordControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
+    <mat-error *ngIf="form.get('confirmPasswordControl')!.value !== form.get('passwordControl')!.value">
+      Паролите не съвпадат
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Потвърди паролата</mat-label>
     <input matInput formControlName="confirmPasswordControl" type="password" placeholder="Потвърждение">
+    <mat-error *ngIf="form.get('confirmPasswordControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Адрес</mat-label>
-    <input matInput formControlName="addressControl" placeholder="Адрес">
-  </mat-form-field>
+    <mat-error *ngIf="form.get('confirmPasswordControl')!.value !== form.get('passwordControl')!.value">
+      Паролите не съвпадат
+    </mat-error>
   <mat-form-field appearance="fill">
     <mat-label>Телефон</mat-label>
     <input matInput formControlName="phoneControl" placeholder="Телефон">
+    <mat-error *ngIf="form.get('phoneControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Роля</mat-label>
@@ -42,6 +68,9 @@
         {{ role.displayName }}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="form.get('roleControl')!.hasError('required')">
+      Полето е задължително
+    </mat-error>
   </mat-form-field>
   <button mat-raised-button color="accent" (click)="register()">Регистрация</button>
 </div>

@@ -11,7 +11,7 @@ namespace BuddyGuard.Core.Models
 {
     public class LoginDTO
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         [Required]
         public string Username { get; set; }
@@ -19,17 +19,16 @@ namespace BuddyGuard.Core.Models
         [Required]
         public string Password { get; set; }
 
-        [Required]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
-        public string Email { get; set; }
+        public string? Email { get; set; }
     }
 }

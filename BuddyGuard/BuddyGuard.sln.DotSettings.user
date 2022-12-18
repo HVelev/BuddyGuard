@@ -1,5 +1,45 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f16b79b1_002De8e0_002D40d6_002Db087_002D66428018f772/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ValidLoginTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\hvelev\AppData\Local\Temp\JetBrains\ReSharperPlatformVs17\vAny_1e219644\CoverageData\_BuddyGuard.392212250\Snapshot\snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3da6dfa5_002Df723_002D4b8f_002Daa6c_002D001e6a8ecde4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AcceptRequestWorksCorrectly" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.AcceptRequestWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.DeleteRequestWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetRequestWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.MarkRequestAsReadWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureThatLocationsNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureThatRolesNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureThatAnimalTypesNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureThatCatServicesNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureThatClientServicesNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureThatSmallDogServicesNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureSmallDogWalkLengthNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureBigDogServicesNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.NomenclaturesServiceTests.EnsureBigDogWalkLengthNomenclaturesWorksCorrectly&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.MailServiceTests.AssertThatCreateEmailGeneratesCorrectEmail&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.MailServiceTests.AssertThatGetClientGeneratesCorrectSMTPServer&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.MailServiceTests.AssertThatMessageGetsSent&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ImageServiceTests.AssertThatMessageIsUploaded&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ImageServiceTests.AssertThatAllImagesAreReceived&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ImageServiceTests.AssertThatImageIsUploaded&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ImageServiceTests.AssertThatImageIsDeleted&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ImageServiceTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=94b936ff_002D7e2c_002D4771_002Da8cf_002D9f6bed203738/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="RequestServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.RequestServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllRequestsReturnsCorrectCount&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllRequestsReturnsCorrectCountWithReadRequest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllRequestsReturnsCorrectCountWithAcceptedRequest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllRequestsReturnsCorrectCountWithAcceptedRequests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllRequestsReturnsCorrectCountWithReadRequestsForNotif&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllRequestsReturnsCorrectCountWithReadRequestForNotif&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllRequestsReturnsCorrectAcceptedCount&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.GetAllAcceptedRequestsReturnsZero&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.AcceptRequestWorksCorrectly&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f16b79b1_002De8e0_002D40d6_002Db087_002D66428018f772/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ValidLoginTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.RequestServiceTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;

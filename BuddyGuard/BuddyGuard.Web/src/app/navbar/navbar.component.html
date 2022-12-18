@@ -6,7 +6,7 @@
         <div fxLayoutAlign="space-around center" fxLayout="row">
           <button mat-icon-button (click)="emitEventToChild()"><mat-icon>menu</mat-icon></button>
           <div>
-            <img routerLink="/" src="https://static.wixstatic.com/media/3df67c_cb863e11b4b84f02be5becddd8bbf49d~mv2.png/v1/fill/w_475,h_90,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Buddy%20Guard%20-%20Horizontal.png" />
+            <img routerLink="/" src="../../assets/pics/Buddy Guard - Horizontal (1).webp" />
           </div>
         </div>
         <div>
@@ -28,12 +28,12 @@
               <div fxLayout="row"
                    fxLayoutAlign="center center"
                    class="notification-margin">
-                <mat-icon class="smallIcon" fxFlex="5">mail</mat-icon>
-                <div fxFlex="80" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10" (click)="openRequestDialog(notification.id)">
+                <mat-icon class="smallIcon" fxFlex="10">mail</mat-icon>
+                <div fxFlex="85" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10" (click)="openRequestDialog(notification.id)">
                   <p>Имате нова заявка за {{ datePipe.transform(notification.startDate, 'dd/MM/yyyy') }}</p>
                   <mat-card-subtitle>{{ notification.sentDate!.toLocaleString() | timeAgo }}</mat-card-subtitle>
                 </div>
-                <div fxFlex="10" fxLayoutAlign="start end">
+                <div fxFlex="5" fxLayoutAlign="start end">
                   <button mat-mini-fab color="primary" class="read-btn">
                   </button>
                 </div>

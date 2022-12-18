@@ -259,18 +259,26 @@ export class RequestComponent implements OnInit, AfterViewInit {
       this.animalServices[index] = [];
       this.petWalkLengths[index] = [];
       this.isVisible[index] = false;
+      this.formArrayControls.at(index).get('descriptionControl')!.setValidators(Validators.required);
+      this.formArrayControls.at(index).get('descriptionControl')!.updateValueAndValidity();
     } else if (event.value.displayName === 'Котка') {
       this.animalServices[index] = this.catServices;
       this.petWalkLengths[index] = [];
       this.isVisible[index] = true;
+      this.formArrayControls.at(index).get('descriptionControl')!.removeValidators(Validators.required);
+      this.formArrayControls.at(index).get('descriptionControl')!.updateValueAndValidity();
     } else if (event.value.displayName === 'Малко куче') {
       this.animalServices[index] = this.smallDogServices;
       this.petWalkLengths[index] = this.smallDogWalkLengths;
       this.isVisible[index] = true;
+      this.formArrayControls.at(index).get('descriptionControl')!.removeValidators(Validators.required);
+      this.formArrayControls.at(index).get('descriptionControl')!.updateValueAndValidity();
     } else if (event.value.displayName === 'Голямо куче') {
       this.animalServices[index] = this.bigDogServices;
       this.petWalkLengths[index] = this.bigDogWalkLengths;
       this.isVisible[index] = true;
+      this.formArrayControls.at(index).get('descriptionControl')!.removeValidators(Validators.required);
+      this.formArrayControls.at(index).get('descriptionControl')!.updateValueAndValidity();
     }
   }
 

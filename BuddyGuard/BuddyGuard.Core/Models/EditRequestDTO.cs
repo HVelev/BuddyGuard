@@ -1,4 +1,6 @@
-﻿namespace BuddyGuard.Core.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BuddyGuard.Core.Models
 {
     public class EditRequestDTO
     {
@@ -9,15 +11,21 @@
 
         public decimal TotalAmount { get; set; }
 
+        [Required]
         public string UserId { get; set; }
 
+        [Required]
+        [Range(1, int.MaxValue)]
         public int LocationId { get; set; }
 
+        [Required]
         public string Address { get; set; }
 
-        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime? StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        [Required]
+        public DateTime? EndDate { get; set; }
 
         public DateTime RequestSentDate { get; set; }
 
@@ -26,7 +34,8 @@
         public string? Comment { get; set; }
 
         public bool IsRead { get; set; }
-
+        
+        [Required]
         public EditPetDTO[] Pets { get; set; }
 
         public List<int> Services { get; set; }

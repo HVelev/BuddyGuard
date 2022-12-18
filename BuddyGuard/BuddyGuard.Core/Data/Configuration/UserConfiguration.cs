@@ -17,7 +17,7 @@ namespace BuddyGuard.Core.Data.Configuration
             builder.HasData(CreateUsers());
         }
 
-        private List<User> CreateUsers()
+        public List<User> CreateUsers()
         {
             var users = new List<User>();
 

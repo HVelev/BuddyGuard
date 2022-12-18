@@ -9,6 +9,7 @@ using Amazon.S3.Model;
 using BuddyGuard.Core.Models;
 using System.Net;
 using System.Threading.Tasks.Dataflow;
+using BuddyGuard.Core.Enums;
 
 namespace BuddyGuard.Core.Services
 {
@@ -20,19 +21,9 @@ namespace BuddyGuard.Core.Services
 
             var extension = Path.GetExtension(fileName);
 
-            if (extension == null 
-                || extension == string.Empty 
-                || extension != ".png" 
-                || extension != ".gif" 
-                || extension != ".svg"
-                || extension != ".jpg"
-                || extension != ".jpeg"
-                || extension != ".jfif"
-                || extension != ".pjp"
-                || extension != ".avif"
-                || extension != ".apng"
-                || extension != ".webp"
-                || extension != ".pjpeg")
+            if (extension == null
+                || extension == string.Empty
+                || !Enum.IsDefined(typeof(ExtensionsEnum), extension.Remove(0, 1)))
             {
                 throw new ArgumentException();
             }
@@ -42,6 +33,11 @@ namespace BuddyGuard.Core.Services
             var bucketRegion = Amazon.RegionEndpoint.USEast1;
             var s3 = new AmazonS3Client(awsKey, awsSecretKey, bucketRegion);
             var putRequest = new PutObjectRequest();
+            putRequest.TagSet.Add(new Tag
+            {
+                Key = "description",
+                Value = image.Description
+            });
             putRequest.BucketName = "buddyguard";
             putRequest.ContentType = "image/jpeg";
             putRequest.InputStream = image.Image.OpenReadStream();
@@ -76,10 +72,28 @@ namespace BuddyGuard.Core.Services
 
                     var url = s3.GetPreSignedURL(request);
 
+                    var tagRequest = new GetObjectTaggingRequest()
+                    {
+                        BucketName = "buddyguard",
+                        Key = obj.Key
+                    };
+
+                    var response = await s3.GetObjectTaggingAsync(tagRequest);
+
+                    var tag = response.Tagging.FirstOrDefault(x => x.Key == "description");
+
+                    string? description = null;
+
+                    if (tag != null)
+                    {
+                        description = tag.Value;
+                    }
+
                     images.Add(new ImageDTO
                     {
                         Name = request.Key,
                         ImageUrl = url,
+                        Description = description
                     });
                 }
 

@@ -13,7 +13,14 @@ namespace BuddyGuard.Core.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Service> builder)
         {
-            builder.HasData(new Service()
+            builder.HasData(CreateServices());
+        }
+
+        public List<Service> CreateServices()
+        {
+            return new List<Service>()
+            {
+                new Service()
             {
                 Id = 1,
                 AnimalTypeId = 1,
@@ -242,7 +249,8 @@ namespace BuddyGuard.Core.Data.Configuration
                 Name = "Еднократно поливане на цветя",
                 IsForCustomer = true,
                 Price = 2.99M
-            });
+            }
+            };
         }
     }
 }

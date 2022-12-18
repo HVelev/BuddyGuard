@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuddyGuard.Core.Enums
 {
-    public enum RoleEnums
+    public enum RoleEnum
     {
         Admin,
         User

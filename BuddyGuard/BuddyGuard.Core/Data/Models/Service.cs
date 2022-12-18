@@ -24,5 +24,7 @@ namespace BuddyGuard.Core.Data.Models
 
         [Required]
         public decimal Price { get; set; }
+
+        public List<RequestService> RequestServices { get; set; }
     }
 }

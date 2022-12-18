@@ -24,16 +24,16 @@ namespace BuddyGuard.Controllers
             this.nomenclatureService = nomenclatureService;
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpPost]
         public IActionResult SubmitForm([FromBody] EditRequestDTO form)
         {
-            requestService.SubmitForm(form);
+            int id = requestService.SubmitForm(form);
 
-            return Ok();
+            return Ok(id);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetAnimalTypes()
         {
@@ -42,7 +42,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetLocations()
         {
@@ -51,7 +51,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetClientServices()
         {
@@ -60,7 +60,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetSmallDogServices()
         {
@@ -69,7 +69,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetSmallDogWalkLengths()
         {
@@ -78,7 +78,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetBigDogServices()
         {
@@ -87,7 +87,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
         
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetBigDogWalkLengths()
         {
@@ -96,7 +96,7 @@ namespace BuddyGuard.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = nameof(RoleEnums.User))]
+        [Authorize(Roles = nameof(RoleEnum.User))]
         [HttpGet]
         public IActionResult GetCatServices()
         {
