@@ -1,21 +1,18 @@
-
 <div class="overflow-hidden">
   <div class="fixed max-width scrollable">
     <mat-toolbar class="nav">
       <div fxLayoutAlign="space-between center" fxFlex="100">
         <div fxLayoutAlign="space-around center" fxLayout="row">
-          <button mat-icon-button (click)="emitEventToChild()"><mat-icon>menu</mat-icon></button>
+          <button mat-icon-button (click)="emitEventToChild()"><mat-icon style="color: #2E2A39">menu</mat-icon></button>
           <div>
-            <img routerLink="/" src="../../assets/pics/Buddy Guard - Horizontal (1).webp" />
+            <img class="logo" routerLink="/" src="../../assets/pics/buddyguard.png" />
           </div>
         </div>
         <div>
-          <button class="brown navbtn" *ngIf="role !== 'Admin'" routerLink="/about"><span>Разбери повече</span></button>
-          <button class="brown navbtn" routerLink="/buddies" *ngIf="role">Buddies</button>
-          <button matBadge="{{ notifications.length }}" matBadgeSize="medium" [matBadgeHidden]="notifications.length === 0" *ngIf="role === 'Admin'" class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
-          <button *ngIf="!role ?? true" class="brown navbtn" routerLink="login"><span>Влез</span></button>
-          <button *ngIf="!role ?? true" class="brown navbtn" routerLink="register"><span>Регистрирай се</span></button>
-          <button *ngIf="role ?? false" class="brown navbtn" routerLink="/" (click)="logout()">Излез</button>
+          <button ngClass.gt-md="lg" matBadge="{{ notifications.length }}" matBadgeSize="medium" [matBadgeHidden]="notifications.length === 0" *ngIf="role === 'Admin'" class="brown navbtn" [matMenuTriggerFor]="menu">Известия</button>
+          <button ngClass.gt-md="lg" *ngIf="!role ?? true" class="brown navbtn p-1" routerLink="login"><span>Влез</span></button>
+          <button ngClass.gt-md="lg" *ngIf="!role ?? true" class="brown navbtn p-1" routerLink="register"><span>Регистрирай се</span></button>
+          <button ngClass.gt-md="lg" *ngIf="role ?? false" class="brown navbtn p-1" routerLink="/" (click)="logout()">Излез</button>
           <mat-menu class="gap oval-border" #menu="matMenu">
             <div>
               <p>
@@ -30,7 +27,8 @@
                    class="notification-margin">
                 <mat-icon class="smallIcon" fxFlex="10">mail</mat-icon>
                 <div fxFlex="85" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10" (click)="openRequestDialog(notification.id)">
-                  <p>Имате нова заявка за {{ datePipe.transform(notification.startDate, 'dd/MM/yyyy') }}</p>
+                  <p *ngIf="notification.startDate">Имате нова заявка за {{ datePipe.transform(notification.startDate, 'dd/MM/yyyy') }}</p>
+                  <p *ngIf="notification.firstName">Получихте запитване от {{ notification.firstName }} {{ notification.lastName }}</p>
                   <mat-card-subtitle>{{ notification.sentDate!.toLocaleString() | timeAgo }}</mat-card-subtitle>
                 </div>
                 <div fxFlex="5" fxLayoutAlign="start end">
@@ -43,15 +41,14 @@
         </div>
       </div>
     </mat-toolbar>
-
+    <mat-divider class="divider"></mat-divider> 
   </div>
   <mat-sidenav-container style="left: -7px;" autosize>
-    
     <mat-sidenav-content fxFlexLayout="center end">
-
       <mat-icon (click)="scrollUp()" class="transform" color="accent">keyboard_arrow_up</mat-icon>
-<app-sidenav [events]="eventsSubject.asObservable()">
-</app-sidenav>
+      <app-sidenav [events]="eventsSubject.asObservable()">
+      </app-sidenav>
     </mat-sidenav-content>
   </mat-sidenav-container>
+  
 </div>

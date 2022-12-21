@@ -6,6 +6,9 @@ import { RegisterDTO } from '../../models/register.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { StringNomenclatureDTO } from '../../shared/models/string-nomenclature-dto';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { InvalidPasswordEnum } from '../../shared/invalid-password-enum';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +22,7 @@ export class RegisterComponent implements OnInit {
 
   public form: FormGroup;
   public roles: StringNomenclatureDTO[] = [];
+  public passwordErrors: string[] = [];
 
   public constructor(service: RegisterService,
     snackbar: MatSnackBar,
@@ -69,11 +73,26 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login']);
         },
         error: (error: any) => {
+            debugger;
           if (error.status === 422) {
             this.snackbar.open('Вече съществува потребител със същия имейл', "Close", {
               duration: 2000,
               panelClass: 'red-snackbar'
             });
+          } else if (error.status === 400) {
+            let errors;
+
+            if (typeof error.error === 'string') {
+              errors = error.error.split(/[ ,"\[\]\\]+/).filter((x: string) => x);
+            }
+
+            if (Array.isArray(errors)) {
+              this.passwordErrors = [];
+
+              for (let code of errors) {
+                this.passwordErrors.push(InvalidPasswordEnum[code as keyof typeof InvalidPasswordEnum]);
+              }
+            }
           }
         }
       });

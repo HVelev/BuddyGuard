@@ -5,6 +5,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { AboutComponent } from "./pages/about/about.component";
 import { AcceptRequestsComponent } from "./pages/accept-requests/accept-requests.component";
 import { BuddiesComponent } from "./pages/buddies/buddies.component";
+import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { IndexComponent } from "./pages/index/index.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { PriceComponent } from "./pages/price/price.component";
@@ -56,6 +57,11 @@ export const appRoutes: Routes = [
   {
     path: 'buddies',
     component: BuddiesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
     canActivate: [AuthGuard],
   },
   {

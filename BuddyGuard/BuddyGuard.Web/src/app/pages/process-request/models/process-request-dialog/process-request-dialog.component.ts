@@ -40,7 +40,7 @@ export class ProcessRequestDialogComponent implements OnInit {
       emailControl: new FormControl(data.email),
       startDateControl: new FormControl(this.datePipe.transform(data.startDate, 'dd/MM/YYYY')),
       endDateControl: new FormControl(this.datePipe.transform(data.endDate, 'dd/MM/YYYY')),
-      meetingDateControl: new FormControl(data.meetingDate ?? 'Неуточнено'),
+      meetingDateControl: new FormControl(data.meetingDate ? this.datePipe.transform(data.meetingDate, 'dd/MM/YYYY') : 'Неуточнено'),
       customerServiceControl: new FormControl(data.clientServices),
       commentControl: new FormControl(data.comment),
       priceControl: new FormControl(data.price),

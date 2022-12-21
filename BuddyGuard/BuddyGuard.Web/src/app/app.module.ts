@@ -75,6 +75,8 @@ import { BuddiesComponent } from './pages/buddies/buddies.component';
 import { PriceComponent } from './pages/price/price.component';
 import { AcceptRequestsComponent } from './pages/accept-requests/accept-requests.component';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { ImageDialogComponent } from './pages/buddies/image-dialog/image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,8 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     PriceComponent,
     AcceptRequestsComponent,
     ConfirmDialogComponent,
+    ContactUsComponent,
+    ImageDialogComponent,
   ],
   imports: [
     BrowserModule,

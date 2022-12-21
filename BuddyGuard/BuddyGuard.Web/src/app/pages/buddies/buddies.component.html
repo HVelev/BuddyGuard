@@ -27,14 +27,15 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
   <h2 class="brown"><strong>Приятелчета, за които сме се грижили:</strong></h2>
   <div class="d-flex flex-wrap" fxLayoutAlign="center">
-    <div *ngFor="let imgDto of images" class="card m-3 pic">
+    <div *ngFor="let imgDto of images" class="card border-0 m-3 pic">
       <button class="show-on-top" mat-mini-fab color="warn" (click)="openDialog(imgDto.name!)">
         <mat-icon>delete</mat-icon>
       </button>
-      <img class="original"
-           [alt]="imgDto"
-           [src]="imgDto.imageUrl" />
-      <span class="imgtext">
+      
+        <img class="original"
+             [src]="imgDto.imageUrl"
+              />
+      <span  (click)="openImage(imgDto)" class="imgtext">
         <p>{{ imgDto.description }}</p>
       </span>
     </div>

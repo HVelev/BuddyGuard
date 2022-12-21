@@ -94,6 +94,42 @@ namespace BuddyGuard.Core.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BuddyGuard.Core.Data.Models.Inquiry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SentDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Inquiries");
+                });
+
             modelBuilder.Entity("BuddyGuard.Core.Data.Models.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -1167,7 +1203,7 @@ namespace BuddyGuard.Core.Migrations
                         {
                             Id = "307894cc-5f1e-4792-ae6b-40293f3dedb5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5258d86a-324b-446e-ad7f-3e82cef8cbd7",
+                            ConcurrencyStamp = "d3cff759-5c13-4ecb-a760-749fad28cbf3",
                             Email = "buddyguardapp@outlook.com",
                             EmailConfirmed = false,
                             FirstName = "Hristo",
@@ -1175,10 +1211,10 @@ namespace BuddyGuard.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BUDDYGUARDAPP@OUTLOOK.COM",
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJweY2E9hwAd81NKCtN+pRKgPrTPcw1UlEGLRpadpPZ4lfkxf8rEISTMDL/HGA3HJQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPVdrtR8njd8J/6uvIQZtHEewOKkXaoY0k9enIlNaeHLSpHFsbhfrLTyKezafs2P8w==",
                             PhoneNumber = "0888888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "92c28792-8db4-4389-aa11-5af26583abf7",
+                            SecurityStamp = "06852420-64c5-4f7c-94dc-0a6c72d91111",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         },
@@ -1186,7 +1222,7 @@ namespace BuddyGuard.Core.Migrations
                         {
                             Id = "7fe60605-1716-4010-abc6-ddacfd3ecf9b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e246d98e-095c-42bb-970e-70c1d93b268c",
+                            ConcurrencyStamp = "67e707bb-7747-44b8-809e-4ad02aa82571",
                             Email = "buddyguardapp@outlook.com",
                             EmailConfirmed = false,
                             FirstName = "Hristo",
@@ -1194,10 +1230,10 @@ namespace BuddyGuard.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BUDDYGUARDAPP@OUTLOOK.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHzDMzXaRm3JarM0EwVTfjvy4T+h30nNayAdv6wweqj+V3qvIII6a0X9TSVvZz9MZA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMWFZjgfTa9DKS3Q6IDSfqPE+Zu7ga7kNTCALujc/zAm5OFoDm3A5o8ekax2gYB0MQ==",
                             PhoneNumber = "0888888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c6a3c92f-9000-457c-9766-8d7c73cae7d9",
+                            SecurityStamp = "b95097c6-c589-4df3-9d67-99d2f7a3bd48",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -1233,14 +1269,14 @@ namespace BuddyGuard.Core.Migrations
                         new
                         {
                             Id = "3f107bb9-9810-4024-b4e3-182d696421ab",
-                            ConcurrencyStamp = "13889fa4-621d-4aa3-b527-c47a68ac5907",
+                            ConcurrencyStamp = "6597cb67-eb00-41db-81ab-36f8bb0b54c8",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "9e0143a5-0c68-4c92-92d5-34965e2ca95d",
-                            ConcurrencyStamp = "72de5d6b-1b48-4dc6-99bb-f655c4dfe76b",
+                            ConcurrencyStamp = "9f3f265b-12fc-4cb3-839f-296d2e8b7562",
                             Name = "User",
                             NormalizedName = "USER"
                         });

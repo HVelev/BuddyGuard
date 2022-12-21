@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageDTO } from '../../models/image.model';
 import { ImageService } from '../../services/image.service';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-buddies',
@@ -20,16 +21,19 @@ export class BuddiesComponent implements OnInit {
   public role: string | undefined | null;
   public form: FormGroup;
   public dialog: MatDialog;
+  public imgDialog: MatDialog;
 
   public constructor
     (
       imageService: ImageService,
       snackbar: MatSnackBar,
-      dialog: MatDialog
+      dialog: MatDialog,
+      imgDialog: MatDialog
     ) {
     this.imageService = imageService;
     this.snackbar = snackbar;
     this.dialog = dialog;
+    this.imgDialog = imgDialog;
 
     this.form = new FormGroup({
       descriptionControl: new FormControl(),
@@ -79,11 +83,9 @@ export class BuddiesComponent implements OnInit {
     }
 
     if (this.form.valid) {
-      let infoObject = {
-        description: this.form.get('descriptionControl')!.value
-      }
+      const description = this.form.get('descriptionControl')!.value;
 
-      this.imageService.uploadImage(this.imageFile, infoObject).subscribe({
+      this.imageService.uploadImage(this.imageFile, description).subscribe({
         next: () => {
           this.snackbar.open('Успешно качена снимка', 'Затвори', {
             duration: 4000
@@ -112,6 +114,16 @@ export class BuddiesComponent implements OnInit {
     }
   }
 
+  public openImage(value: ImageDTO) {
+    debugger;
+    const dialogRef = this.imgDialog.open(ImageDialogComponent, {
+      height: '100%',
+      maxWidth: '100%',
+      data: value
+    });
+    dialogRef.afterClosed().subscribe();
+  }
+
   public deleteImage(key: string) {
     this.imageService.deleteImage(key).subscribe({
       next: () => {
@@ -121,10 +133,6 @@ export class BuddiesComponent implements OnInit {
         this.getData();
       }
     });
-  }
-
-  public getImages() {
-    this.imageService.getAlbum();
   }
 
   private getData() {

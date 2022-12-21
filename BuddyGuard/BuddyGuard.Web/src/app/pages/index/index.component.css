@@ -1,13 +1,20 @@
 img {
-  width: 70%;
-  margin-top: 20px
+  width: 100%;
+  margin-top: 1px;
 }
+
+.min-width {
+    min-width: 300px;
+}
+
 .smallimg {
     width: 40%;
+    min-width: 300px;
 }
 
 .mediumimg {
     width: 50%;
+    min-width: 300px;
 }
 
 .insertable {

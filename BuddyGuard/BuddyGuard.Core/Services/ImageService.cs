@@ -10,6 +10,7 @@ using BuddyGuard.Core.Models;
 using System.Net;
 using System.Threading.Tasks.Dataflow;
 using BuddyGuard.Core.Enums;
+using BuddyGuard.Core.Data.Constants;
 
 namespace BuddyGuard.Core.Services
 {
@@ -28,28 +29,31 @@ namespace BuddyGuard.Core.Services
                 throw new ArgumentException();
             }
 
-            var awsKey = "AKIAW4ROKHDZ7KHWLHUK";
-            var awsSecretKey = "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";
+            var awsKey = DataConstants.S3Constants.Key;
+            var awsSecretKey = DataConstants.S3Constants.SecretKey;
             var bucketRegion = Amazon.RegionEndpoint.USEast1;
             var s3 = new AmazonS3Client(awsKey, awsSecretKey, bucketRegion);
             var putRequest = new PutObjectRequest();
-            putRequest.TagSet.Add(new Tag
+            if (image.Description != null)
             {
-                Key = "description",
-                Value = image.Description
-            });
-            putRequest.BucketName = "buddyguard";
+                putRequest.TagSet.Add(new Tag
+                {
+                    Key = DataConstants.S3Constants.Descrpition,
+                    Value = image.Description
+                });
+            }
+            putRequest.BucketName = DataConstants.S3Constants.BucketName;
             putRequest.ContentType = "image/jpeg";
             putRequest.InputStream = image.Image.OpenReadStream();
-            putRequest.Key = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+            putRequest.Key = Guid.NewGuid().ToString("D");
             PutObjectResponse putResponse = await s3.PutObjectAsync(putRequest);
             return putResponse.HttpStatusCode;
         }
 
         public async Task<List<ImageDTO>> GetImages()
         {
-            var awsKey = "AKIAW4ROKHDZ7KHWLHUK";
-            var awsSecretKey = "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";
+            var awsKey = DataConstants.S3Constants.Key;
+            var awsSecretKey = DataConstants.S3Constants.SecretKey;
             var bucketRegion = Amazon.RegionEndpoint.USEast1;
             var s3 = new AmazonS3Client(awsKey, awsSecretKey, bucketRegion);
 
@@ -57,15 +61,22 @@ namespace BuddyGuard.Core.Services
             {
                 var images = new List<ImageDTO>();
 
-                var objects = await s3.ListObjectsAsync("buddyguard");
+                var objects = await s3.ListObjectsAsync(DataConstants.S3Constants.BucketName);
 
                 foreach (var obj in objects.S3Objects.OrderByDescending(x => x.LastModified))
                 {
+                    var result = await s3.GetObjectAsync(DataConstants.S3Constants.BucketName, obj.Key);
+
+                    if (result.Headers.ContentType != "image/jpeg")
+                    {
+                        continue;
+                    }
+
                     var expires = DateTime.Now.AddHours(1);
 
                     GetPreSignedUrlRequest request = new GetPreSignedUrlRequest
                     {
-                        BucketName = "buddyguard",
+                        BucketName = DataConstants.S3Constants.BucketName,
                         Key = obj.Key,
                         Expires = expires,
                     };
@@ -74,13 +85,13 @@ namespace BuddyGuard.Core.Services
 
                     var tagRequest = new GetObjectTaggingRequest()
                     {
-                        BucketName = "buddyguard",
+                        BucketName = DataConstants.S3Constants.BucketName,
                         Key = obj.Key
                     };
 
                     var response = await s3.GetObjectTaggingAsync(tagRequest);
 
-                    var tag = response.Tagging.FirstOrDefault(x => x.Key == "description");
+                    var tag = response.Tagging.FirstOrDefault(x => x.Key == DataConstants.S3Constants.Descrpition);
 
                     string? description = null;
 
@@ -107,18 +118,18 @@ namespace BuddyGuard.Core.Services
 
         public async Task DeleteImage(string key)
         {
-            var awsKey = "AKIAW4ROKHDZ7KHWLHUK";
-            var awsSecretKey = "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";
+            var awsKey = DataConstants.S3Constants.Key;
+            var awsSecretKey = DataConstants.S3Constants.SecretKey;
             var bucketRegion = Amazon.RegionEndpoint.USEast1;
             var s3 = new AmazonS3Client(awsKey, awsSecretKey, bucketRegion);
 
 
-            var obj = await s3.GetObjectAsync("buddyguard", key);
+            var obj = await s3.GetObjectAsync(DataConstants.S3Constants.BucketName, key);
 
 
             var request = new DeleteObjectRequest
             {
-                BucketName= "buddyguard",
+                BucketName= DataConstants.S3Constants.BucketName,
                 Key = key,
                 VersionId = obj.VersionId,
             };

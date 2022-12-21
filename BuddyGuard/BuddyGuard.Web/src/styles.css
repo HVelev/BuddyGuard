@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
-    font-family: 'Comic';
+    font-family: Arial;
 }
 
 body {
-  font-family: 'Comic', cursive !important
+  font-family: Arial, Helvetica, sans-serif !important
 }
 
 .mat-sidenav-container {

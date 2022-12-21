@@ -126,6 +126,22 @@ export class AuthGuard implements CanActivate {
             }
           });
         });
+      case '/contact-us':
+        return new Promise((resolve, reject) => {
+          let isAdmin: boolean = false;
+
+          this.service.isLoggedInAsAdmin(sessionStorage.getItem('token') ?? '').subscribe({
+            next: (value: boolean) => {
+              isAdmin = value;
+              if (isAdmin) {
+                this.router.navigate(['/']);
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            }
+          });
+        });
     }
 
     this.router.navigate(['/']);

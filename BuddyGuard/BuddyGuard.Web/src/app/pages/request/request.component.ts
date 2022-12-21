@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ContentChild, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter, ErrorStateMatcher, MAT_DATE_FORMATS, MAT_DATE_LOCALE, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStep, MatStepper } from '@angular/material/stepper';
@@ -42,6 +43,10 @@ export class RequestComponent implements OnInit, AfterViewInit {
   public animalTypeMatSelect!: MatSelect;
   @ViewChild('stepper')
   public stepper!: MatStepper;
+  @ViewChild('picker')
+  public startDate!: MatDatepicker<Date>;
+  @ViewChild('pick')
+  public endDate!: MatDatepicker<Date>;
 
   public form: FormGroup;
   public animalTypes: NomenclatureDTO<number>[] = [];
@@ -138,10 +143,10 @@ export class RequestComponent implements OnInit, AfterViewInit {
     this.form = new FormGroup({
       animalArrayControl: this.animals,
       dateLocationGroupControl: new FormGroup({
-        startDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
-        endDateControl: new FormControl(new Date(2022, 12, 12), Validators.required),
+        startDateControl: new FormControl(undefined, Validators.required),
+        endDateControl: new FormControl(undefined, Validators.required),
         meetingDateControl: new FormControl(),
-        locationControl: new FormControl(undefined, Validators.required),
+        locationControl: new FormControl(undefined, [Validators.required, requireMatch()]),
         addressControl: new FormControl(undefined, Validators.required)
       }),
       customerServiceControl: new FormControl(),
@@ -190,6 +195,34 @@ export class RequestComponent implements OnInit, AfterViewInit {
         if (value.selectedIndex === 2) {
           this.calculate();
         }
+      }
+    });
+
+    this.startDate.openedStream.subscribe({
+      next: () => {
+        this.dateLocationGroup.get('startDateControl')!.removeValidators(Validators.required);
+        this.dateLocationGroup.get('startDateControl')!.updateValueAndValidity();
+      }
+    });
+
+    this.startDate.closedStream.subscribe({
+      next: () => {
+        this.dateLocationGroup.get('startDateControl')!.addValidators(Validators.required);
+        this.dateLocationGroup.get('startDateControl')!.updateValueAndValidity();
+      }
+    });
+
+    this.endDate.openedStream.subscribe({
+      next: () => {
+        this.dateLocationGroup.get('endDateControl')!.removeValidators(Validators.required);
+        this.dateLocationGroup.get('endDateControl')!.updateValueAndValidity();
+      }
+    });
+
+    this.endDate.closedStream.subscribe({
+      next: () => {
+        this.dateLocationGroup.get('endDateControl')!.addValidators(Validators.required);
+        this.dateLocationGroup.get('endDateControl')!.updateValueAndValidity();
       }
     });
   }
@@ -294,9 +327,14 @@ export class RequestComponent implements OnInit, AfterViewInit {
     return data && data.displayName ? data.displayName : '';
   }
 
-  public filter(val: string): NomenclatureDTO<number>[] {
-    return this.locationOptions.filter(location =>
-      location.displayName.toLowerCase().includes(val));
+  public filter(val: string | NomenclatureDTO<number>): NomenclatureDTO<number>[] {
+    if (typeof val === 'string') {
+      return this.locationOptions.filter(location =>
+        location.displayName.toLowerCase().includes(val.toLowerCase()));
+    } else {
+      return this.locationOptions.filter(location =>
+        location.displayName.toLowerCase().includes(val.displayName));
+    }
   }
 
   public submitForm() {
@@ -371,5 +409,16 @@ export class RequestComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+}
+
+export function requireMatch(): ValidatorFn {
+  console.log('isnide');
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (typeof control.value === 'string') {
+      return { 'requirematch': true };
+    }
+
+    return null;
   }
 }

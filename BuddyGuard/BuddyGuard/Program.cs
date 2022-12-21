@@ -34,10 +34,13 @@ builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddTransient<IRequestService, RequestsService>();
 builder.Services.AddTransient<IProcessRequestService, ProcessRequestService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IRegisterService, RegisterService>();
 builder.Services.AddTransient<INomenclatureService, NomenclatureService>();
 builder.Services.AddTransient<IMailService, MailService>();
 builder.Services.AddTransient<IImageService, ImageService>();
+builder.Services.AddTransient<IInquiryService, InquiryService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
@@ -49,6 +52,7 @@ IdentityBuilder identityBuilder = builder.Services.AddIdentity<User, IdentityRol
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
     options.SignIn.RequireConfirmedEmail = false;
+    options.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<BuddyguardDbContext>();
 
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<User>, UserClaimsPrincipalFactory<User, IdentityRole>>();
@@ -89,7 +93,8 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = false,
-        ValidateIssuerSigningKey = true
+        ValidateIssuerSigningKey = true,
+        
     };
 });
 

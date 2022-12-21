@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       error: (error: any) => {
+        debugger;
         if (error.status > 399 && error.status < 500) {
           this.snackbar.open("Грешно потребителско име или парола", "Close", {
             duration: 2000,

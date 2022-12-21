@@ -7,9 +7,11 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { EditRequestDTO } from '../models/edit-request.model';
+import { NotificationDTO } from '../models/notification.model';
 import { RequestDTO } from '../models/request.model';
 import { ProcessRequestDialogComponent } from '../pages/process-request/models/process-request-dialog/process-request-dialog.component';
 import { LoginService } from '../services/login.service';
+import { NotificationService } from '../services/notification.service';
 import { ProcessRequestService } from '../services/process-request.service';
 import { RegisterService } from '../services/register.service';
 import { RequestService } from '../services/request.service';
@@ -63,6 +65,7 @@ export class NavbarComponent implements OnInit {
 
   private processRequestService: ProcessRequestService;
   private loginService: LoginService;
+  private notificationService: NotificationService;
   private registerService: RegisterService;
   private router: Router;
   private dialog: MatDialog;
@@ -71,7 +74,7 @@ export class NavbarComponent implements OnInit {
 
 
   public isToggled = true;
-  public notifications: RequestDTO[] = [];
+  public notifications: NotificationDTO[] = [];
   public role: string | undefined | null;
   public datePipe: DatePipe;
 
@@ -94,6 +97,7 @@ export class NavbarComponent implements OnInit {
   constructor(changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     processRequestService: ProcessRequestService,
+    notificationService: NotificationService,
     loginService: LoginService,
     registerService: RegisterService,
     datePipe: DatePipe,
@@ -104,6 +108,7 @@ export class NavbarComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.processRequestService = processRequestService;
+    this.notificationService = notificationService;
     this.loginService = loginService;
     this.role = sessionStorage.getItem('role');
     this.registerService = registerService;
@@ -118,6 +123,7 @@ export class NavbarComponent implements OnInit {
         this.role = value;
 
         if (value === 'Admin') {
+          debugger;
           this.updateNotifications();
         }
       }
@@ -125,13 +131,18 @@ export class NavbarComponent implements OnInit {
 
     this.processRequestService.onRequestDialogClosed.subscribe({
       next: () => {
+        debugger;
         this.updateNotifications();
       }
     });
 
-    if (this.loginService.isLoggedInAsAdmin(sessionStorage.getItem('token') ?? '')) {
-      this.updateNotifications();
-    }
+    this.loginService.isLoggedInAsAdmin(sessionStorage.getItem('token') ?? '').subscribe({
+      next: (value: boolean) => {
+        if (value === true) {
+          this.updateNotifications();
+        }
+      }
+    });
   }
 
   public ngOnDestroy(): void {
@@ -156,6 +167,7 @@ export class NavbarComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe({
           next: () => {
+            debugger;
             this.updateNotifications();
           }
         });
@@ -178,10 +190,9 @@ export class NavbarComponent implements OnInit {
   }
 
   public updateNotifications(): void {
-    this.processRequestService.getAllUnreadRequests().subscribe({
-      next: (value: RequestDTO[]) => {
+    this.notificationService.getNotifications().subscribe({
+      next: (value: NotificationDTO[]) => {
         this.notifications = value;
-        console.log(value);
       }
     });
   }

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="mb-5" fxLayoutAlign="center">
+    <h2 class="brown">
+      Свържи се с нас!
+    </h2>
+  </div>
+  <form fxLayout="column">
+    <mat-card class="mat-elevation-z10 outline" fxFlex="50" fxLayoutAlign="center center">
+      <div fxFlex="70" fxLayout="column" fxLayoutGap="1em" [formGroup]="form">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1em">
+          <div fxLayout="column" fxFlex="50" fxLayoutGap="0.5em">
+            <mat-label>Име</mat-label>
+            <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+              <input matInput formControlName="firstNameControl">
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" fxLayout="column" fxLayoutGap="0.5em">
+            <mat-label>Фамилия</mat-label>
+            <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+              <input matInput formControlName="lastNameControl">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1em">
+          <div fxLayout="column" fxFlex="50" fxLayoutGap="0.5em">
+            <mat-label>Имейл</mat-label>
+            <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+              <input matInput formControlName="emailControl">
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" fxLayout="column" fxLayoutGap="0.5em">
+            <mat-label>Телефон</mat-label>
+            <mat-form-field appearance="fill" fxFlex="50" fxFlex.xs="100">
+              <input matInput formControlName="phoneControl">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="column">
+          <mat-label>Вашият въпрос</mat-label>
+          <mat-form-field appearance="fill" fxFlex="100">
+            <textarea fxFlex="100" #message maxlength="200" matInput formControlName="inquiryControl"></textarea>
+          </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center center">
+          <button mat-raised-button color="primary" (click)="sendInquiry()">Изпращане на запитване</button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>

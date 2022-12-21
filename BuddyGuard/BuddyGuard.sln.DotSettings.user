@@ -1,5 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\hvelev\AppData\Local\Temp\JetBrains\ReSharperPlatformVs17\vAny_1e219644\CoverageData\_BuddyGuard.392212250\Snapshot\snapshot.utdcvr</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3da6dfa5_002Df723_002D4b8f_002Daa6c_002D001e6a8ecde4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="AcceptRequestWorksCorrectly" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7EE4304B-E4A2-4046-85B0-26CFEF6A6431::net6.0::BuddyGuard.UnitTests.ProcessRequestServiceUnitTests.AcceptRequestWorksCorrectly&lt;/TestId&gt;&#xD;

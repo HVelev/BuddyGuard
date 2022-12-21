@@ -2,25 +2,25 @@
 using BuddyGuard.Core.Data;
 using BuddyGuard.Core.Data.Common;
 using BuddyGuard.Core.Data.Models;
+using BuddyGuard.Core.Exceptions;
 using BuddyGuard.Core.Models;
 using BuddyGuard.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Results;
 
 namespace BuddyGuard.API.Controllers
 {
     [Area("Shared")]
     public class RegisterController : Controller
     {
-        private readonly UserManager<User> userManager;
-        private readonly IRepository repository;
+        private readonly IRegisterService service;
         private readonly INomenclatureService nomenclatureService;
 
-        public RegisterController(UserManager<User> userManager, IRepository repository, INomenclatureService nomenclatureService)
+        public RegisterController(IRegisterService service, IRepository repository, INomenclatureService nomenclatureService)
         {
-            this.userManager = userManager;
-            this.repository = repository;
+            this.service = service;
             this.nomenclatureService = nomenclatureService;
         }
 
@@ -35,34 +35,19 @@ namespace BuddyGuard.API.Controllers
 
             try
             {
-                var doesUserExist = repository.All<User>().Where(x => x.Email == userModel.Email || x.UserName == userModel.Username).Count() > 0;
-
-                if (doesUserExist)
-                {
-                    return UnprocessableEntity();
-                }
-
-                User user = new User
-                {
-                    UserName = userModel.Username,
-                    Email = userModel.Email,
-                    FirstName = userModel.FirstName,
-                    LastName = userModel.LastName,
-                    PhoneNumber = userModel.Phone
-                };
-
-                var result = await userManager.CreateAsync(user, userModel.Password);
-
-                await userManager.AddToRoleAsync(user, userModel.Role);
-
-                repository.SaveChanges();
+                await service.Register(userModel);
 
                 return Ok();
             }
-            catch (Exception)
+            catch (InvalidOperationException)
             {
+                return UnprocessableEntity();
+            }
+            catch (PasswordException ex)
+            {
+                var codes = ex.ErrorCodes;
 
-                throw;
+                return BadRequest(codes);
             }
         }
 

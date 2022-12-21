@@ -25,6 +25,8 @@ namespace BuddyGuard.Core.Data
 
         public DbSet<Location> Locations { get; set; }
 
+        public DbSet<Inquiry> Inquiries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<RequestService>().HasKey(x => new { x.ServiceId, x.RequestId });

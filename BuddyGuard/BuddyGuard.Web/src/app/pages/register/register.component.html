@@ -50,10 +50,10 @@
     <mat-error *ngIf="form.get('confirmPasswordControl')!.hasError('required')">
       Полето е задължително
     </mat-error>
-  </mat-form-field>
     <mat-error *ngIf="form.get('confirmPasswordControl')!.value !== form.get('passwordControl')!.value">
       Паролите не съвпадат
     </mat-error>
+  </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Телефон</mat-label>
     <input matInput formControlName="phoneControl" placeholder="Телефон">
@@ -73,5 +73,8 @@
     </mat-error>
   </mat-form-field>
   <button mat-raised-button color="accent" (click)="register()">Регистрация</button>
+  <mat-error *ngIf="passwordErrors.length > 0" fxLayout="column">
+    <span *ngFor="let error of passwordErrors">{{ error }}</span>
+  </mat-error>
 </div>
 

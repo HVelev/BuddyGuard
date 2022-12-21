@@ -2,11 +2,13 @@
   <mat-sidenav fullscreen style="background-color: transparent; border: hidden;" #snav
                mode="push">
     <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
-      <mat-chip *ngIf="role === 'User'" selected mat-list-item class="btn" routerLink="request" (click)="snav.toggle()">Заявка</mat-chip>
-      <mat-chip *ngIf="role === 'Admin'" selected mat-list-item class="btn" routerLink="/process-request" (click)="snav.toggle()">Заявки за обработка</mat-chip>
-      <mat-chip *ngIf="role === 'Admin'" selected mat-list-item class="btn" routerLink="/accept-requests" (click)="snav.toggle()">Одобрени заявки</mat-chip>
-      <mat-chip *ngIf="!role || role === 'User'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/price">Цени</mat-chip>
-      <mat-chip *ngIf="!role || role === 'User'" selected mat-list-item class="btn" (click)="snav.toggle()">Контакти</mat-chip>
+      <mat-chip matRipple *ngIf="role === 'User'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="request">Заявка</mat-chip>
+      <mat-chip matRipple *ngIf="role === 'Admin'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/process-request">Заявки за обработка</mat-chip>
+      <mat-chip matRipple *ngIf="role === 'Admin'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/accept-requests">Одобрени заявки</mat-chip>
+      <mat-chip matRipple *ngIf="role !== 'Admin'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/about">Разбери повече</mat-chip>
+      <mat-chip matRipple *ngIf="!role || role === 'User'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/price">Цени</mat-chip>
+      <mat-chip matRipple *ngIf="!role || role === 'User'" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="contact-us">Контакти</mat-chip>
+      <mat-chip matRipple *ngIf="role" selected mat-list-item class="btn" (click)="snav.toggle()" routerLink="/buddies">Buddies</mat-chip>
     </div>
   </mat-sidenav>
 </mat-sidenav-container>

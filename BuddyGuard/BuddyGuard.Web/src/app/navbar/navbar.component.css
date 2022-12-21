@@ -11,7 +11,6 @@ mat-sidenav-content {
 }
 
 .transform {
-  display: fixed;
   font-size: 4.6vw;
   position: fixed;
   right: 0px;
@@ -20,12 +19,20 @@ mat-sidenav-content {
   min-width: 50px;
   height: 10%;
   min-height: 30px;
-  border: solid;
-  border-radius: 50%;
   cursor: pointer;
-  background-color: #ff5722;
-  border-color: saddlebrown;
   opacity: 0.8;
+}
+
+.logo {
+    width: 30% !important;
+    padding: 10px;
+    min-width: 150px;
+}
+
+.divider {
+  border-width: 2px !important;
+  background-color: #2E2A39;
+  opacity: 20%;
 }
 
 .nav {
@@ -58,6 +65,10 @@ img {
     z-index: 1;
 }
 
+.p-1 {
+    padding: 1px !important;
+}
+
 .btn {
   color: white;
   font-size: 20px;
@@ -72,11 +83,15 @@ img {
   max-height: none !important;
 }
 
+.lg {
+    font-size: 25px !important;
+}
+
 @media (min-width: 30px) {
   .navbtn {
     background-color: transparent;
-    font-family: Comic Sans MS, Comic Sans, cursive;
-    font-size: max(3vw, min(20px, 50px));
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
     margin: 10px;
     border: hidden;
     cursor: pointer;

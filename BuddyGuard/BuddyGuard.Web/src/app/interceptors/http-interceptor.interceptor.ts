@@ -3,7 +3,8 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,15 +31,15 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(request).pipe(catchError(this.handleError));
   }
 
-  handleError(error: any) {
+  handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       this.snackbar.open('Възникна грешка', 'Затвори');
     } else {
-      if (error.status >= 500) {
+      if (error.status >= 500 || error.status === 0) {
         this.snackbar.open('Възникна сървърна грешка', 'Затвори');
       }
     }
 
-    return throwError(error.message);
+    return throwError(error);
   }
 }
